@@ -2,6 +2,10 @@ export default {
   title: 'zeMing',
   description: '',
   lang: 'zh-CN',
+  locales: {
+    root: { label: '简体中文' },
+    en: { label: 'English', link: 'https://vitejs.dev' },
+  },
   themeConfig: {
     nav: [
       { text: '开始', link: '/doc/introduction/' },
@@ -25,6 +29,9 @@ export default {
           ]
         }
       ]
+    },
+    search: {
+      provider: 'local'
     }
   }
 }

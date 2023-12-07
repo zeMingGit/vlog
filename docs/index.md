@@ -17,14 +17,14 @@ hero:
  
 features:
   - icon: ⚡️
-    title: Vite, The DX that can't be beat
-    details: Lorem ipsum...
+    title: 帮助性
+    details: Wait for you to discover...
   - icon: 🖖
-    title: Power of Vue meets Markdown
-    details: Lorem ipsum...
+    title: 快乐性
+    details: Wait for you to discover...
   - icon: 🛠️
-    title: Simple and minimal, always
-    details: Lorem ipsum...
+    title: 编码性
+    details: Wait for you to discover...
 ---
 <style>
   :root {

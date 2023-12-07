@@ -1,6 +1,7 @@
-module.exports = {
+export default {
   title: 'zeMing',
   description: '',
+  lang: 'zh-CN',
   themeConfig: {
     nav: [
       { text: '开始', link: '/doc/introduction/' },

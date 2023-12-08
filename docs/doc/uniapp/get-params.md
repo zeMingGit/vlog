@@ -5,7 +5,7 @@
 
 例如：在package.json中，如下
 
-```javascript
+```javascript:{5-8}
 "scripts": {
     "build": "node script/index.js",
     "build:h5": "cross-env NODE_ENV=production UNI_PLATFORM=h5 vue-cli-service uni-build",

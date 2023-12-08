@@ -11,6 +11,9 @@ export default {
     root: { label: '简体中文' },
     en: { label: 'English', link: 'https://vitejs.dev' },
   },
+  markdown: {
+    lineNumbers: true,
+  },
   cleanUrls: true, //是否启用干净的URL，例如/about代替/about.html
   head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   themeConfig: {

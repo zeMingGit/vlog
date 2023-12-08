@@ -12,19 +12,27 @@ const members = [
   {
     avatar: 'https://foruda.gitee.com/avatar/1695001043495360137/8741248_zeminga_1695001043.png',
     name: 'zeMing',
-    title: '前端',
+    title: '文档作者',
     links: [
       { icon: 'github', link: 'https://github.com/2439340964' },
     ]
   },
   {
-    avatar: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg9.doubanio.com%2Fview%2Fgroup_topic%2Fl%2Fpublic%2Fp515054775.jpg&refer=http%3A%2F%2Fimg9.doubanio.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1704609760&t=9c3a61380b73d35002790f0fb4efb9fe',
-    name: ' 空缺',
-    title: '欢迎加入',
+    avatar: 'https://foruda.gitee.com/avatar/1702023507003711393/10948272_zhangchufan_1702023506.png!avatar200',
+    name: 'ChufanOvO',
+    title: '参与者',
     links: [
-      { icon: 'github', link: '' },
+      { icon: 'github', link: 'https://gitee.com/zhangchufan' },
     ]
   },
+  // {
+  //   avatar: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg9.doubanio.com%2Fview%2Fgroup_topic%2Fl%2Fpublic%2Fp515054775.jpg&refer=http%3A%2F%2Fimg9.doubanio.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1704609760&t=9c3a61380b73d35002790f0fb4efb9fe',
+  //   name: ' 空缺',
+  //   title: '欢迎加入',
+  //   links: [
+  //     { icon: 'github', link: '' },
+  //   ]
+  // },
 ]
 </script>
 

@@ -15,12 +15,13 @@ export default {
     lineNumbers: true,
   },
   cleanUrls: true, //是否启用干净的URL，例如/about代替/about.html
-  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+  head: [['link', { rel: 'icon', href: '/img/logo.svg' }]],
   themeConfig: {
     nav, // 导航栏配置
     sidebar, // 侧边栏配置
     search, // 搜索配置
-    lastUpdated, // 允许自定义最后更新文本和日期格式。
+    lastUpdated, // 允许自定义最后更新文本和日期格式
+    logo: '/img/logo.svg',
     copyCode: {
       buttonText: '复制代码', // 在这里更改按钮文字
       errorText: '复制失败', // 更改复制失败时的提示文字
@@ -40,8 +41,14 @@ export default {
       text: '在gitee上编辑此页面'
     },
     footer: {
-      message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2023-zeMing'
+      message: '欢迎加入我们，一起来完善小棱镜文档吧',
+      copyright: copyright(),
     },
   }
+}
+
+function copyright() {
+  let endYear = new Date().getFullYear()
+  endYear = endYear > 2023 ? `2023-${endYear}` : 2023
+  return `Copyright©${endYear}  zeMing`
 }

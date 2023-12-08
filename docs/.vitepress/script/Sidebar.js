@@ -1,3 +1,7 @@
+import uniapp from '../router/uniapp'
+import vue2 from '../router/vue2'
+import vue3 from '../router/vue3'
+
 const sidebar = {
   '/doc/': [
     {
@@ -8,14 +12,9 @@ const sidebar = {
         { text: '快速上手', link: '/doc/introduction/quick-start' },
       ],
     },
-    {
-      text: 'uniapp',
-      collapsed: false,
-      items: [
-        { text: '概述', link: '/doc/uniapp/' },
-        { text: 'npm获取命令行参数', link: '/doc/uniapp/get-params' },
-      ]
-    },
+    uniapp,
+    vue2,
+    vue3,
     {
       text: 'git',
       collapsed: false,

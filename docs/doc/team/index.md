@@ -39,10 +39,10 @@ const members = [
 <VPTeamPage>
   <VPTeamPageTitle>
     <template #title>
-      我们的团队
+      团队核心成员
     </template>
     <template #lead>
-      光杆司令团队，但是欢迎你的加入
+      提供有价值的资源和支持
     </template>
   </VPTeamPageTitle>
   <VPTeamMembers

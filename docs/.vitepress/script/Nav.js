@@ -5,7 +5,7 @@ const nav = [
     items: [
       { text: '常见问题', link: '/doc' },
       { text: '团队', link: '/doc/team/' },
-      { text: '关于我们', link: '/doc' },
+      { text: '关于我们', link: '/doc/nav/about' },
     ],
   },
 ]

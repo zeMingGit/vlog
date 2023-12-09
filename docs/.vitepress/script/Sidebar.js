@@ -19,7 +19,8 @@ const sidebar = {
       text: 'git',
       collapsed: false,
       items: [
-        { text: '问题', link: '/doc/git/' },
+        { text: '概述', link: '/doc/git/' },
+        { text: 'git记录', link: '/doc/git/record' },
       ]
     },
   ]

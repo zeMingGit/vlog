@@ -13,8 +13,8 @@ const sidebar = {
       ],
     },
     uniapp,
-    vue2,
     vue3,
+    vue2,
     {
       text: 'git',
       collapsed: false,

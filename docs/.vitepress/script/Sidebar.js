@@ -16,11 +16,12 @@ const sidebar = {
     vue3,
     vue2,
     {
-      text: 'git',
+      text: '杂项',
       collapsed: false,
       items: [
-        { text: '概述', link: '/doc/git/' },
-        { text: 'git记录', link: '/doc/git/record' },
+        { text: '概述', link: '/doc/sundry/' },
+        { text: 'vs code配置', link: '/doc/sundry/settings' },
+        { text: 'git记录', link: '/doc/sundry/git' },
       ]
     },
   ]

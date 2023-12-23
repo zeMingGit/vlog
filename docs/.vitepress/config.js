@@ -17,7 +17,8 @@ export default {
   cleanUrls: true, //是否启用干净的URL，例如/about代替/about.html
   head: [
     ['link', { rel: 'icon', href: '/img/logo.svg' }],
-    ['link', { rel: 'stylesheet', href: '/style/index.css' }]
+    ['link', { rel: 'stylesheet', href: '/style/index.css' }],
+    ['script', { src: '/js/baidu-analytics.js' }],
   ],
   themeConfig: {
     nav, // 导航栏配置

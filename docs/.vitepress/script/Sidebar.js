@@ -22,6 +22,7 @@ const sidebar = {
         { text: '概述', link: '/doc/sundry/' },
         { text: 'vs code配置', link: '/doc/sundry/settings' },
         { text: 'git记录', link: '/doc/sundry/git' },
+        { text: 'css布局', link: '/doc/sundry/css' },
       ]
     },
   ]

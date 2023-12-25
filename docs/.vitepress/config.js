@@ -57,6 +57,7 @@ export default {
       message: '欢迎加入我们，一起来完善小棱镜文档吧',
       copyright: copyright(),
     },
+    darkModeSwitchLabel: '切换外观',
   }
 }
 

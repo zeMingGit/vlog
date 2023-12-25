@@ -34,7 +34,7 @@ export default {
     sidebar, // 侧边栏配置
     search, // 搜索配置
     lastUpdated, // 允许自定义最后更新文本和日期格式
-    logo: '/img/logo.svg',
+    logo: { light: "/img/logo.svg", dark: "/img/logoFFF.svg" },
     copyCode: {
       buttonText: '复制代码', // 在这里更改按钮文字
       errorText: '复制失败', // 更改复制失败时的提示文字

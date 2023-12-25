@@ -18,6 +18,14 @@ const members = [
     ]
   },
   {
+    avatar: 'https://foruda.gitee.com/avatar/1677169054941917823/9249306_invictuspm_1658799010.png!avatar200',
+    name: 'Min Pan',
+    title: '贡献者',
+    links: [
+      { icon: 'github', link: 'https://github.com/pm0915' },
+    ]
+  },
+  {
     avatar: 'https://foruda.gitee.com/avatar/1702023507003711393/10948272_zhangchufan_1702023506.png!avatar200',
     name: 'ChufanOvO',
     title: '参与者',
@@ -25,14 +33,6 @@ const members = [
       { icon: 'github', link: 'https://gitee.com/zhangchufan' },
     ]
   },
-  // {
-  //   avatar: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg9.doubanio.com%2Fview%2Fgroup_topic%2Fl%2Fpublic%2Fp515054775.jpg&refer=http%3A%2F%2Fimg9.doubanio.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1704609760&t=9c3a61380b73d35002790f0fb4efb9fe',
-  //   name: ' 空缺',
-  //   title: '欢迎加入',
-  //   links: [
-  //     { icon: 'github', link: '' },
-  //   ]
-  // },
 ]
 </script>
 

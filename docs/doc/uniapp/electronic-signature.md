@@ -123,7 +123,7 @@ const save = () => {
 
 1、` 提示：template部分`
 
-```javascript
+```vue
 <template>
   <view class="setUpASeal">
     <canvas
@@ -143,7 +143,7 @@ const save = () => {
 ```
 2、` 提示：script部分`
 
-```javascript
+```vue
 <script setup>
 import { ref, unref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
@@ -263,7 +263,7 @@ function clear() {
 ```
 3、`提示：style部分`
 
-```javascript
+```scss
 <style lang="scss" scoped>
 .setUpASeal {
   width: 100vw;

@@ -1,14 +1,13 @@
-# uniapp--vue3生成canvas进行电子签名
+# uniapp--vue3生成canvas实现电子签名
 ## 概要
 
-` 提示：使用uniapp中vue3语法，进行canvas电子签名，最后保存图片生成地址`
+` 提示：使用uniapp中vue3语法，实现canvas电子签名，并将签名保存为图片并生成地址。`
 
 使用场景：
-用户进行电子签名，最后保存用户的签名，生成图片存入数据库等等。。
+用户可在应用中进行电子签名，并将签名保存为图片后存入数据库等用途。
 
 项目构建：
-本教程有多个使用方法，方法一可以减少不必要的代码，封装性较强，推荐使用
-方法二可以使用，不是很推荐，代码夯余
+本教程提供了多种实现方法。其中，方法一具有较强的封装性和简洁性，推荐使用；而方法二虽然可用，但代码冗余，不太推荐使用。
 
 
 
@@ -90,7 +89,7 @@ export function useDrawSignature(canvasId) {
 ```
 `使用：`
 
-```javascript
+```vue
 <template>
 	<canvas
 	   canvas-id="canvas"
@@ -105,6 +104,7 @@ export function useDrawSignature(canvasId) {
 	    <cover-view class="confirm btn-inner text-center" @click="save">保存</cover-view>
     </cover-view>
 </template>
+<script setup>
 import { useDrawSignature } from '@/hooks/index'
 const { isSigned, touchStart, touchMove, touchEnd, clear } = useDrawSignature('canvas')
 
@@ -117,6 +117,7 @@ const save = () => {
 		return
 	}
 }
+</script>
 ```
 
 **方法二：(推荐方法一)**

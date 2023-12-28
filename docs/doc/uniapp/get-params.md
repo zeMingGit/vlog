@@ -24,11 +24,11 @@
 
 ` 提示：这里可以添加技术整体架构`
 
-比如一个成熟的项目，功能都比较齐全。突然有一天，这个项目也会给其他公司机构用，需要重新创建分支？copy一份？no，不需要。
+当一个成熟的项目需要为其他公司或机构提供使用时，并不需要重新创建分支或复制一份项目。你可以继续维护当前的分支，并通过条件渲染（例如 v-if）或其他方法来控制不同功能的显示与隐藏。此外，项目的基本配置应该是通用的。
 
-可以继续维护目前这个分支，各自功能可以用节点进行v-if或者其他的一些办法，项目基本配置应该有的吧，比如：在main.js导入项目的基本配置（提前在utils创建一个index.js，各自项目创建各自的js，之后导入到index.js）
+例如在 main.js 中导入项目的基本配置。你可以提前在 utils 文件夹下创建一个 index.js 文件，并根据各自的项目需求，创建不同的配置文件并导入到 index.js 中。
 
-有个问题，比如我怎么知道utils里面的index.js怎么动态导入？可以使用本教程
+至于如何动态导入 utils 文件夹下的 index.js 文件，你可以参考本教程来实现。动态导入可以使用 import 语句的动态导入语法或者使用 require.ensure 方法进行按需加载。具体的实现方式取决于你使用的构建工具和版本。
 
 ## 技术细节
 ` 提示：这里可以添加技术细节`
@@ -50,29 +50,12 @@
 import xzrcyyDatas from './xzrcyyDatas.js' // 导入的是各自项目的基础配置
 import sdfyyDatas from './sdfyyDatas.js'
 
-let HTYPE = process.env.VUE_APP_HTYPE
-
-let nodeSettings = {}
-if (HTYPE === 'XZRC') {
-  nodeSettings = xzrcyyDatas
-} else if (HTYPE === 'SDY') {
-  nodeSettings = sdfyyDatas
-}
-
-export default nodeSettings
-
-
-// 或者
-import xzrcyyDatas from './xzrcyyDatas.js' // 导入的是各自项目的基础配置
-import sdfyyDatas from './sdfyyDatas.js'
-
-let HTYPE = process.env.VUE_APP_HTYPE
-
+const HTYPE = process.env.VUE_APP_HTYPE
 const mapSettings = {
   'XZRC': xzrcyyDatas,
   'SDY': sdfyyDatas,
 }
-let nodeSettings = mapSettings[HTYPE]
+let nodeSettings = mapSettings[HTYPE] || ''
 
 if (!nodeSettings) {
   // 如果没有匹配的配置，则抛出错误

@@ -1,29 +1,37 @@
 # 使用uniapp开发微信小程序获取当前位置
 
 ## 概要
-使用uniapp开发微信小程序时，多多少少会遇到获取当前位置的详细信息（比如：xxx省xxx市），uniapp提供了一个名为uni.getLocation()。仔细观察文档你就会发现，在success中只有经纬度信息，在app端success中才会有一个address字段（其中就包含详细的地址信息等）
-  
-现在是微信小程序需要使用具体的位置信息怎么办？前提是，你的微信小程序具有定位功能，这个非常重要！！！
+在使用 Uniapp 开发微信小程序时，通常会遇到需要获取当前位置的详细信息（如 xxx省xxx市）。Uniapp 提供了一个名为 `uni.getLocation()`的方法来实现位置获取。然而，仔细观察文档后会发现，在 success 回调中只返回经纬度信息，而在 app 端的 success 回调中才会包含一个 address 字段，其中包含了详细的地址信息等。
 
+那么在微信小程序中如何获取具体的位置信息呢？前提是，你的微信小程序已经具备了定位功能，这一点非常重要！你可以通过以下步骤来获取具体的位置信息：
+
+1.使用 uni.getLocation() 方法获取经纬度信息。
+
+2.将获得的经纬度信息发送给后端服务器。
+
+3.后端服务器使用合适的地图 API（如百度地图、高德地图等）来获取详细的位置信息。你可以参考相应地图 API 的文档来实现该功能。
+
+4.后端服务器将获取到的详细位置信息返回给前端，前端即可使用该信息进行相关操作。
 
 
 ## 一、配置
 #### 1、进入mainfest.json文件配置permission块
-意思就是进mainfestison里的微信小程序配置，勾选位置接口
+这一步是在mainfest.json文件中配置微信小程序的权限，需要勾选位置接口。
 
-#### 2、进入微信公众平台添加合法域名
-tip：尽量不要跳过，这一步跳过可能会出现在微信开发者工具预览小程序时能够获取到位置，但是在手机微信中预览小程序就获取失败
+#### 2、在微信公众平台添加合法域名
+`tip：尽量不要跳过，这一步跳过可能会出现在微信开发者工具预览小程序时能够获取到位置，但是在手机微信中预览小程序就获取失败`
 
-[进入微信公众平台](https://mp.weixin.qq.com/)
-进入当前开发的项目中  一一 开发  一一   开发管理   一一   开发设置   一一  服务器域名   一一   request合法域名   一一  添加域名
+在微信公众平台中进行以下操作：
+*  进入当前开发的项目 [进入微信公众平台](https://mp.weixin.qq.com/)，点击【开发】，选择【开发管理】，进入【开发设置】
+*  在【服务器域名】中的【request合法域名】中添加以下域名：
 
-```javascript
+```
 https://restapi.amap.com   //高德合法域名
 ```
+这一步是为了确保微信小程序能够正常访问高德地图API
 
-#### 3、[高德SDK文件下载](https://lbs.amap.com/api/wx/download)
-[高德SDK文件下载](https://lbs.amap.com/api/wx/download)
-在解压后可以获取到一个js文件 ( amap-wx.130.js )，并且将改文件存放在项目中的静态文件中
+#### 3、下载高德SDK文件
+在[高德开放平台](https://lbs.amap.com/api/wx/download)下载高德SDK文件。解压后，会得到一个amap-wx.130.js的文件。将该文件存放在项目中的静态文件夹中
 
 ## 二、使用步骤 （直接封装组件）
 #### 1.在组件中引入amap-wx.130.js文件
@@ -35,7 +43,8 @@ import amap from '@/static/js/amap-wx.130.js';
 
 #### 2.在data中定义
 
-```javascript
+```vue
+<script>
 data() {
 	return {
 		amapPlugin: null,
@@ -43,17 +52,20 @@ data() {
 		address: "", // 已经获取到的位置
 	}
 }
+</script>
 ```
 
 #### 3.在created中定义
 
-```javascript
+```vue
+<script>
 created() {
 	this.amapPlugin = new amap.AMapWX({
 		key: this.gaodekey
 	});
 	this.getLocation();
 },
+</script>
 ```
 
 #### 4.在methods中定义
@@ -93,10 +105,13 @@ getLocation() {
 
 #### 5.在你需要使用的vue页面调用改组件
 
-```javascript
-// 调用组件
-<position-infor @lodAddress="getLocation()"></position-infor>
+```vue
+<template>
+    <!-- 调用组件 -->
+    <position-infor @lodAddress="getLocation()"></position-infor>
+</template>
 
+<script>
 methods(){
 	// 页面加载就会触发
   getLocation(address){
@@ -105,6 +120,7 @@ methods(){
     this.address = address;
   }
 }
+</script>
 
 ```
 

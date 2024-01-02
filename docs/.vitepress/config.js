@@ -18,16 +18,7 @@ export default {
   head: [
     ['link', { rel: 'icon', href: '/img/logo.svg' }],
     ['link', { rel: 'stylesheet', href: '/style/index.css' }],
-    // ['script', { src: '/js/baidu-analytics.js' }],
-    ['script', {}, `
-      var _hmt = _hmt || [];
-      (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?caeddcfe6f8c0b222474f7907aedb4a1"
-        var s = document.getElementsByTagName("script")[0]
-        s.parentNode.insertBefore(hm, s)
-      })()
-    `],
+    ['script', { src: '/js/baidu-analytics.js' }],
   ],
   themeConfig: {
     nav, // 导航栏配置
@@ -64,5 +55,5 @@ export default {
 function copyright() {
   let endYear = new Date().getFullYear()
   endYear = endYear > 2023 ? `2023-${endYear}` : 2023
-  return `Copyright©${endYear}  zeMing`
+  return `Copyright©${endYear} zeMing`
 }

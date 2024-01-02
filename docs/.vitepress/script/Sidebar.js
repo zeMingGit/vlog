@@ -20,9 +20,10 @@ const sidebar = {
       collapsed: false,
       items: [
         { text: '概述', link: '/doc/sundry/' },
+        { text: 'css布局', link: '/doc/sundry/css' },
+        { text: '工具代码', link: '/doc/sundry/toolCode' },
         { text: 'vs code配置', link: '/doc/sundry/settings' },
         { text: 'git记录', link: '/doc/sundry/git' },
-        { text: 'css布局', link: '/doc/sundry/css' },
       ]
     },
   ]

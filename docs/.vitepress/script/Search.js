@@ -36,4 +36,13 @@ const search = {
   }
 }
 
-export default search
+const searchAlgolia = {
+  provider: 'algolia',
+  options: {
+    appId: 'R0JRESJRK0',
+    apiKey: '96e84e24f9682766082d30a2f8294461',
+    indexName: 'vlog'
+  }
+}
+
+export default searchAlgolia

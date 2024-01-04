@@ -1,4 +1,4 @@
-const watermarkText = '@zeMing';
+const watermarkText = 'zeMing';
 
 // 创建水印画布
 function createWatermarkCanvas() {
@@ -16,32 +16,30 @@ function createWatermarkCanvas() {
 function drawWatermarkText() {
   const canvas = document.getElementById('watermark-canvas');
   const ctx = canvas.getContext('2d');
+  const fontSize = 30;
 
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ctx.font = '30px Arial';
+  ctx.font = `${fontSize}px Arial`;
   ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
 
-  // 计算水印文本的行数和列数
-  const textWidth = ctx.measureText(watermarkText).width;
-  const rowCount = Math.ceil(canvas.height / (textWidth + 40));
-  const columnCount = Math.ceil(canvas.width / (textWidth + 40));
+  const watermarkWidth = ctx.measureText(watermarkText).width;
+  const watermarkHeight = fontSize;
 
-  // 绘制水印文本
-  for (let row = 0; row < rowCount; row++) {
-    for (let column = 0; column < columnCount; column++) {
-      const x = column * (textWidth + 100) + 30;
-      const y = row * (textWidth + 60) + 100;
+  const numColumns = Math.floor(canvas.width / (watermarkWidth + 20));
+  const numRows = Math.ceil(canvas.height / (watermarkHeight + 20));
 
-      ctx.save();
-      ctx.translate(x, y);
-      const angle = -35;
-      ctx.rotate(angle * Math.PI / 180);
-      ctx.fillText(watermarkText, 0, 0);
-      ctx.restore();
+  for (let row = 0; row < numRows; row++) {
+    const xOffset = row % 2 === 0 ? 0 : (watermarkWidth + 20) / 2;
+
+    for (let column = 0; column < numColumns; column++) {
+      const x = xOffset + column * (watermarkWidth + 60);
+      const y = row * (watermarkHeight + 60);
+
+      ctx.fillText(watermarkText, x, y);
     }
   }
 }
@@ -49,7 +47,7 @@ function drawWatermarkText() {
 // 使用 MutationObserver 监听 DOM 变化并绘制水印
 function observeDOMChanges() {
   const observer = new MutationObserver(function(mutationsList) {
-    for(let mutation of mutationsList) {
+    for (let mutation of mutationsList) {
       if (mutation.type === 'childList') {
         drawWatermarkText();
       }
@@ -66,4 +64,4 @@ function initWatermark() {
   observeDOMChanges();
 }
 
-initWatermark()
+initWatermark();

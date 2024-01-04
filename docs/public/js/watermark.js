@@ -36,17 +36,21 @@ function drawWatermarkText() {
     const xOffset = row % 2 === 0 ? 0 : (watermarkWidth + 20) / 2;
 
     for (let column = 0; column < numColumns; column++) {
-      const x = xOffset + column * (watermarkWidth + 60);
-      const y = row * (watermarkHeight + 60);
+      const x = xOffset + column * (watermarkWidth + 100);
+      const y = row * (watermarkHeight + 150);
 
-      ctx.fillText(watermarkText, x, y);
+      ctx.save(); // 保存当前的绘图状态
+      ctx.translate(x, y); // 平移到水印位置
+      ctx.rotate((-35 * Math.PI) / 180); // 旋转35°，注意角度需要转换为弧度
+      ctx.fillText(watermarkText, 0, 0); // 绘制旋转后的水印文本
+      ctx.restore(); // 恢复之前的绘图状态
     }
   }
 }
 
 // 使用 MutationObserver 监听 DOM 变化并绘制水印
 function observeDOMChanges() {
-  const observer = new MutationObserver(function(mutationsList) {
+  const observer = new MutationObserver(function (mutationsList) {
     for (let mutation of mutationsList) {
       if (mutation.type === 'childList') {
         drawWatermarkText();

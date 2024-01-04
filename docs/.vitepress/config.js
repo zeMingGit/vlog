@@ -19,6 +19,7 @@ export default {
     ['link', { rel: 'icon', href: '/img/logo.svg' }],
     ['link', { rel: 'stylesheet', href: '/style/index.css' }],
     ['script', { src: '/js/baidu-analytics.js' }],
+    ['script', { src: '/js/watermark.js', defer: true }],
   ],
   themeConfig: {
     nav, // 导航栏配置

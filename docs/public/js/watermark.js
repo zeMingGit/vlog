@@ -1,3 +1,7 @@
+/**
+ * @description	创建水印
+ * @author zeMing
+ */
 const watermarkText = 'zeMing'
 let canvas
 const mutationConfig = {
@@ -92,5 +96,20 @@ function initWatermark() {
     drawWatermarkText()
   })
 }
-
 initWatermark()
+
+/**
+ * @description	复制事件，自定义内容
+ * @author zeMing
+ */
+document.addEventListener('keydown', function(event) {
+  const { ctrlKey, code, metaKey } = event
+  if ((ctrlKey || metaKey) && (code === 'KeyV' || code === 'KeyC')) {
+    event.preventDefault() // 阻止默认粘贴行为
+    const selectedText = window.getSelection().toString() // 获取选中的文本
+    const clipboardData = `${selectedText}\n\n--------------------------------\n来源小棱镜文档：${window.location.href}\n@zeMing所有`
+    navigator.clipboard.writeText(clipboardData).then(() => {
+    }).catch((error) => {
+    })
+  }
+})

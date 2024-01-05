@@ -72,7 +72,7 @@ function observeDOMChanges() {
         drawWatermarkText()
       }
       if (type === 'attributes' && target.id === 'watermark-canvas' && oldValue) {
-        console.log('监听到水印画布属性变化！禁止修改水印画布属性！')
+        console.log('警告⚠️：检测到水印属性变化！禁止修改水印属性！')
         observer.disconnect()
         canvas.style.position = 'fixed'
         canvas.style.top = '0'
@@ -97,6 +97,7 @@ function initWatermark() {
   })
 }
 initWatermark()
+console.log('%c 水印可抹除，我留了后门 ', 'font-size:14px; background:pink; color:#bf2c9f;')
 
 /**
  * @description	复制事件，自定义内容

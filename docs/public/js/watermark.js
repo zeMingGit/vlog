@@ -1,49 +1,91 @@
-const watermarkText = 'zeMing';
-let canvas;
+const watermarkText = 'zeMing'
+let canvas
 
 // 创建水印画布
-function createWatermarkCanvas() {
-  canvas = document.createElement('canvas');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+function createWatermarkCanvas(el) {
+  if (el) {
+    document.body.appendChild(el)
+    return
+  }
+  canvas = document.createElement('canvas')
+  canvas.id = 'watermark-canvas'
+  canvas.style.position = 'fixed'
+  canvas.style.top = '0'
+  canvas.style.left = '0'
+  canvas.style.pointerEvents = 'none'
+  canvas.style.zIndex = '-1'
+  document.body.appendChild(canvas)
+}
 
-  const ctx = canvas.getContext('2d');
-  const fontSize = 30;
+// 绘制水印文本
+function drawWatermarkText() {
+  const ctx = canvas.getContext('2d')
+  const fontSize = 30
 
-  ctx.font = `${fontSize}px Arial`;
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  canvas.width = window.innerWidth
+  canvas.height = window.innerHeight
 
-  const watermarkWidth = ctx.measureText(watermarkText).width;
-  const watermarkHeight = fontSize;
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-  const numColumns = Math.floor(canvas.width / (watermarkWidth + 20));
-  const numRows = Math.ceil(canvas.height / (watermarkHeight + 20));
+  ctx.font = `${fontSize}px Arial`
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'
+
+  const watermarkWidth = ctx.measureText(watermarkText).width
+  const watermarkHeight = fontSize
+
+  const numColumns = Math.floor(canvas.width / (watermarkWidth + 20))
+  const numRows = Math.ceil(canvas.height / (watermarkHeight + 20))
 
   for (let row = 0; row < numRows; row++) {
-    const xOffset = row % 2 === 0 ? 0 : (watermarkWidth + 20) / 2;
+    const xOffset = row % 2 === 0 ? 0 : (watermarkWidth + 20) / 2
 
     for (let column = 0; column < numColumns; column++) {
-      const x = xOffset + column * (watermarkWidth + 100);
-      const y = row * (watermarkHeight + 150);
+      const x = xOffset + column * (watermarkWidth + 100)
+      const y = row * (watermarkHeight + 150)
 
-      ctx.save(); // 保存当前的绘图状态
-      ctx.translate(x, y); // 平移到水印位置
-      ctx.rotate((-35 * Math.PI) / 180); // 旋转35°，注意角度需要转换为弧度
-      ctx.fillText(watermarkText, 0, 0); // 绘制旋转后的水印文本
-      ctx.restore(); // 恢复之前的绘图状态
+      ctx.save() // 保存当前的绘图状态
+      ctx.translate(x, y) // 平移到水印位置
+      ctx.rotate((-35 * Math.PI) / 180) // 旋转35°，注意角度需要转换为弧度
+      ctx.fillText(watermarkText, 0, 0) // 绘制旋转后的水印文本
+      ctx.restore() // 恢复之前的绘图状态
     }
   }
+}
 
-  const backgroundImage = canvas.toDataURL();
-  document.body.style.backgroundImage = `url('${backgroundImage}')`;
+// 使用 MutationObserver 监听 DOM 变化并绘制水印
+function observeDOMChanges() {
+  const observer = new MutationObserver((mutationsList) => {
+    if (mutationsList.length) {
+      const { removedNodes, type, target, oldValue } = mutationsList[0]
+      if (removedNodes[0] === canvas) {
+        createWatermarkCanvas(canvas)
+        drawWatermarkText()
+      }
+      if (type === 'attributes' && target.id === 'watermark-canvas' && oldValue) {
+        console.log('监听到水印画布属性变化！禁止修改水印画布属性！')
+        observer.disconnect()
+        canvas.style.position = 'fixed'
+        canvas.style.top = '0'
+        canvas.style.left = '0'
+        canvas.style.pointerEvents = 'none'
+        canvas.style.zIndex = '-1'
+        observer.observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeOldValue: true })
+      }
+    }
+  })
+  observer.observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeOldValue: true })
 }
 
 // 初始化水印
 function initWatermark() {
-  createWatermarkCanvas();
+  createWatermarkCanvas()
+  drawWatermarkText()
+  observeDOMChanges()
 
   // 监听窗口尺寸变化事件
-  window.addEventListener('resize', createWatermarkCanvas);
+  window.addEventListener('resize', () => {
+    drawWatermarkText()
+  })
 }
 
-initWatermark();
+initWatermark()

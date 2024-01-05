@@ -1,12 +1,13 @@
 const watermarkText = 'zeMing'
+let canvas
 
 // 创建水印画布
 function createWatermarkCanvas(el) {
-  if(el) {
+  if (el) {
     document.body.appendChild(el)
     return
   }
-  const canvas = document.createElement('canvas')
+  canvas = document.createElement('canvas')
   canvas.id = 'watermark-canvas'
   canvas.style.position = 'fixed'
   canvas.style.top = '0'
@@ -18,7 +19,6 @@ function createWatermarkCanvas(el) {
 
 // 绘制水印文本
 function drawWatermarkText() {
-  const canvas = document.getElementById('watermark-canvas')
   const ctx = canvas.getContext('2d')
   const fontSize = 30
 
@@ -54,10 +54,9 @@ function drawWatermarkText() {
 
 // 使用 MutationObserver 监听 DOM 变化并绘制水印
 function observeDOMChanges() {
-  let canvas = document.getElementById('watermark-canvas')
-  const observer = new MutationObserver((mutationsList) =>{
+  const observer = new MutationObserver((mutationsList) => {
     if (mutationsList.length) {
-      const { removedNodes, type, target } = mutationsList[0]
+      const { removedNodes } = mutationsList[0]
       if (removedNodes[0] === canvas) {
         createWatermarkCanvas(canvas)
         drawWatermarkText()
@@ -72,6 +71,11 @@ function initWatermark() {
   createWatermarkCanvas()
   drawWatermarkText()
   observeDOMChanges()
+
+  // 监听窗口尺寸变化事件
+  window.addEventListener('resize', () => {
+    drawWatermarkText()
+  })
 }
 
 initWatermark()

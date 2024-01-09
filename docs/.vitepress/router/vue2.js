@@ -1,6 +1,10 @@
 // 作者: zeMing
 import { readdirFiles } from '../script/tool.js'
-const files = readdirFiles(__dirname, 1, 'doc/vue2')
+const files = readdirFiles({
+  currentPath: __dirname,
+  level: 2,
+  parentPath: 'doc/vue2',
+})
 
 let text = new Map([
   ['index', '概述'],

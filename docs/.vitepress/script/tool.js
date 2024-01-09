@@ -18,12 +18,12 @@ export const readdirFiles = (params) => {
   const {
     currentPath,
     level = 1,
-    parentPath = '',
+    parentPath,
     isBackFile = false
   } = params
 
   if (typeof currentPath !== 'string' || typeof parentPath !== 'string') {
-    throw new TypeError('currentPath和parentPath参数必须是字符串')
+    throw new TypeError('currentPath和parentPath参数必须是字符串 at tool.js')
   }
   const filesList = [] // 存储文件名列表
   let filePath = currentPath
@@ -32,7 +32,7 @@ export const readdirFiles = (params) => {
   }
   filePath = path.join(filePath, parentPath)
   if (!fs.existsSync(filePath)) {
-    throw new Error('指定路径不存在')
+    throw new Error('指定路径不存在 at tool.js')
   }
   const files = fs.readdirSync(filePath)
 

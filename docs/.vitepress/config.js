@@ -1,3 +1,4 @@
+// import { defineConfig } from 'vitepress'
 import lastUpdated from './script/LastTime'
 import search from './script/Search'
 import sidebar from './script/Sidebar'

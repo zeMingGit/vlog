@@ -18,7 +18,7 @@ export default {
   head: [
     ['link', { rel: 'icon', href: '/img/logo.svg' }],
     ['link', { rel: 'stylesheet', href: '/style/index.css' }],
-    ['link', { rel: 'preconnect', href: 'https://YOUR_APP_ID-dsn.algolia.net' }],
+    ['link', { rel: 'preconnect', href: 'https://2HEGWEY7SW-dsn.algolia.net' }],
     ['script', { src: '/js/baidu-analytics.js' }],
     ['script', { src: '/js/watermark.js', defer: true }],
   ],

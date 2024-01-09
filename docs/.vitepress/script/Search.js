@@ -43,7 +43,9 @@ const searchAlgolia = {
     apiKey: '2e4d854dceb221dedc1ecb0b397a8373',
     indexName: 'vlogxiao',
     locales: {
-      zh: {
+      // root是默认的本地化文本选项
+      root: {
+        // 指定根目录下的本地化文本。
         placeholder: '搜索文档',
         translations: {
           button: {
@@ -57,6 +59,18 @@ const searchAlgolia = {
               cancelButtonText: '取消',
               cancelButtonAriaLabel: '取消'
             },
+            noResultsText: '无法找到相关结果',
+            resetButtonTitle: '清除查询条件',
+            footer: {
+              selectText: '选择',
+              navigateText: '切换',
+              closeText: '关闭',
+              searchByText: '搜索提供者'
+            },
+            errorScreen: {
+              titleText: '无法获取结果',
+              helpText: '你可能需要检查你的网络连接'
+            },
             startScreen: {
               recentSearchesTitle: '搜索历史',
               noRecentSearchesText: '没有搜索历史',
@@ -65,22 +79,12 @@ const searchAlgolia = {
               favoriteSearchesTitle: '收藏',
               removeFavoriteSearchButtonTitle: '从收藏中移除'
             },
-            errorScreen: {
-              titleText: '无法获取结果',
-              helpText: '你可能需要检查你的网络连接'
-            },
-            footer: {
-              selectText: '选择',
-              navigateText: '切换',
-              closeText: '关闭',
-              searchByText: '搜索提供者'
-            },
             noResultsScreen: {
               noResultsText: '无法找到相关结果',
               suggestedQueryText: '你可以尝试查询',
               reportMissingResultsText: '你认为该查询应该有结果？',
               reportMissingResultsLinkText: '点击反馈'
-            }
+            },
           }
         }
       }

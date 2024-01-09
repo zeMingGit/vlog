@@ -1,5 +1,5 @@
 /**
- * @description 作用是读取指定文件夹下的所有文件
+ * @description 作用是读取指定文件夹下的所有文件 --暂时弃用(已废弃！)
  * @param {Object} params 参数对象
  * @param {String} params.currentPath 当前路径
  * @param {Number} [params.level=1] 向上级目录的层数
@@ -46,4 +46,35 @@ export const readdirFiles = (params) => {
     }
   })
   return filesList
+}
+
+
+/**
+ * @description 作用是读取指定文件夹下的所有文件
+ * @param {Object} params 参数对象
+ * @param {String} params.path 当前路径
+ * @param {Boolean} [params.isBackSuffix=false] 是否返回文件后缀名
+ * @throws {TypeError} 如果 path 参数不是字符串类型
+ * @throws {Error} 如果指定路径不存在
+ * @returns {Array} 返回一个数组，数组中包含指定文件夹下的所有文件名或文件夹名（根据 isBackSuffix 参数决定） at tool.js
+ * @example
+ * const files = readdirFilesV2({ path: 'docs/doc/vue2', })
+ * // files = ['index', 'precision']
+ */
+export const readdirFilesV2 = (params) => {
+  const {
+    path,
+    isBackSuffix = false,
+  } = params
+
+  try {
+    const fileList = fs.readdirSync(path).map((pkg) => {
+      if (isBackSuffix) return pkg
+      return pkg = pkg.split('.')[0]
+    })
+    return fileList
+  } catch (error) {
+    console.error('Error reading directory:', error)
+    throw error
+  }
 }

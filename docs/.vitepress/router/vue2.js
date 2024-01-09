@@ -1,19 +1,13 @@
-// 作者: zeMing
-import { readdirFiles } from '../script/tool.js'
-const files = readdirFiles({
-  currentPath: __dirname,
-  level: 2,
-  parentPath: 'doc/vue2',
-})
+import { readdirFilesV2 } from '../script/tool.js'
 
 let text = new Map([
   ['index', '概述'],
   ['precision', 'Number精度问题'],
 ])
-let items = files.map(item => {
+const items = readdirFilesV2({ path: 'docs/doc/vue2', }).map((pkg) => {
   return {
-    text: text.get(item),
-    link: `/doc/vue2/${item}`
+    text: text.get(pkg),
+    link: `/doc/vue2/${pkg}`
   }
 })
 

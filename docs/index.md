@@ -20,6 +20,15 @@ hero:
     - theme: alt
       text: uniapp
       link: https://uniapp.dcloud.net.cn/
+    - theme: alt
+      text: vite
+      link: https://cn.vitejs.dev/
+    # - theme: alt
+    #   text: eslint.js
+    #   link: https://eslint.org/docs/latest/use/getting-started
+    # - theme: alt
+    #   text: uniapp
+    #   link: https://uniapp.dcloud.net.cn/
  
 features:
   - icon: ⚡️

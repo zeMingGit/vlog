@@ -5,8 +5,9 @@ hero:
   name: 小棱镜
   # text: 前端技术预览文档
   tagline: 前端技术简明概述，快速入门指南
-  # image: 
+  image: 
   #   src: /img/vue.svg
+      src: https://cdn.chinachdu.com/webStatic/wechat-applets/nyt-static/xin_vlogLogo.jpg
   actions:
     - theme: brand
       text: 开始
@@ -45,5 +46,10 @@ features:
   :root {
     --vp-home-hero-name-color: transparent;
     --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe, #41d1ff);
+  }
+
+  .VPImage, .image-src {
+    padding: 24px;
+    border-radius: 50%;
   }
 </style>

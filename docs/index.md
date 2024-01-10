@@ -6,8 +6,9 @@ hero:
   # text: 前端技术预览文档
   tagline: 前端技术简明概述，快速入门指南
   image: 
-  #   src: /img/vue.svg
-      src: https://cdn.chinachdu.com/webStatic/wechat-applets/nyt-static/xin_vlogLogo.png
+      # src: /img/vue.svg
+      # src: https://cdn.chinachdu.com/webStatic/wechat-applets/nyt-static/xin_vlogLogo.png
+      src: /img/xin_vlogLogo.png
   actions:
     - theme: brand
       text: 开始
@@ -19,11 +20,11 @@ hero:
       text: pinia
       link: https://pinia.vuejs.org/zh/introduction.html
     - theme: alt
-      text: uniapp
-      link: https://uniapp.dcloud.net.cn/
-    - theme: alt
       text: vite
       link: https://cn.vitejs.dev/
+    - theme: alt
+      text: uniapp
+      link: https://uniapp.dcloud.net.cn/
     # - theme: alt
     #   text: eslint.js
     #   link: https://eslint.org/docs/latest/use/getting-started

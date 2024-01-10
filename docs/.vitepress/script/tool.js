@@ -65,16 +65,22 @@ export const readdirFilesV2 = (params) => {
   const {
     path,
     isBackSuffix = false,
+    isBackPath = false,
   } = params
 
   try {
     const fileList = fs.readdirSync(path).map((pkg) => {
-      if (isBackSuffix) return pkg
-      return pkg = pkg.split('.')[0]
-    })
+      if (!fs.statSync(path + '/' + pkg).isFile()){
+        return null
+      }
+      if (!isBackSuffix) {
+        pkg = pkg.split('.')[0]
+      }
+      return isBackPath ? `/${path}/${pkg}` : pkg
+    }).filter(file => file !== null)
     return fileList
   } catch (error) {
-    console.error('Error reading directory:', error)
+    console.error('读取目录时出错：', error)
     throw error
   }
 }

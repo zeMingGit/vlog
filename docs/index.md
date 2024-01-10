@@ -7,7 +7,7 @@ hero:
   tagline: 前端技术简明概述，快速入门指南
   image: 
   #   src: /img/vue.svg
-      src: https://cdn.chinachdu.com/webStatic/wechat-applets/nyt-static/xin_vlogLogo.jpg
+      src: https://cdn.chinachdu.com/webStatic/wechat-applets/nyt-static/xin_vlogLogo.png
   actions:
     - theme: brand
       text: 开始

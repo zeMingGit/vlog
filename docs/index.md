@@ -5,8 +5,8 @@ hero:
   name: 小棱镜
   # text: 前端技术预览文档
   tagline: 前端技术简明概述，快速入门指南
-  image: 
-    src: /img/vue.svg
+  # image: 
+  #   src: /img/vue.svg
   actions:
     - theme: brand
       text: 开始

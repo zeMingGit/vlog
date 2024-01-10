@@ -48,7 +48,7 @@ features:
     --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe, #41d1ff);
   }
 
-  .VPImage, .image-src {
+  .VPImage.image-src {
     padding: 24px;
     border-radius: 50%;
   }

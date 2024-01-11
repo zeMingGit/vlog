@@ -8,7 +8,7 @@
     "dev": "vitepress dev docs",
     "build": "vitepress build docs"
   },
-  "author": "",
+  "author": "zeMing",
   "license": "ISC",
   "dependencies": {
     "less": "^4.2.0",

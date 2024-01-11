@@ -1,9 +1,13 @@
 import fs from 'fs'
 import path from 'path'
 import { defineConfig } from 'vitepress'
+import { createRequire } from 'module'
 import nav from './script/Nav'
 import sidebar from './script/Sidebar'
 import search from './script/Search'
+const require = createRequire(import.meta.url)
+// const pkg = require('vitepress/package.json')
+
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -37,7 +41,7 @@ export default defineConfig({
         locales: { ...search },
       }
     }, // 搜索配置
-    logo: { light: "/img/logo.svg", dark: "/img/logoFFF.svg" },
+    logo: { light: "/img/logo.svg", dark: "/img/logoFFF.svg", width: 24, height: 24 },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/2439340964' },
     ],
@@ -68,5 +72,12 @@ export default defineConfig({
     darkModeSwitchLabel: '切换外观',
     lightModeSwitchTitle: '切换到浅色模式',
     darkModeSwitchTitle: '切换到深色模式',
+  },
+  vite: {
+    server: {
+      port: 8888,
+      host: true,
+      // open: '/',
+    },
   }
 })

@@ -1,27 +1,30 @@
-// import { defineConfig } from 'vitepress'
-import lastUpdated from './script/LastTime'
-import search from './script/Search'
-import sidebar from './script/Sidebar'
+// import fs from 'fs'
+// import path from 'path'
+import { defineConfig } from 'vitepress'
 import nav from './script/Nav'
+import sidebar from './script/Sidebar'
+import search from './script/Search'
+import lastUpdated from './script/LastTime'
 
-export default {
-  title: 'zeMing',
-  description: '',
+export default defineConfig({
   lang: 'zh-CN',
+  title: 'zeMing',
+  description: 'vlog - 小棱镜 快速入门指南',
+  // srcDir: 'src',
+  cleanUrls: true, //是否启用干净的URL，例如/about代替/about.html
   locales: {
     root: { label: '简体中文' },
-    en: { label: 'English', link: 'https://vitejs.dev' },
+    // en: { label: 'English', link: 'https://vitejs.dev' },
   },
   markdown: {
     lineNumbers: true,
   },
-  cleanUrls: true, //是否启用干净的URL，例如/about代替/about.html
   head: [
     ['link', { rel: 'icon', href: '/img/logo.svg' }],
     ['link', { rel: 'stylesheet', href: '/style/index.css' }],
     ['link', { rel: 'preconnect', href: 'https://2HEGWEY7SW-dsn.algolia.net' }],
     ['script', { src: '/js/baidu-analytics.js' }],
-    ['script', { src: '/js/watermark.js', defer: true }],
+    ['script', { src: '/js/watermark.js', defer: '' }],
   ],
   themeConfig: {
     nav, // 导航栏配置
@@ -29,11 +32,11 @@ export default {
     search, // 搜索配置
     lastUpdated, // 允许自定义最后更新文本和日期格式
     logo: { light: "/img/logo.svg", dark: "/img/logoFFF.svg" },
-    copyCode: {
-      buttonText: '复制代码', // 在这里更改按钮文字
-      errorText: '复制失败', // 更改复制失败时的提示文字
-      successText: '已复制' // 更改成功复制时的提示文字
-    },
+    // copyCode: {
+    //   buttonText: '复制代码', // 在这里更改按钮文字
+    //   errorText: '复制失败', // 更改复制失败时的提示文字
+    //   successText: '已复制' // 更改成功复制时的提示文字
+    // },
     outline: [2, 4], // 设置标题的大纲深度，即显示到哪一级标题
     outlineTitle: '本页目录', // 设置大纲的标题
     sidebarMenuLabel: '菜单',
@@ -53,10 +56,11 @@ export default {
     },
     darkModeSwitchLabel: '切换外观',
   }
-}
+})
 
-function copyright() {
-  let endYear = new Date().getFullYear()
+
+function copyright(): string {
+  let endYear: number | string = new Date().getFullYear()
   endYear = endYear > 2023 ? `2023-${endYear}` : 2023
   return `Copyright©${endYear} zeMing`
 }

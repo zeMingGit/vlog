@@ -11,7 +11,7 @@ hero:
   actions:
     - theme: brand
       text: 开始
-      link: /doc/introduction/index
+      link: /src/introduction/
     - theme: alt
       text: vue.js
       link: https://cn.vuejs.org/guide/introduction.html

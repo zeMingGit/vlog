@@ -1,5 +1,5 @@
 // 搜索功能
-const search = {
+const searchBox = {
   // 指定使用本地搜索提供商。
   provider: 'local',
   options: {
@@ -36,8 +36,8 @@ const search = {
   }
 }
 
-const searchAlgolia = {
-  provider: 'algolia',
+const search = {
+  provider: 'algolia' as const,
   options: {
     appId: '2HEGWEY7SW',
     apiKey: '2e4d854dceb221dedc1ecb0b397a8373',
@@ -92,4 +92,4 @@ const searchAlgolia = {
   }
 }
 
-export default searchAlgolia
+export default search

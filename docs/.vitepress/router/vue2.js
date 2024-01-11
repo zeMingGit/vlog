@@ -4,10 +4,10 @@ let text = new Map([
   ['index', '概述'],
   ['precision', 'Number精度问题'],
 ])
-const items = readdirFilesV2({ path: 'docs/doc/vue2', }).map((pkg) => {
+const items = readdirFilesV2({ path: 'docs/src/vue2', }).map((pkg) => {
   return {
     text: text.get(pkg),
-    link: `/doc/vue2/${pkg}`
+    link: `/src/vue2/${pkg}`
   }
 })
 
@@ -26,8 +26,8 @@ export default vue2
 //   text: 'vue2',
 //   collapsed: false,
 //   items: [
-//     { text: '概述', link: '/doc/vue2/' },
-//     { text: 'Number精度问题', link: '/doc/vue2/precision' },
+//     { text: '概述', link: '/src/vue2/' },
+//     { text: 'Number精度问题', link: '/src/vue2/precision' },
 //   ]
 // }
 

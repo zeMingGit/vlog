@@ -75,9 +75,10 @@ export default defineConfig({
   },
   vite: {
     server: {
-      port: 8888,
+      // tip：默认端口号在win系统上有些许问题，自测mac正常。暂时不打开。-zeMing
+      // port: 8888, 
       host: true,
-      // open: '/',
+      // open: '/', // 不做修改，不打开！！！
     },
   }
 })

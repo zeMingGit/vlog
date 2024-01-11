@@ -4,33 +4,15 @@ layout: home
 hero:
   name: 小棱镜
   # text: 前端技术预览文档
-  tagline: 前端技术简明概述，快速入门指南
+  tagline: 精确解答，探索无限可能
   image: 
       # src: /img/vue.svg
       src: https://cdn.chinachdu.com/webStatic/wechat-applets/nyt-static/xin_vlogLogo.png
       # src: /img/xin_vlogLogo.png
   actions:
     - theme: brand
-      text: 开始
+      text: 开始使用
       link: /src/introduction/
-    - theme: alt
-      text: vue.js
-      link: https://cn.vuejs.org/guide/introduction.html
-    - theme: alt
-      text: pinia
-      link: https://pinia.vuejs.org/zh/introduction.html
-    - theme: alt
-      text: vite
-      link: https://cn.vitejs.dev/
-    - theme: alt
-      text: uniapp
-      link: https://uniapp.dcloud.net.cn/
-    # - theme: alt
-    #   text: eslint.js
-    #   link: https://eslint.org/docs/latest/use/getting-started
-    # - theme: alt
-    #   text: uniapp
-    #   link: https://uniapp.dcloud.net.cn/
  
 features:
   - icon: ⚡️
@@ -48,9 +30,7 @@ features:
 import { onMounted } from 'vue'
 import { fetchReleaseTag } from './.vitepress/script/fetchReleaseTag.ts'
 
-onMounted(() => {
-  fetchReleaseTag()
-})
+fetchReleaseTag()
 </script>
 
 <style>

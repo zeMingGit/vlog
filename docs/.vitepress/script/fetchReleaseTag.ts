@@ -3,11 +3,12 @@ export const fetchReleaseTag = () => {
     .then((res) => res.json())
     .then((json) => json.tag_name ?? '')
     .then(releaseTag => {
-      if (!releaseTag) return;
+      if (!releaseTag) return
       const tagLineParagragh = document.querySelector('div.VPHero.has-image.VPHomeHero > div > div.main > p.tagline')
+      const sampDoc = document.querySelector('div.VPHero.has-image.VPHomeHero > div > div.main > p.tagline > .docs-cn-github-release-tag')
       const docsReleaseTagSpan = document.createElement('samp')
       docsReleaseTagSpan.classList.add('docs-cn-github-release-tag')
       docsReleaseTagSpan.innerText = releaseTag
-      tagLineParagragh?.appendChild(docsReleaseTagSpan)
+      !sampDoc && tagLineParagragh?.appendChild(docsReleaseTagSpan)
     })
 }

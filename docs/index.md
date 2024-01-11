@@ -30,7 +30,9 @@ features:
 import { onMounted } from 'vue'
 import { fetchReleaseTag } from './.vitepress/script/fetchReleaseTag.ts'
 
-fetchReleaseTag()
+onMounted(() => {
+  fetchReleaseTag()
+})
 </script>
 
 <style>

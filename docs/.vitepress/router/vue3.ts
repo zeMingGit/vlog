@@ -2,9 +2,10 @@
 const vue3 = {
   text: 'vue3',
   collapsed: false,
+  base: '/src/vue3',
   items: [
-    { text: '概述', link: '/src/vue3/' },
-    { text: 'SHA 256', link: '/src/vue3/sha256' },
+    { text: '概述', link: '/' },
+    { text: 'SHA 256', link: '/sha256' },
   ]
 }
 

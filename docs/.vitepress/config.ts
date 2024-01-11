@@ -51,7 +51,7 @@ export default defineConfig({
       copyright: `Copyright© 2023-${new Date().getFullYear()} zeMing`,
     },
     docFooter: { prev: '上一页', next: '下一页' }, // 自定义上一个和下一个链接上方显示的文本
-    outline: { label: '页面导航' }, // 设置标题的大纲深度，即显示到哪一级标题
+    outline: [2, 4], // 设置标题的大纲深度，即显示到哪一级标题
     lastUpdated: {
       text: '更新时间',
       formatOptions: {

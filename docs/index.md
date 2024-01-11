@@ -43,6 +43,16 @@ features:
     title: 编码性
     details: 快速复制代码示例和解决方案，提供高效的编码方法
 ---
+
+<script setup>
+import { onMounted } from 'vue'
+import { fetchReleaseTag } from './.vitepress/script/fetchReleaseTag.ts'
+
+onMounted(() => {
+  fetchReleaseTag()
+})
+</script>
+
 <style>
   :root {
     --vp-home-hero-name-color: transparent;

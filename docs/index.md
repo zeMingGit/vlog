@@ -11,7 +11,7 @@ hero:
       # src: /img/xin_vlogLogo.png
   actions:
     - theme: brand
-      text: 开始使用
+      text: 快速开始
       link: /src/introduction/
  
 features:

@@ -47,6 +47,7 @@ export default defineConfig({
     ],
     // 文章底部链接
     editLink: {
+      // pattern: 'https://gitee.com/zeminga/vlog/tree/master/docs/:path', // 不这么做，因为查看代码太过方便，不利于文档安全性
       pattern: 'https://gitee.com/zeminga/vlog',
       text: '在gitee上编辑此页面'
     },

@@ -1,6 +1,10 @@
 const nav = [
   { text: '开始', link: '/src/introduction/' },
   {
+    text: '作者',
+    link: '/v2/',
+  },
+  {
     text: "关于",
     items: [
       { text: '团队', link: '/src/nav/team' },

@@ -19,11 +19,11 @@
   const fs = uni.getFileSystemManager()
   const filePath = `${wx.env.USER_DATA_PATH}/jcReport.pdf`
   try {
-    const res = fs.writeFileSync({
+    fs.writeFileSync(
       filePath, // 临时文件路径
       arrayBuffer,
       'binary'
-    })
+    )
 
     // 预览文件操作
     uni.openDocument({
@@ -41,7 +41,7 @@
     })
 
     // 保存文件操作
-    const saveFile: { savedFilePath } = fs.saveFileSync({ filePath, filePath })
+    const savedFilePath = fs.saveFileSync(filePath, filePath)
     if (savedFilePath) {
       uni.showToast({
         title: '保存PDF文件成功',

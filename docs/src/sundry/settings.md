@@ -6,6 +6,28 @@
 ## 技术细节
 #### 1. vs code中settings.json配置
 `提示：下载相应的插件`
+::: details 推荐的插件
+**人工智能**
+
+GitHub Copilot Chat、GitHub Copilot
+
+**必装插件**
+
+GitLens — Git supercharged、Git History、ESLint、console helper、Stylelint、var-translate-en
+
+**vue系列**
+
+Vuter、Vue Language Features (Volar)、Vue 3 Snippets、vue-helper
+
+**uniapp系列**
+
+uniapp-snippet
+
+**效率神器**
+
+vscode-styled-components、Prettier - Code formatter、Prettier ESLint、path-alias、Path Intellisense、JavaScript (ES6) code snippets、Import Cost、Image preview、EditorConfig for VS Code、
+Code Translate、Auto Rename Tag、Auto Import、Auto Close Tag
+:::
 ```javascript
 {
     "editor.suggestSelection": "first",
@@ -414,6 +436,7 @@ module.exports = {
 ```
 
 #### 4. vue2 Eslint配置
+::: details vue2 Eslint配置
 ```javascript
 module.exports = {
     "root": true,
@@ -581,6 +604,7 @@ module.exports = {
     }
 }
 ```
+:::
 
 #### 5. .gitignore配置
 ```javascript

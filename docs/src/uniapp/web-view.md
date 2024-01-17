@@ -73,26 +73,4 @@ export default {
 
 
 ## 小结
-
-<!-- 
-const primaryDom = document.querySelector('.primary')
-    let time = 4
-    let timer = setInterval(function () {
-      if (time < 0) {
-        clearInterval(timer)
-        primaryDom.innerHTML = '我已阅读并同意'
-        return
-      }
-      primaryDom.innerHTML = `请您仔细阅读并同意隐私政策(${time--}s)`
-    }, 1000)
-
-    primaryDom.addEventListener('click', function () {
-      if (time > 0) {
-        return
-      }
-      if(window.__wxjs_environment === 'miniprogram') {
-        wx.miniProgram.postMessage({ data: { isRead: 'yes' } })
-        wx.miniProgram.navigateBack()
-        return
-      }
-    }) -->
+待补充

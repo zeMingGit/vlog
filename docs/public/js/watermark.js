@@ -97,7 +97,6 @@ function initWatermark() {
   })
 }
 initWatermark()
-console.log('%c 水印可抹除，我留了后门 ', 'font-size:14px; background:pink; color:#bf2c9f;')
 
 /**
  * @description	复制事件，自定义内容

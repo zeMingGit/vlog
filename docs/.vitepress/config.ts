@@ -27,7 +27,7 @@ export default defineConfig({
     ['link', { rel: 'stylesheet', href: '/style/index.css' }],
     ['link', { rel: 'preconnect', href: 'https://2HEGWEY7SW-dsn.algolia.net' }],
     ['script', { src: '/js/baidu-analytics.js' }],
-    ['script', { src: '/js/watermark.js', defer: '' }],
+    // ['script', { src: '/js/watermark.js', defer: '' }],
   ],
   themeConfig: {
     nav, // 导航栏配置

@@ -1,7 +1,12 @@
+import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import MyLayout from './MyLayout.vue'
+import VueAmazingUI from 'vue-amazing-ui'
+import Layout from './MyLayout.vue'
 
 export default {
   extends: DefaultTheme,
-  // Layout: MyLayout
-}
+  Layout,
+  enhanceApp({ app }) {
+    app.use(VueAmazingUI)
+  },
+} satisfies Theme

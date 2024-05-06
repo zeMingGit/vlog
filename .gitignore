@@ -8,13 +8,18 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+package-lock.json
+dist
+dist-ssr
 docs/.vitepress/cache
 docs/.vitepress/dist
 .DS_Store
-# dist
+dist
 *.local
 
 # Editor directories and files
+.vscode/*
+!.vscode/extensions.json
 .idea
 *.suo
 *.ntvs*

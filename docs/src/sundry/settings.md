@@ -17,7 +17,7 @@ GitLens — Git supercharged、Git History、ESLint、console helper、Stylelint
 
 **vue系列**
 
-Vuter、Vue Language Features (Volar)、Vue 3 Snippets、vue-helper
+Vuter、Vue - Official、Vue 3 Snippets、vue-helper
 
 **uniapp系列**
 
@@ -99,6 +99,82 @@ Code Translate、Auto Rename Tag、Auto Import、Auto Close Tag
 }
 ```
 
+```javascript
+{
+	"editor.suggestSelection": "first",
+	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+	"files.associations": {
+			"*.cjson": "jsonc",
+			"*.wxss": "css",
+			"*.wxs": "javascript"
+	},
+	"emmet.includeLanguages": {
+			"wxml": "html"
+	},
+	"minapp-vscode.disableAutoConfig": true,
+	"editor.tabSize": 2,
+	// 配置 eslint 检查的文件类型
+	"eslint.autoFixOnSave": true,
+	"eslint.validate": [
+			"javascript", {
+					"language": "vue",
+					"autoFix": true
+			},
+			"html",
+			"vue"
+	],
+	// stylelint 需要检查的文件
+	"stylelint.validate": [
+			"css",
+			"less",
+			"postcss",
+			"scss",
+			"vue",
+			"sass"
+	],
+	// 配置 stylelint 自动修复 ,VScode需要安装stylelint-plus插件，否则不能实现自动修复
+	"stylelint.autoFixOnSave": true,
+	"editor.fontSize": 14,
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"[html]": {
+			"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"[javascript]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[vue]": {
+			"editor.defaultFormatter": "stylelint.vscode-stylelint"
+	},
+	"tabnine.experimentalAutoImports": true,
+	"[css]": {
+			"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"editor.codeActionsOnSave": {
+			"source.fixAll.stylelint": "explicit",
+			"source.fixAll.eslint": "explicit"
+	},
+	"liveServer.settings.AdvanceCustomBrowserCmdLine": "",
+	"editor.fontLigatures": false,
+	"editor.inlineSuggest.enabled": true,
+	"workbench.colorTheme": "Default Dark+",
+	"vue.autoInsert.dotValue": true,
+	"github.copilot.enable": {
+			"*": true,
+			"plaintext": false,
+			"markdown": false,
+			"scminput": false,
+			"vue": true
+	},
+	"window.commandCenter": true,
+	"extensions.autoCheckUpdates": false,
+	"files.autoSave": "afterDelay",
+	"json.schemas": [
+			
+	],
+	"eslint.format.enable": true,
+	"editor.stickyScroll.enabled": false
+}
+```
 #### 2. vue3 Eslint配置
 ```javascript
 module.exports = {

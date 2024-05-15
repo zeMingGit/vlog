@@ -52,7 +52,7 @@ export default defineConfig({
       text: '在gitee上编辑此页面'
     },
     footer: {
-      message: '欢迎加入我们，一起来完善小棱镜文档吧',
+      message: '小小棱镜，无限可能',
       copyright: `Copyright© 2023-${new Date().getFullYear()} zeMing`,
     },
     docFooter: { prev: '上一页', next: '下一页' }, // 自定义上一个和下一个链接上方显示的文本

@@ -23,7 +23,7 @@ features:
     details: 分享有趣故事和趣味项目，带来快乐和轻松的体验
   - icon: 🛠️
     title: 编码性
-    details: 快速复制代码示例和解决方案，提供高效的编码方法
+    details: 快速复制代码示例和解决方案，提供高效的解决方法
 ---
 
 <script setup>

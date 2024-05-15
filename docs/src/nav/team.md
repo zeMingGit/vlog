@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 ---
 <script setup>
 import {
@@ -14,7 +14,7 @@ const members = [
     name: 'zeMing',
     title: '文档作者',
     links: [
-      { icon: 'github', link: 'https://github.com/2439340964' },
+      { icon: 'github', link: 'https://github.com/zeMingGit' },
     ]
   },
   {

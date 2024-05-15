@@ -22,6 +22,7 @@ const sundry = {
     { text: '工具代码', link: '/toolCode' },
     { text: 'vs code配置', link: '/settings' },
     { text: 'git记录', link: '/git' },
+    { text: 'node环境', link: '/node' },
     { text: '我的记录', link: '/my' },
   ],
 }

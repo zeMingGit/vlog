@@ -4,7 +4,7 @@
 `提示：node、pnpm、nvm等一些环境设置`
 
 ## 技术细节
-#### 1. node
+### 1. node
 ```shell
 # node下载地址
 https://nodejs.org/dist/
@@ -25,7 +25,7 @@ npm.taobao.org ==》npmmirror.com
 ```
 
 
-#### 2. nvm(windows)
+### 2. nvm(windows)
 ```shell
 # 指导地址
 https://beltxman.com/3789.html
@@ -65,7 +65,7 @@ nvm reinstall-packages <version>  ## 在当前版本 node 环境下，重新   �
 nvm alias default [node版本号]     ##设置默认版本
 ```
 
-#### 3. nvm(mac)
+### 3. nvm(mac)
 ```shell
 # 指导地址
 https://www.jianshu.com/p/304656f2f6af
@@ -110,7 +110,7 @@ nvm alias default 10.24.1
 ```
 
 
-#### 4. pnpm
+### 4. pnpm
 ```shell
 # 指导地址
 https://pnpm.io/installation
@@ -120,10 +120,16 @@ https://pnpm.io/installation
 npm install -g pnpm
 ```
 下面是一个支持各自Node.js版本的过去pnpm版本的列表
-| Node.js     |   pnpm 7  |  pnpm 8 | pnpm 9 |
-| ----------- | :-------: | ----: | ----: |
+| Node.js     |   pnpm 7  |  pnpm 8  | pnpm 9 |
+| ----------- | :-------: | :-------: | :-------: |
 | Node.js 12  |   ❌   |   ❌ |   ❌ |
 | Node.js 14  |   ✔️   |   ❌ |   ❌ |
 | Node.js 16  |   ✔️   |   ✔️ |   ❌ |
 | Node.js 18  |   ✔️   |   ✔️ |   ✔️ |
 | Node.js 20  |   ✔️   |   ✔️ |   ✔️ |
+
+
+
+## 小结
+` 提示：记录node生态`
+

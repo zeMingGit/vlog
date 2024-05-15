@@ -20,10 +20,10 @@ const sundry = {
     { text: '概述', link: '/' },
     { text: 'css布局', link: '/css' },
     { text: '工具代码', link: '/toolCode' },
-    { text: 'vs code配置', link: '/settings' },
     { text: 'git记录', link: '/git' },
-    { text: 'node环境', link: '/node' },
-    { text: '我的记录', link: '/my' },
+    { text: 'vs code配置', link: '/settings' },
+    { text: 'node生态环境', link: '/node' },
+    { text: '个人记录', link: '/my' },
   ],
 }
 

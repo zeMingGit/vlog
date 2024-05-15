@@ -6,13 +6,49 @@
 ## 技术细节
 `提示：细节实现`
 
-#### 1. git命令实训操作网址
+### 1. git命令实训操作网址
 [学习git分支](https://oschina.gitee.io/learn-git-branching/)
 ```shell
 https://oschina.gitee.io/learn-git-branching/
 ```
 
-#### 2. git push后出现错误 ![rejected] master -> master(non-fast-forward)
+### 2. git流程/命令行
+```shell
+git fetch   # 拉取数据、分支等
+git branch  # 查看当前分支
+git checkout XXX   # 切换本地分支
+git cherry-pick XXX   # 将指定的提交（commit）应用于其他分支
+git reset --soft HEAD^
+git pull    # 抓取分支
+git push    # 推送分支
+git pull origin master-common    # 从主分支获取提交
+```
+
+### 3. commit提交规范
+| 类型     |   详细介绍  
+| ----------- | :-------: |
+|  feat |   新功能、新特性   |
+|  fix  |   bugfix，修改问题   |
+|  refactor  |   代码重构   |
+|  docs  |   文档修改   |
+|  style  |   代码格式修改, 注意不是 css 修改   |
+|  test  |   测试用例修改   |
+|  pref  |   性能提升的修改   |
+|  build  |   对项目构建或者依赖的改动   |
+|  chore  |   其他修改, 比如构建流程, 依赖管理   |
+
+### 4. git 问题
+commit 执行 git reset --hard HEAD^  回退上次提交
+```shell
+# 先执行，查看提交id
+git reflog
+# 根据id回退版本
+git reset --hard 1f1c92c60
+# 查看提交记录
+git log
+```
+
+### 5. git push后出现错误 ![rejected] master -> master(non-fast-forward)
 https://www.cnblogs.com/qingheshiguang/p/14777557.html
 
 https://blog.csdn.net/Lovely_red_scarf/article/details/125760091
@@ -21,7 +57,6 @@ https://blog.csdn.net/weixin_42310154/article/details/118340458
 
 https://blog.csdn.net/SweetoRm/article/details/134134559
 
-#### 3. 待补充...
 
 ## 小结
 #### 主要特性

@@ -4,7 +4,7 @@
 `提示：提供一些常见布局`
 
 ## 技术细节
-#### 1. 九宫格布局-中间居中
+#### 1. 三宫格布局-中间居中
 ```scss
 .wrap {
   display: flex;
@@ -32,21 +32,58 @@
 }
 ```
 
-#### 2. 各种机型底部的安全区域
+#### 2. 四宫格布局-中间居中
+```scss
+// 使用flex、gap属性来设置间隙
+.imgWrap {
+  width: 100%;
+  max-height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 0;
+  overflow-y: auto;
+  gap: 16px;
+
+  .imgWrap_item {
+    width: calc(25% - 12px);
+    height: 200px;
+  }
+}
+
+// 或者使用margin来设置间隙
+.imgWrap {
+  width: 100%;
+  max-height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 0;
+  overflow-y: auto;
+  margin: -8px;
+
+  .imgWrap_item {
+    position: relative;
+    width: calc(25% - 16px);
+    height: 200px;
+    margin: 8px;
+  }
+}
+```
+
+#### 3. 各种机型底部的安全区域
 ```css
 .item {
   padding-bottom: calc(env(safe-area-inset-bottom) + 20rpx);
 }
 ```
 
-#### 3. 常用css
+#### 4. 常用css
 ```css
 .item {
   word-break: break-all; // 纯数字换行
 }
 ```
 
-#### 4. css好网站
+#### 5. css好网站
 这里是一些优秀的网站资源，可以用于 CSS 相关的开发和设计：
 - [毛玻璃](http://tool.mkblog.cn/glassmorphism/) - 一个生成毛玻璃效果的在线工具。
 - [毛玻璃](https://glassgenerator.netlify.app/) - 另一个生成毛玻璃效果的在线工具。

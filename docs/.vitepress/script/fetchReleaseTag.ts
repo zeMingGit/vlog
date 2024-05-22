@@ -1,5 +1,5 @@
 export const fetchReleaseTag = () => {
-  return fetch('https://api.github.com/repos/2439340964/vlog/releases/latest')
+  return fetch('https://api.github.com/repos/zeMingGit/vlog/releases/latest')
     .then((res) => res.json())
     .then((json) => json.tag_name ?? '')
     .then(releaseTag => {

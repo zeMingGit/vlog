@@ -14,7 +14,7 @@
 
 我计划将项目推送到GitHub上，并且Gitee也会强制同步GitHub仓库，这样就有了备份。每次提交后，会自动进行部署。
 
-目前小棱镜文档还处于初步阶段，在[GitHub](https://github.com/2439340964/vlog)上的 Discussions/讨论区 可以提交意见和反馈。使用[Gitee](https://gitee.com/zeminga/vlog)也能方便一些，至少不会受到被墙的限制。
+目前小棱镜文档还处于初步阶段，在[GitHub](https://github.com/zeMingGit/vlog)上的 Discussions/讨论区 可以提交意见和反馈。使用[Gitee](https://gitee.com/zeminga/vlog)也能方便一些，至少不会受到被墙的限制。
 
 ## 代码片段
 本文档中包含各种前端开发中常用的代码片段，涵盖了 HTML、CSS 和 JavaScript 等多个方面。这些代码片段旨在帮助你快速解决常见的前端开发任务，提高开发效率。

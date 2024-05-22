@@ -43,7 +43,7 @@ export default defineConfig({
     }, // 搜索配置
     logo: { light: "/img/logo.svg", dark: "/img/logoFFF.svg", width: 24, height: 24 },
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/2439340964' },
+      { icon: 'github', link: 'https://github.com/zeMingGit' },
     ],
     // 文章底部链接
     editLink: {

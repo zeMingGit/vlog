@@ -6,7 +6,7 @@
 ## 技术细节
 <!-- <div class="tip custom-block" style="padding-top: 8px">试一下</div> -->
 
-- #### 从数组中删除指定的元素
+- ### 1. 从数组中删除指定的元素
 ```javascript
 /**
  * @description 作用是从数组中删除指定的元素
@@ -20,5 +20,58 @@ const remove = (arr, el) => {
   }
 }
 ```
+- ### 2. 判断对象属性存在不存在
+```javascript
+const a = {}
 
+// #方式一：布尔判定
+if(obj.a) {
+  console.log('存在')
+} else {
+  // 如果:
+  // const a = {
+  //   a: undefined,
+  //   a: 0,
+  //   a: '',
+  // }
+  console.log('不存在')
+}
+
+// #方式二：对比undefined
+if(obj.a !== undefined) {
+  console.log('存在')
+} else {
+  // 如果:
+  // const a = {
+  //   a: undefined,
+  //   a: 0,
+  //   a: '',
+  // }
+  console.log('不存在')
+}
+
+// #方式三：使用Object.keys
+if(Object.keys(obj).includes('a')) {
+  // 拿到的是对象自有的可枚举属性：原型链的属性拿不到
+  console.log('存在')
+} else {
+  console.log('不存在')
+}
+
+// #方式四：使用hasOwnProperty
+if(obj.hasOwnProperty('a')) {
+  // 拿到的是对象自有的属性：原型链的属性拿不到
+  console.log('存在')
+} else {
+  console.log('不存在')
+}
+
+// #方式五：使用in
+if('a' in obj) {
+  // 不要求可枚举和自有属性，原型上也行
+  console.log('存在')
+} else {
+  console.log('不存在')
+}
+```
 

@@ -24,7 +24,7 @@ layout: page
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .wrap {
   width: 60%;
   margin: auto;

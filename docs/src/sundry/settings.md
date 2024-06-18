@@ -175,7 +175,10 @@ Code Translate、Auto Rename Tag、Auto Import、Auto Close Tag
 	"editor.stickyScroll.enabled": false
 }
 ```
-#### 2. vue3 Eslint配置
+#### 2. vue3 好的Eslint配置
+:::tip Eslint配置指南
+* https://mp.weixin.qq.com/s/UNCmGb9dciew_KUPrTE-Ng
+:::
 ```javascript
 module.exports = {
 	'root': true,

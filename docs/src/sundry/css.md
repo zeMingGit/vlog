@@ -77,9 +77,20 @@
 ```
 
 #### 4. 常用css
-```css
+```scss
 .item {
   word-break: break-all; // 纯数字换行
+  shape-outside: circle(50% at 50% 50%); // 不规则的文字环绕
+}
+
+// 滑动吸附效果--常见于swiper
+.wrap {
+  scroll-snap-type: x mandatory; // 可更换为proximity 表示为附近吸附
+
+  .item {
+    scroll-snap-align: start; // 排列
+    scroll-snap-stop: always; // 吸附是否停止
+  }
 }
 ```
 

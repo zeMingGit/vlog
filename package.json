@@ -12,8 +12,11 @@
   "author": "zeMing",
   "license": "ISC",
   "dependencies": {
-    "less": "^4.2.0",
+    "vite-plugin-inspect": "^0.8.4",
     "vitepress": "^1.1.4",
     "vue-amazing-ui": "^0.1.38"
+  },
+  "devDependencies": {
+    "sass": "^1.77.6"
   }
 }

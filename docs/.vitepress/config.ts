@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { defineConfig } from 'vitepress'
 import { createRequire } from 'module'
+import Inspect from 'vite-plugin-inspect'
 import nav from './script/Nav'
 import sidebar from './script/Sidebar'
 import search from './script/Search'
@@ -75,9 +76,10 @@ export default defineConfig({
     darkModeSwitchTitle: '切换到深色模式',
   },
   vite: {
+    plugins: [Inspect()],
     server: {
       // tip：默认端口号在win系统上有些许问题，自测mac正常。暂时不打开。-zeMing
-      // port: 8888, 
+      // port: 8888,
       host: true,
       // open: '/', // 不做修改，不打开！！！
     },

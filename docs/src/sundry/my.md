@@ -11,3 +11,4 @@
 
 ### 2. 宝藏库
 * [animejs](https://animejs.com/)
+* [gsap滚动插件](https://gsap.com/)

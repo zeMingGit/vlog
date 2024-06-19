@@ -14,14 +14,18 @@ https://oschina.gitee.io/learn-git-branching/
 
 ### 2. git流程/命令行
 ```shell
-git fetch   # 拉取数据、分支等
-git branch  # 查看当前分支
+git init      # 初始化本地仓库
+git clone xxx # 克隆仓库
+git add .     # 暂存
+git commit -m # 提交更改
+git pull      # 抓取分支
+git push      # 推送分支
+git pull origin master-common    # 从主分支获取提交
+git fetch     # 拉取数据、分支等
+git branch    # 查看当前分支
 git checkout XXX   # 切换本地分支
 git cherry-pick XXX   # 将指定的提交（commit）应用于其他分支
 git reset --soft HEAD^
-git pull    # 抓取分支
-git push    # 推送分支
-git pull origin master-common    # 从主分支获取提交
 ```
 
 ### 3. commit提交规范

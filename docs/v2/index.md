@@ -4,7 +4,7 @@ layout: page
 
 <div class="wrap">
   <div class="myLogo flex">
-    <img src="https://foruda.gitee.com/avatar/1695001043495360137/8741248_zeminga_1695001043.png">
+    <img @click="goToNav" src="https://foruda.gitee.com/avatar/1695001043495360137/8741248_zeminga_1695001043.png">
     <div class="myName">zeMing</div>
   </div>
   <div class="content">
@@ -19,8 +19,13 @@ layout: page
   </div>
 </div>
 
-
 <script setup>
+import { useRouter } from 'vitepress'
+const router = useRouter()
+
+const goToNav = () => {
+  router.go('v2/gsap')
+}
 
 </script>
 

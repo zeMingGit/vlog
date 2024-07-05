@@ -19,24 +19,22 @@ Prettier 是一个用于格式化代码的工具（也称为包或插件）。�
 
 ## 怎么使用 Prettier
 
-### 1. 通过给 IDE 开发工具安装插件
+#### 1. 通过IDE插件
 - 以vscode为例，直接在插件搜索 Prettier 并安装
 
-  ![](/img/Snipaste_2024-06-06_16-16-17.png)
+  <img src="../../public/img/prettier_1.png" style="zoom:50%;" />
 
 - 安装之后，鼠标右键配置默认的格式化工具
 
-  ![](/img/Snipaste_2024-06-06_16-18-02.png)
+  ![](../../public/img/prettier_2.png)
 
 - 因为vscode本身有一种格式化选项，需要将默认选项更改为 Prettier
 
-  ![](/img/Snipaste_2024-06-06_16-21-55.png)
+  ![](../../public/img/prettier_3.png)
 
-这样就可以通过快捷键 `Shift + Alt + F` 或者 `鼠标右键` 使用 Prettier 快速进行格式化
+配置完成后就可以通过快捷键 `Shift + Alt + F` 或鼠标右键使用 Prettier 快速进行格式化。
 
-   
-
-### 2. 通过脚本命令
+#### 2. 通过脚本命令
 给开发工具安装插件虽然简单快捷，但在多人协作的项目中，如何能保证每个人都给 VSCode 安装了 Prettier 插件呢？为了解决这个问题，我们需要将 Prettier 库安装到项目的开发依赖中，并通过配置脚本命令来使用 Prettier 进行代码格式化。
 
 这样做有以下好处：
@@ -88,7 +86,51 @@ Prettier 是一个用于格式化代码的工具（也称为包或插件）。�
 
 这里就会产生另一个问题，假设第一个人在项目里配置了 Prettier，但是第二个人写完代码后并没有执行 format 命令，这该怎么办呢？这时就需要用到 `Git hooks`（后面篇章会详细介绍），在提交代码时触发 hook 钩子自动执行 format 命令，先把代码格式化一遍，然后再提交。这样就能保证团队中的每个成员，无论他知不知道 Prettier、有没有安装插件或手动执行 format 命令，都能提交经过 Prettier 格式化的代码。
 
-
 ## 配置文件
 
-上面提到的两种方式都是采用 Prettier 的默认配置，比如 Prettier 默认使用双引号。但如果你想使用单引号，该怎么办？此时就需要使用 Prettier 的配置文件。
+> 上面提到的两种方式都是采用 Prettier 的默认配置，比如 Prettier 默认使用双引号。但如果你想使用单引号，该怎么办？
+>
+> 此时就需要使用 Prettier 的配置文件。通常使用一个名为 `.prettierrc` 或 `.prettierrc.json` 的配置文件来自定义其行为。你可以根据项目的需要创建和调整这个配置文件。
+>
+> 以下是一个基本的 Prettier 配置文件示例 `.prettierrc`：
+
+```js
+{
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "arrowParens": "always",
+  "printWidth": 80
+}
+```
+
+#### 1. 配置说明：
+
+- `"tabWidth"`：指定缩进的空格数。
+
+- `"semi"`：是否在语句末尾添加分号。
+
+- `"singleQuote"`：是否使用单引号替代双引号。
+
+- `"trailingComma"`：在多行对象和数组的最后一项后面是否加逗号。
+
+- `"bracketSpacing"`：是否在对象字面量的括号之间打印空格。
+
+- `"jsxBracketSameLine"`：是否将 JSX 的 `>` 放在最后一行的末尾，而不是另起一行。
+
+- `"arrowParens"`：在单参数箭头函数中是否添加括号。
+
+- `"printWidth"`：指定换行的行长度。
+
+这只是一个基本的示例，你可以根据个人或项目的具体要求调整这些选项。Prettier 支持的配置选项非常丰富，详细信息可以在 Prettier 的官方文档中找到：[prettier 配置项](https://prettier.io/docs/en/options)
+
+#### 2. 使用方式：
+
+1. **创建配置文件**： 在项目根目录下创建一个 `.prettierrc` 文件，并添加你的自定义配置。
+2. **集成到编辑器**： 配置文件对上面提到的方法一：安装插件，同样有效，插件将自动读取项目中的 `.prettierrc` 文件，并在保存文件时自动应用配置的格式化规则。
+3. **命令行使用**： 可以通过命令行工具或集成到构建过程中的任务中使用 Prettier。例如，在 `package.json` 的 `scripts` 中添加 `"format": "prettier --write \"src/**/*.js\""`，然后运行 `npm run format` 可以格式化指定目录下的所有 JavaScript 文件。
+
+通过使用和调整 Prettier 的配置文件，你可以确保项目中的代码始终保持一致的风格，提高代码的可读性和维护性。

@@ -173,3 +173,6 @@ stylelint-scss@3.18.0
 ```sh [pnpm]
 $ pnpm i eslint@8.39.0 -D
 :::
+
+## 小结
+需要下载对应版本的依赖，否则可能导致项目无法运行或报错。最后说一句，uniapp app依托答辩。

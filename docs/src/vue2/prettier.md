@@ -22,15 +22,15 @@ Prettier 是一个用于格式化代码的工具（也称为包或插件）。�
 ### 1. 通过IDE插件
 - 以vscode为例，直接在插件搜索 Prettier 并安装
 
-  <img src="../../public/img/prettier_1.png" style="zoom:50%;" />
+  <img src="/img/prettier_1.png" style="zoom:50%;" />
 
 - 安装之后，鼠标右键配置默认的格式化工具
 
-  ![](../../public/img/prettier_2.png)
+  ![](/img/prettier_2.png)
 
 - 因为vscode本身有一种格式化选项，需要将默认选项更改为 Prettier
 
-  ![](../../public/img/prettier_3.png)
+  ![](/img/prettier_3.png)
 
 配置完成后就可以通过快捷键 `Shift + Alt + F` 或鼠标右键使用 Prettier 快速进行格式化。
 

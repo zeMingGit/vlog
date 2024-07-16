@@ -33,13 +33,15 @@ git reset --soft HEAD^
 | ----------- | :-------: |
 |  feat |   新功能、新特性   |
 |  fix  |   bugfix，修改问题   |
+|  docs  |   文档修改、变更   |
+|  style  |   代码格式(不影响功能，例如空格、分号等格式修正)注意不是css修改   |
 |  refactor  |   代码重构   |
-|  docs  |   文档修改   |
-|  style  |   代码格式修改, 注意不是 css 修改   |
-|  test  |   测试用例修改   |
 |  pref  |   性能提升的修改   |
-|  build  |   对项目构建或者依赖的改动   |
+|  test  |   测试用例修改   |
+|  build  |   对项目构建或者依赖的改动(例如scopes: webpack、gulp、npm等)   |
+|  ci  |   更改持续集成软件的配置文件和package中的scripts命令，例如scopes: Travis, Circle等   |
 |  chore  |   其他修改, 比如构建流程, 依赖管理   |
+|  revert  |   代码回退   |
 
 ### 4. git 问题
 commit 执行 git reset --hard HEAD^  回退上次提交

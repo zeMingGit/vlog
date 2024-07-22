@@ -1,6 +1,7 @@
 import uniapp from '../router/uniapp'
 import vue2 from '../router/vue2'
 import vue3 from '../router/vue3'
+import react from '../router/react'
 
 const introduction = {
   text: '开始',
@@ -28,7 +29,7 @@ const sundry = {
 }
 
 const sidebar = {
-  '/src/': [ introduction, uniapp, vue3, vue2, sundry ],
+  '/src/': [ introduction, uniapp, vue3, vue2, react, sundry ],
 }
 
 export default sidebar

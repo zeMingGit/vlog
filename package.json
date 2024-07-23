@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "type": "module",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
@@ -13,11 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "gsap": "^3.12.5",
-    "vitepress": "^1.1.4",
     "vue-amazing-ui": "^0.1.38"
   },
   "devDependencies": {
     "sass": "^1.77.6",
+    "vitepress": "^1.1.4",
     "vite-plugin-inspect": "^0.8.4"
   }
 }

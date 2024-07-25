@@ -58,7 +58,7 @@ const element = (
 
 6. 标签必须闭合
 
-    所有 JSX 标签必须闭合，即使是单个标签也需要使用自闭合语法。示例：
+    所有 JSX 标签必须闭合，即使是单个标签也需要使用自闭合语法。
 
 7. 标签首字母
     - 以小写字母开头的标签会被转化为 HTML 元素，如果 HTML 中没有这个元素，则会报错。
@@ -81,419 +81,421 @@ const element = <MyComponent /> // 被当成自定义组件
 ```jsx
 class MyComponent extends React.Component {
   render() {
-    return <h2>我是用类定义的组件</h2>;
+    return <h2>我是用类定义的组件</h2>
   }
 }
 ```
+  - 类组件必须继承 React 内置的 `React.Component` 类。
+  - 在类组件中，JSX 代码必须写在 `render` 方法中，并且 `render` 方法必须有返回值。
+  - `render` 方法被定义在类的原型对象上，因此可以供实例使用。
+  - `render` 方法中的 this 指向由类(new)创建的实例。
 
-> - 类组件必须要继承 react 内置类 React.Component
-> - jsx 必须要写在 render 函数中，且要有返回值
-> - render 方法是放在类的原型对象上，供实例使用
-> - render 方法中的 this 指向 new 出来的实例
+通过这些规则，可以正确地定义和使用类组件，提高组件的可维护性和可读性。
 
 #### 2、实例的三大属性
 
 - **state**
 
-  > 组件的状态，类似于 vue 中的响应式数据。
+组件的状态，类似于 vue 中的响应式数据。
 
-  ```jsx
-  class MyComponent extends React.Component {
-      // 通常，在 React 中构造函数仅用于两个目的：
-  	// 1、通过将对象分配给来初始化本地状态this.state。
-  	// 2、将事件处理程序方法绑定到实例。
-      constructor(props) {
-          super(props)
-  		// 初始化 state
-          this.state = { isHot: false, wind:'微风'}
-    		// 改变事件处理函数中的this指向
-          // this.click = this.handleClick.bind(this)
-      }
-
-      render() {
-          // 读取state 中的值
-          const { isHot，wind} = this.state
-          // 原生JS中的 onclick 事件，在 react 中要写成 onClick，其他同理
-          return (
-              <div>
-                  <h2>今天天气很{ isHot ? '炎热': '凉爽'}</h2>
-                  <h2>{ wind }</h2>
-                  <button onClick={this.handleClick}>更改</button>
-              </div>
-          )
-      }
-
-      // ！！！注意：此处必须要用箭头函数，否则会改变this的指向
-      handleClick = () => {
-    		// 状态必须通过 setState 以对象的形式进行更新，且更新是一种合并，不是替换
-          const { wind } = this.state
-          // setState 是同步的，但数据更新是异步的，只能在回调中拿到更新后的数据
-          this.setState({ wind: '斜阳'}, ()=> {
-              console.log(this.state.wind)
-          })
-          // 函数式的 setState，新的数据依赖于原数据
-          this.setState(state => ({ count: state.wind + '斜阳'}))
-      }
-
-      // 若不使用箭头函数，可以在 constructor 中用 bind 重新指回 this
-      handleClick() => {
-    		// 更新state中的值
-         	const { wind } = this.state
-          this.setState({ wind: '斜阳'})
-      }
+```jsx
+class MyComponent extends React.Component {
+  // 通常，在 React 中构造函数仅用于两个目的：
+  // 1、通过将对象分配给来初始化本地状态this.state。
+  // 2、将事件处理程序方法绑定到实例。
+  constructor(props) {
+    super(props)
+    // 初始化 state
+    this.state = { isHot: false, wind:'微风'}
+    // 改变事件处理函数中的this指向
+    // this.click = this.handleClick.bind(this)
   }
-  ```
+
+  render() {
+    // 读取state 中的值
+    const { isHot，wind} = this.state
+    // 原生JS中的 onclick 事件，在 react 中要写成 onClick，其他同理
+    return (
+      <div>
+        <h2>今天天气很{ isHot ? '炎热': '凉爽'}</h2>
+        <h2>{ wind }</h2>
+        <button onClick={this.handleClick}>更改</button>
+      </div>
+    )
+  }
+
+  // ！！！注意：此处必须要用箭头函数，否则会改变this的指向
+  handleClick = () => {
+    // 状态必须通过 setState 以对象的形式进行更新，且更新是一种合并，不是替换
+    const { wind } = this.state
+    // setState 是同步的，但数据更新是异步的，只能在回调中拿到更新后的数据
+    this.setState({ wind: '斜阳'}, ()=> {
+      console.log(this.state.wind)
+    })
+    // 函数式的 setState，新的数据依赖于原数据
+    this.setState(state => ({ count: state.wind + '斜阳'}))
+  }
+
+  // 若不使用箭头函数，可以在 constructor 中用 bind 重新指回 this
+  handleClick() => {
+    // 更新state中的值
+    const { wind } = this.state
+    this.setState({ wind: '斜阳'})
+  }
+}
+```
 
 - **props**
 
-  > 通过标签属性从组件外向组件内传递变化的数据
+通过标签属性从组件外向组件内传递变化的数据
 
-  ```jsx
-  // 直接传值
-  <Person name="李华" age={18} sex="男" />
-  // 或批量传值
-  const obj = { name: "李华", age: 18, sex: "男"}
-  <Person {...obj} />
+```jsx
+// 直接传值
+<Person name="李华" age={18} sex="男" />
 
-  class Person extends React.Component {
-      // 可省略
-      constructor(props) {
-          super(props)
-      }
+// 或批量传值
+const obj = { name: "李华", age: 18, sex: "男"}
+<Person {...obj} />
 
-      render() {
-          const { name, age, sex }= this.props
-          return(
-              <ul>
-                  <li>{ name }</li>
-              </ul>
-          )
-      }
+class Person extends React.Component {
+  // 可省略
+  constructor(props) {
+    super(props)
   }
-  ```
 
-  - 组件标签的所有属性都以 { key: value } 的形式保存在`props`中
+  render() {
+    const { name, age, sex } = this.props
+    return(
+      <ul>
+        <li>{ name }</li>
+      </ul>
+    )
+  }
+}
+```
 
-  - 单向数据流，组件内部不要修改`props`数据
+- 组件标签的所有属性都以 { key: value } 的形式保存在`props`中
 
-  - 限制 props（需要引入 prop-types 库）
+- 单向数据流，组件内部不要修改`props`数据
 
-    1. 写在类外面
+- 限制 props（需要引入 prop-types 库）
 
-       ```jsx
-       // 指定数据类型
-       Person.propTypes = {
-         name: PropTypes.string.isRequired, //限制name必传，且为字符串
-         sex: PropTypes.string, //限制sex为字符串
-         age: PropTypes.number, //限制age为数值
-         speak: PropTypes.func, //限制speak为函数
-       };
-       // 指定默认值
-       Person.defaultProps = {
-         sex: "男", //sex默认值为男
-         age: 18, //age默认值为18
-       };
+1. 写在类外面
 
-       class Person extends React.Component {
-         // 可省略
-         constructor(props) {
-           super(props);
-         }
+```jsx
+// 指定数据类型
+Person.propTypes = {
+  name: PropTypes.string.isRequired, //限制name必传，且为字符串
+  sex: PropTypes.string, //限制sex为字符串
+  age: PropTypes.number, //限制age为数值
+  speak: PropTypes.func, //限制speak为函数
+};
+// 指定默认值
+Person.defaultProps = {
+  sex: "男", //sex默认值为男
+  age: 18, //age默认值为18
+};
 
-         render() {
-           const { name, age, sex } = this.props;
-           return (
-             <ul>
-               <li>{name}</li>
-               <li>{age}</li>
-             </ul>
-           );
-         }
-       }
-       ```
+class Person extends React.Component {
+  // 可省略
+  constructor(props) {
+    super(props);
+  }
 
-    2. 写在类里面
+  render() {
+    const { name, age, sex } = this.props;
+    return (
+      <ul>
+        <li>{name}</li>
+        <li>{age}</li>
+      </ul>
+    )
+  }
+}
+```
 
-       ```jsx
-       class Person extends React.Component {
-         // 可省略
-         constructor(props) {
-           super(props);
-         }
-     
-         // 指定数据类型
-         static propTypes = {
-           name: PropTypes.string.isRequired, //限制name必传，且为字符串
-           sex: PropTypes.string, //限制sex为字符串
-           age: PropTypes.number, //限制age为数值
-         };
-     
-         // 指定默认值
-         static defaultProps = {
-           sex: "男", //sex默认值为男
-           age: 18, //age默认值为18
-         };
-     
-         render() {
-           const { name, age, sex } = this.props;
-           return (
-             <ul>
-               <li>{name}</li>
-               <li>{age}</li>
-             </ul>
-           );
-         }
-       }
-       ```
+2. 写在类里面
+
+```jsx
+class Person extends React.Component {
+  // 可省略
+  constructor(props) {
+    super(props);
+  }
+
+  // 指定数据类型
+  static propTypes = {
+    name: PropTypes.string.isRequired, //限制name必传，且为字符串
+    sex: PropTypes.string, //限制sex为字符串
+    age: PropTypes.number, //限制age为数值
+  };
+
+  // 指定默认值
+  static defaultProps = {
+    sex: "男", //sex默认值为男
+    age: 18, //age默认值为18
+  };
+
+  render() {
+    const { name, age, sex } = this.props;
+    return (
+      <ul>
+        <li>{name}</li>
+        <li>{age}</li>
+      </ul>
+    );
+  }
+}
+```
 
 - **refs**
 
-  > 组件内的标签可以定义`ref`属性来标识自己（类似于 id)
+组件内的标签可以定义`ref`属性来标识自己（类似于 id)
 
-  - **字符串形式的 ref，不推荐使用**
+**字符串形式的 ref，不推荐使用**
 
-    ```jsx
-    class Demo extends React.Component {
-      render() {
-        return (
-          <div>
-            <input ref="input1" type="text" />
-            <input ref="input2" type="text" />
-            <button onClick={this.handleClick}>点击</button>
-          </div>
-        );
-      }
+```jsx
+class Demo extends React.Component {
+  render() {
+    return (
+      <div>
+        <input ref="input1" type="text" />
+        <input ref="input2" type="text" />
+        <button onClick={this.handleClick}>点击</button>
+      </div>
+    );
+  }
 
-      handleClick = () => {
-        // refs 是一个数组，他收集了组件内的所有 ref。这里的 input1
-        const { input1, input2 } = this.refs;
-      };
-    }
-    ```
+  handleClick = () => {
+    // refs 是一个数组，他收集了组件内的所有 ref。这里的 input1
+    const { input1, input2 } = this.refs;
+  };
+}
+```
 
-  - **推荐使用 createRef**
+**推荐使用 createRef**
 
-    ```jsx
-    class Demo extends React.Component {
-      myRef1 = React.createRef();
-      myRef2 = React.createRef();
-    
-      render() {
-        return (
-          <div>
-            <input ref={myRef1} type="text" />
-            <input ref={myRef2} type="text" />
-            <button onClick={this.handleClick}>点击</button>
-          </div>
-        );
-      }
-    
-      handleClick = () => {
-        console.log(this.myRef1.current.value);
-      };
-    }
-    ```
+```jsx
+class Demo extends React.Component {
+  myRef1 = React.createRef();
+  myRef2 = React.createRef();
 
-    **`React.createRef`调用后可以返回一个容器，该容器可以存储被`ref`所标识的节点**
+  render() {
+    return (
+      <div>
+        <input ref={myRef1} type="text" />
+        <input ref={myRef2} type="text" />
+        <button onClick={this.handleClick}>点击</button>
+      </div>
+    );
+  }
+
+  handleClick = () => {
+    console.log(this.myRef1.current.value);
+  };
+}
+```
+
+**`React.createRef` 调用后可以返回一个容器，该容器可以存储被 `ref` 所标识的节点**
 
 #### 3、受控组件与非受控组件
 
 - **非受控组件**
 
-  > 页面中所有的输入类 DOM 现用现取，即通过`ref`标识 DOM，进而获取数据
+页面中所有的输入类 DOM 现用现取，即通过 `ref` 标识 DOM，进而获取数据
 
-  ```jsx
-  class Login extends React.Component {
-    render() {
-      return (
-        <form onSubmit={this.handleSubmit}>
-          用户名：
-          <input ref={(c) => (this.username = c)} type="text" name="username" />
-          密码：
-          <input
-            ref={(c) => (this.password = c)}
-            type="password"
-            name="password"
-          />
-          <button>登录</button>
-        </form>
-      );
-    }
-
-    handleSubmit = (event) => {
-      event.preventDefault(); //阻止表单提交
-      const { username, password } = this;
-      alert(
-        `你输入的用户名是：${username.value},你输入的密码是：${password.value}`
-      );
-    };
+```jsx
+class Login extends React.Component {
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        用户名：
+        <input ref={(c) => (this.username = c)} type="text" name="username" />
+        密码：
+        <input
+          ref={(c) => (this.password = c)}
+          type="password"
+          name="password"
+        />
+        <button>登录</button>
+      </form>
+    );
   }
-  ```
+
+  handleSubmit = (event) => {
+    event.preventDefault(); //阻止表单提交
+    const { username, password } = this;
+    alert(
+      `你输入的用户名是：${username.value},你输入的密码是：${password.value}`
+    );
+  };
+}
+```
 
 - **受控组件**
 
-  > 用`onChange`+`state`实现，页面中所有的输入类 DOM 将数据存在`state`中
+用 `onChange` + `state` 实现，页面中所有的输入类 DOM 将数据存在 `state` 中
 
-  ```jsx
-  class Login extends React.Component {
-    //初始化状态
-    state = {
-      username: "", //用户名
-      password: "", //密码
-    };
+```jsx
+class Login extends React.Component {
+  //初始化状态
+  state = {
+    username: "", //用户名
+    password: "", //密码
+  };
 
-    render() {
-      return (
-        <form onSubmit={this.handleSubmit}>
-          用户名：
-          <input onChange={this.saveUsername} type="text" name="username" />
-          密码：
-          <input onChange={this.savePassword} type="password" name="password" />
-          <button>登录</button>
-        </form>
-      );
-    }
-
-    // 保存用户名到状态中
-    saveUsername = (event) => {
-      this.setState({ username: event.target.value });
-    };
-
-    // 保存密码到状态中
-    savePassword = (event) => {
-      this.setState({ password: event.target.value });
-    };
-
-    // 表单提交的回调
-    handleSubmit = (event) => {
-      event.preventDefault(); //阻止表单提交
-      const { username, password } = this.state;
-      alert(`你输入的用户名是：${username},你输入的密码是：${password}`);
-    };
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        用户名：
+        <input onChange={this.saveUsername} type="text" name="username" />
+        密码：
+        <input onChange={this.savePassword} type="password" name="password" />
+        <button>登录</button>
+      </form>
+    );
   }
-  ```
+
+  // 保存用户名到状态中
+  saveUsername = (event) => {
+    this.setState({ username: event.target.value });
+  };
+
+  // 保存密码到状态中
+  savePassword = (event) => {
+    this.setState({ password: event.target.value });
+  };
+
+  // 表单提交的回调
+  handleSubmit = (event) => {
+    event.preventDefault(); //阻止表单提交
+    const { username, password } = this.state;
+    alert(`你输入的用户名是：${username},你输入的密码是：${password}`);
+  };
+}
+```
 
 - **使用函数柯里化优化受控组件**
 
-  - 函数的柯里化：通过函数调用继续返回函数的方式，实现多次接收参数最后统一处理的函数编码形式
+函数的柯里化：通过函数调用继续返回函数的方式，实现多次接收参数最后统一处理的函数编码形式
 
-    ```js
-    function sum(a) {
-      return (b) => {
-        return (c) => {
-          return a + b + c;
-        };
-      };
-    }
-    ```
+```js
+function sum(a) {
+  return (b) => {
+    return (c) => {
+      return a + b + c;
+    };
+  };
+}
+```
 
-  - 利用函数柯里化优化 saveUserName 和 savePassword
+利用函数柯里化优化 saveUserName 和 savePassword
 
-    ```jsx
-    class Login extends React.Component {
-      //初始化状态
-      state = {
-        username: "", //用户名
-        password: "", //密码
-      };
-  
-      render() {
-        return (
-          <form onSubmit={this.handleSubmit}>
-            用户名：
-            <input
-              onChange={this.saveFormData("username")}
-              type="text"
-              name="username"
-            />
-            密码：
-            <input
-              onChange={this.saveFormData("password")}
-              type="password"
-              name="password"
-            />
-            <button>登录</button>
-          </form>
-        );
-      }
-  
-      // 保存表单数据到状态中（函数的柯里化）
-      saveFormData = (dataType) => {
-        // onChange 接受的是 saveFormData 返回的箭头函数，刚好符合事件处理的回调函数
-        return (event) => {
-          this.setState({ [dataType]: event.target.value });
-        };
-      };
-  
-      // 表单提交的回调
-      handleSubmit = (event) => {
-        event.preventDefault(); //阻止表单提交
-        const { username, password } = this.state;
-        alert(`你输入的用户名是：${username},你输入的密码是：${password}`);
-      };
-    }
-    ```
+```jsx
+class Login extends React.Component {
+  //初始化状态
+  state = {
+    username: "", //用户名
+    password: "", //密码
+  };
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        用户名：
+        <input
+          onChange={this.saveFormData("username")}
+          type="text"
+          name="username"
+        />
+        密码：
+        <input
+          onChange={this.saveFormData("password")}
+          type="password"
+          name="password"
+        />
+        <button>登录</button>
+      </form>
+    );
+  }
+
+  // 保存表单数据到状态中（函数的柯里化）
+  saveFormData = (dataType) => {
+    // onChange 接受的是 saveFormData 返回的箭头函数，刚好符合事件处理的回调函数
+    return (event) => {
+      this.setState({ [dataType]: event.target.value });
+    };
+  };
+
+  // 表单提交的回调
+  handleSubmit = (event) => {
+    event.preventDefault(); //阻止表单提交
+    const { username, password } = this.state;
+    alert(`你输入的用户名是：${username},你输入的密码是：${password}`);
+  };
+}
+```
 
 - **不使用函数柯里化优化受控组件**
 
-  ```jsx
-  saveFormData = (dataType,event)=>{
-  				this.setState({[dataType]:event.target.value})
-  			}
-  用户名：<input onChange={event => this.saveFormData('username',event) } type="text" name="username"/>
-  
-  ```
+```jsx
+saveFormData = (dataType,event)=>{
+  this.setState({[dataType]:event.target.value})
+}
+
+用户名：<input onChange={event => this.saveFormData('username',event) } type="text" name="username"/>
+
+```
 
 #### 4、生命周期
 
-- 生命周期大致可划分为三个阶段：
+生命周期大致可划分为三个阶段：
 
-  1. 挂载：创建组件实例并将其插入到 DOM 中
-  2. 更新：props 或 state 的改变引起组件重新渲染
-  3. 卸载：组件从 DOM 中移除
+**1. 挂载**：创建组件实例并将其插入到 DOM 中
 
-- 示例代码
+**2. 更新**：props 或 state 的改变引起组件重新渲染
 
-  ```jsx
-  class Life extends React.component {
-    // 初始化
-    constructor() {
-      console.log("1-1");
-    }
+**3. 卸载**：组件从 DOM 中移除
 
-    // 挂载
-    render() {
-      console.log("1-2");
-    }
-
-    // 挂载完成
-    componentDidMount() {
-      console.log("1-3");
-    }
-
-    // 更新前
-    shouldComponentUpdate() {
-      console.log("2-1");
-    }
-
-    // 更新完成
-    componentDidUpdate() {
-      console.log("2-2");
-    }
-
-    // 卸载前
-    componentWillUnmount() {
-      console.log("3-1");
-    }
+```jsx
+class Life extends React.component {
+  // 初始化
+  constructor() {
+    console.log("1-1");
   }
-  ```
 
-- 生命周期图
+  // 挂载
+  render() {
+    console.log("1-2");
+  }
 
-  ![](../../public/img/react-lifecycle.png)
+  // 挂载完成
+  componentDidMount() {
+    console.log("1-3");
+  }
+
+  // 更新前
+  shouldComponentUpdate() {
+    console.log("2-1");
+  }
+
+  // 更新完成
+  componentDidUpdate() {
+    console.log("2-2");
+  }
+
+  // 卸载前
+  componentWillUnmount() {
+    console.log("3-1");
+  }
+}
+```
+
+生命周期图
+
+![](../../public/img/react-lifecycle.png)
 
 ### 三、函数式组件
-
 
 #### 1、定义
 
@@ -503,91 +505,91 @@ function MyComponent() {
 }
 ```
 
-**函数中的`this`指向`undefined`，因为 babel 编译后开启了严格模式**
+**函数中的 `this` 指向 `undefined` ，因为 babel 编译后开启了严格模式**
 
 #### 2、props
 
-- 三大属性中，只有`props`可以用于函数组件，因为函数可以接收参数，`state`和`refs`都不能用于函数组件
+三大属性中，只有 `props` 可以用于函数组件，因为函数可以接收参数，`state` 和 `refs` 都不能用于函数组件
 
-  ```jsx
-  function Person(props) {
-    const { name, age, sex } = props;
-    return (
-      <ul>
-        <li>姓名：{name}</li>
-        <li>性别：{sex}</li>
-        <li>年龄：{age}</li>
-      </ul>
-    );
-  }
-  
-  // 函数组件限制props只能使用此方法
-  Person.propTypes = {
-    name: PropTypes.string.isRequired, //限制name必传，且为字符串
-    sex: PropTypes.string, //限制sex为字符串
-    age: PropTypes.number, //限制age为数值
-  };
-  
-  // 指定默认标签属性值
-  Person.defaultProps = {
-    sex: "男", //sex默认值为男
-    age: 18, //age默认值为18
-  };
-  ```
+```jsx
+function Person(props) {
+  const { name, age, sex } = props;
+  return (
+    <ul>
+      <li>姓名：{name}</li>
+      <li>性别：{sex}</li>
+      <li>年龄：{age}</li>
+    </ul>
+  );
+}
+
+// 函数组件限制props只能使用此方法
+Person.propTypes = {
+  name: PropTypes.string.isRequired, //限制name必传，且为字符串
+  sex: PropTypes.string, //限制sex为字符串
+  age: PropTypes.number, //限制age为数值
+};
+
+// 指定默认标签属性值
+Person.defaultProps = {
+  sex: "男", //sex默认值为男
+  age: 18, //age默认值为18
+};
+```
 
 #### 3、Hooks
 
-> 为了解决函数组件缺失类组件中的 state 、refs 和生命周期这些能力的问题，引入的一些特殊函数。
+为了解决函数组件缺失类组件中的 state 、refs 和生命周期这些能力的问题，引入的一些特殊函数。
 
 - **useState()**
 
-  > 类似于类组件中的 state 和 setState，用于在函数组件中添加状态
+  类似于类组件中的 state 和 setState，用于在函数组件中添加状态
 
-  - 参数：
+  **参数：**
 
-    > 接受一个参数，这个参数是状态的初始值。这个初始值可以是任意类型，例如数字、字符串、数组、对象等。
+  接受一个参数，这个参数是状态的初始值。这个初始值可以是任意类型，例如数字、字符串、数组、对象等。
 
-    ```js
-    const [state, setState] = useState(initialState); // initialState：状态的初始值
-    ```
+  ```js
+  const [state, setState] = useState(initialState); // initialState：状态的初始值
+  ```
 
-  - 返回值:
+  **返回值:**
 
-    > 返回一个数组，数组包含两个元素：
+  返回一个数组，数组包含两个元素：
 
-    ```js
-    // 1、state：当前状态的值
-    // 2、setState：状态更新函数，接受一个新状态值作为参数，或一个返回新状态值的函数
-    const [state, setState] = useState(initialState);
-    ```
+  ```js
+  // 1、state：当前状态的值
+  // 2、setState：状态更新函数，接受一个新状态值作为参数，或一个返回新状态值的函数
+  const [state, setState] = useState(initialState);
+  ```
 
-  - 示例:
+  示例:
 
-    ```jsx
-    import { useState } from "react";
-  
-    function App() {
-      // 初始化一个名为 "count" 的状态变量，初始值为 0
-      const [count, setCount] = useState(0);
-  
-      const add = () => {
-        setCount(count + 1);
-      };
-  
-      return (
-        <div>
-          <h2>当前和为：{count}</h2>
-          <button onClick={add}>点击加1</button>
-        </div>
-      );
-    }
-    ```
+  ```jsx
+  import { useState } from "react";
+
+  function App() {
+    // 初始化一个名为 "count" 的状态变量，初始值为 0
+    const [count, setCount] = useState(0);
+
+    const add = () => {
+      setCount(count + 1);
+    };
+
+    return (
+      <div>
+        <h2>当前和为：{count}</h2>
+        <button onClick={add}>点击加1</button>
+      </div>
+    );
+  }
+  ```
 
 - **useEffect()**
 
-  > 类似于类中的生命周期，可以将`useEffect` 视为`componentDidMount`、`componentDidUpdate`和`componentWillUnmount`的组合。
+  类似于类中的生命周期，可以将`useEffect` 视为`componentDidMount`、`componentDidUpdate`和`componentWillUnmount`的组合。
 
-  - 参数：
+  **参数：**
 
     > `useEffect` 接受两个参数：
     >

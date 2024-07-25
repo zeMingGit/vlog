@@ -5,6 +5,7 @@ const React = {
   base: '/src/react',
   items: [
     { text: '概述', link: '/' },
+    { text: '基本语法', link: '/foundation' },
   ]
 }
 

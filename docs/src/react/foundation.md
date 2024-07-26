@@ -5,21 +5,21 @@
 
 React 是一个用于构建用户界面的 JavaScript 库。它由 Facebook 开发和维护，自推出以来，因其高效、灵活和强大的特性迅速获得了广泛的应用。React 通过组件化开发和虚拟DOM技术，使得复杂的用户界面更易于管理和优化。
 
-## 技术细节
+<!-- ## 技术细节 -->
 
-### 一、JSX 语法规则
+## 一、JSX 语法规则
 
-1. 定义虚拟 DOM 时不用写引号
+**1. 定义虚拟 DOM 时不用写引号**
 
-    在定义虚拟 DOM 时，不需要使用引号包裹字符串。示例：
+  在定义虚拟 DOM 时，不需要使用引号包裹字符串。示例：
 
 ```jsx
 const element = <h1>Hello, world!</h1>
 ```
 
-2. 标签中混入 JavaScript 表达式要用 `{}`
+**2. 标签中混入 JavaScript 表达式要用 `{}`**
 
-    在 JSX 中，可以使用 `{}` 来插入 JavaScript 表达式。示例：
+  在 JSX 中，可以使用 `{}` 来插入 JavaScript 表达式。示例：
 ```jsx
 const vdom = (
   <ul>
@@ -30,23 +30,23 @@ const vdom = (
 )
 ```
 
-3. 标签 class 类名不能用 `class`，要用 `className`
+**3. 标签 class 类名不能用 `class`，要用 `className`**
 
-    在 JSX 中，使用 `className` 来定义 CSS 类，而不是 `class`。示例：
+  在 JSX 中，使用 `className` 来定义 CSS 类，而不是 `class`。示例：
 ```jsx
 <div className="my-class"></div>
 ```
 
-4. 标签内联样式要用 `{ {} }`
+**4. 标签内联样式要用 `{ {} }`**
 
-    在 JSX 中，内联样式需要使用双层大括号，第一层是 JSX 表达式，第二层是样式对象。示例：
+  在 JSX 中，内联样式需要使用双层大括号，第一层是 JSX 表达式，第二层是样式对象。示例：
 ```jsx
 <div style={{ color: "red", fontSize: "20px" }}></div>
 ```
 
-5. 只能有一个根标签
+**5. 只能有一个根标签**
 
-    每个 JSX 表达式必须有且仅有一个根标签。示例：
+  每个 JSX 表达式必须有且仅有一个根标签。示例：
 ```jsx
 const element = (
   <div>
@@ -56,15 +56,14 @@ const element = (
 )
 ```
 
-6. 标签必须闭合
+**6. 标签必须闭合**
 
-    所有 JSX 标签必须闭合，即使是单个标签也需要使用自闭合语法。
+  所有 JSX 标签必须闭合，即使是单个标签也需要使用自闭合语法。
 
-7. 标签首字母
-    - 以小写字母开头的标签会被转化为 HTML 元素，如果 HTML 中没有这个元素，则会报错。
-    - 以大写字母开头的标签会被当成一个自定义组件。
+**7. 标签首字母**
 
-    示例：
+  - 以小写字母开头的标签会被转化为 HTML 元素，如果 HTML 中没有这个元素，则会报错。
+  - 以大写字母开头的标签会被当成一个自定义组件。
 ```jsx
 // 以小写字母开头
 const element = <div></div> // 转化为 HTML 的 <div>
@@ -74,9 +73,9 @@ const MyComponent = () => <div></div>
 const element = <MyComponent /> // 被当成自定义组件
 ```
 
-### 二、类组件
+## 二、类组件
 
-#### 1、定义
+### 1. 定义
 
 ```jsx
 class MyComponent extends React.Component {
@@ -92,9 +91,9 @@ class MyComponent extends React.Component {
 
 通过这些规则，可以正确地定义和使用类组件，提高组件的可维护性和可读性。
 
-#### 2、实例的三大属性
+### 2. 实例的三大属性
 
-- **state**
+- #### **2.1 state**
 
 组件的状态，类似于 vue 中的响应式数据。
 
@@ -145,7 +144,7 @@ class MyComponent extends React.Component {
 }
 ```
 
-- **props**
+- #### **2.2 props**
 
 通过标签属性从组件外向组件内传递变化的数据
 
@@ -180,9 +179,9 @@ class Person extends React.Component {
 
 - 限制 props（需要引入 prop-types 库）
 
-1. 写在类外面
+::: code-group
 
-```jsx
+```jsx [写在类外面]
 // 指定数据类型
 Person.propTypes = {
   name: PropTypes.string.isRequired, //限制name必传，且为字符串
@@ -214,9 +213,7 @@ class Person extends React.Component {
 }
 ```
 
-2. 写在类里面
-
-```jsx
+```jsx [写在类里面]
 class Person extends React.Component {
   // 可省略
   constructor(props) {
@@ -247,38 +244,17 @@ class Person extends React.Component {
   }
 }
 ```
+:::
 
-- **refs**
+- #### **2.3 refs**
 
-组件内的标签可以定义`ref`属性来标识自己（类似于 id)
+组件内的标签可以定义`ref`属性来标识自己（类似于 id）
 
-**字符串形式的 ref，不推荐使用**
-
-```jsx
+::: code-group
+```jsx [推荐使用 createRef]
 class Demo extends React.Component {
-  render() {
-    return (
-      <div>
-        <input ref="input1" type="text" />
-        <input ref="input2" type="text" />
-        <button onClick={this.handleClick}>点击</button>
-      </div>
-    );
-  }
-
-  handleClick = () => {
-    // refs 是一个数组，他收集了组件内的所有 ref。这里的 input1
-    const { input1, input2 } = this.refs;
-  };
-}
-```
-
-**推荐使用 createRef**
-
-```jsx
-class Demo extends React.Component {
-  myRef1 = React.createRef();
-  myRef2 = React.createRef();
+  myRef1 = React.createRef()
+  myRef2 = React.createRef()
 
   render() {
     return (
@@ -287,18 +263,38 @@ class Demo extends React.Component {
         <input ref={myRef2} type="text" />
         <button onClick={this.handleClick}>点击</button>
       </div>
-    );
+    )
   }
 
   handleClick = () => {
-    console.log(this.myRef1.current.value);
-  };
+    console.log(this.myRef1.current.value)
+  }
 }
 ```
 
+```jsx [字符串形式的 ref 不推荐使用]
+class Demo extends React.Component {
+  render() {
+    return (
+      <div>
+        <input ref="input1" type="text" />
+        <input ref="input2" type="text" />
+        <button onClick={this.handleClick}>点击</button>
+      </div>
+    )
+  }
+
+  handleClick = () => {
+    // refs 是一个数组，他收集了组件内的所有 ref。这里的 input1
+    const { input1, input2 } = this.refs
+  }
+}
+```
+:::
+
 **`React.createRef` 调用后可以返回一个容器，该容器可以存储被 `ref` 所标识的节点**
 
-#### 3、受控组件与非受控组件
+### 3. 受控组件与非受控组件
 
 - **非受控组件**
 
@@ -447,7 +443,7 @@ saveFormData = (dataType,event)=>{
 
 ```
 
-#### 4、生命周期
+### 4. 生命周期
 
 生命周期大致可划分为三个阶段：
 
@@ -495,9 +491,9 @@ class Life extends React.component {
 
 ![](../../public/img/react-lifecycle.png)
 
-### 三、函数式组件
+## 三、函数式组件
 
-#### 1、定义
+#### 1. 定义
 
 ```jsx
 function MyComponent() {
@@ -507,7 +503,7 @@ function MyComponent() {
 
 **函数中的 `this` 指向 `undefined` ，因为 babel 编译后开启了严格模式**
 
-#### 2、props
+#### 2. props
 
 三大属性中，只有 `props` 可以用于函数组件，因为函数可以接收参数，`state` 和 `refs` 都不能用于函数组件
 
@@ -537,7 +533,7 @@ Person.defaultProps = {
 };
 ```
 
-#### 3、Hooks
+#### 3. Hooks
 
 为了解决函数组件缺失类组件中的 state 、refs 和生命周期这些能力的问题，引入的一些特殊函数。
 

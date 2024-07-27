@@ -22,17 +22,8 @@ import { fetchReleaseTagArray } from '../.vitepress/script/fetchReleaseTag.ts'
 // import gsap  from 'gsap'
 // import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
-let tagArray = ref({})
-let spinning = ref(false)
 onMounted(() => {
-  spinning.value = true
-  fetchReleaseTagArray().then(res => {
-    spinning.value = false
-    timelineData.value.push({
-      desc: `${res.body} ${res.created_at.split('T')[0]}`,
-      color: 'green'
-    })
-  })
+  initView()
 })
 
 let timelineData = ref([
@@ -46,16 +37,22 @@ let timelineData = ref([
   },
   // {
   //   desc: 'Technical testing 2023-05-24',
-  //   color: 'blue'
+  //   color: 'blue', 'green', 'gray'
   // },
-  // {
-  //   desc: 'Network problems being solved 2023-05-24'
-  // },
-  // {
-  //   desc: 'Network problems being solved 2',
-  //   color: 'gray'
-  // }
 ])
+let spinning = ref(false)
+const initView = async() => {
+  spinning.value = true
+  const res = await fetchReleaseTagArray()
+  const resMap = res.reverse().map(li => {
+    return {
+      desc: `${li.body} ${li.created_at.split('T')[0]}`,
+      color: 'green'
+    }
+  })
+  timelineData.value.push(...resMap)
+  spinning.value = false
+}
 </script>
 
 <style scoped lang="scss">
@@ -69,6 +66,6 @@ let timelineData = ref([
   width: 100%;
 }
 :deep(.m-timeline-item) {
-  padding-bottom: 88px !important;
+  padding-bottom: 66px !important;
 }
 </style>

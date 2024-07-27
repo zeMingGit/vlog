@@ -12,3 +12,12 @@ export const fetchReleaseTag = () => {
       !sampDoc && tagLineParagragh?.appendChild(docsReleaseTagSpan)
     })
 }
+
+export const fetchReleaseTagArray = () => {
+  return fetch('https://api.github.com/repos/zeMingGit/vlog/releases/latest')
+    .then((res) => res.json())
+    // .then((json) => json.tag_name ?? '')
+    .then(releaseTag => {
+      return releaseTag
+    })
+}

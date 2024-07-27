@@ -3,53 +3,59 @@ editLink: false
 lastUpdated: false
 ---
 <main>
-  <h1>文档发展历程</h1>
-  <section class="boxes-container" ref="main">
-    <div class="timeline">
-    <div class="stage" v-for="stage in stages" :key="stage.id" :data-stage="stage.id">
-      <h2>{{ stage.title }}</h2>
-      <p>{{ stage.description }}</p>
-    </div>
-  </div>
-  </section>
+  <Spin :spinning="spinning" indicator="dynamic-circle">
+    <Timeline :timeline-data="timelineData" mode="center" lineStyle="dashed">
+      <template #dot="{ index }">
+        <!-- <span class="big-dot" v-if="index===2"></span> -->
+        <!-- <div v-if="index===3">
+          <svg focusable="false" class="u-icon" data-icon="clock-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"></path></svg>
+        </div> -->
+      </template>
+    </Timeline>
+  </Spin>
 </main>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import gsap  from 'gsap'
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import { Timeline, Spin } from 'vue-amazing-ui'
+import { fetchReleaseTagArray } from '../.vitepress/script/fetchReleaseTag.ts'
+// import gsap  from 'gsap'
+// import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
+let tagArray = ref({})
+let spinning = ref(false)
 onMounted(() => {
- gsap.registerPlugin(ScrollTrigger);
-
-      const stageElements = document.querySelectorAll('.stage');
-
-      stageElements.forEach(stage => {
-        gsap.fromTo(stage,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            scrollTrigger: {
-              trigger: stage,
-              start: 'top 80%',
-              end: 'top 30%',
-              scrub: true,
-              markers: false
-            }
-          }
-        );
-      });
+  spinning.value = true
+  fetchReleaseTagArray().then(res => {
+    spinning.value = false
+    timelineData.value.push({
+      desc: `${res.body} ${res.created_at.split('T')[0]}`,
+      color: 'green'
+    })
+  })
 })
 
-const stages = ref([
-  { id: 1, title: '初步规划', description: '确定动画的目标、类型和所需资源。' },
-  { id: 2, title: '动画设计', description: '设计动画的具体效果和实现方式。' },
-  { id: 3, title: '动画实现', description: '使用GSAP实现设计好的动画效果。' },
-  { id: 4, title: '测试与反馈', description: '确保动画在所有目标设备和浏览器上正常运行。' },
-  { id: 5, title: '部署与维护', description: '将动画效果发布到生产环境，并进行后续维护。' }
+let timelineData = ref([
+  {
+    desc: '初始化 2023-12-07',
+    color: 'green'
+  },
+  {
+    desc: '正式开始建档 2023-12-08',
+    color: 'green'
+  },
+  // {
+  //   desc: 'Technical testing 2023-05-24',
+  //   color: 'blue'
+  // },
+  // {
+  //   desc: 'Network problems being solved 2023-05-24'
+  // },
+  // {
+  //   desc: 'Network problems being solved 2',
+  //   color: 'gray'
+  // }
 ])
-
 </script>
 
 <style scoped lang="scss">
@@ -59,46 +65,10 @@ const stages = ref([
   background: linear-gradient( 114.41deg, #0ae448 20.74%, #abff84 65.5% );
 }
 
-.timeline {
-  width: 80%;
-  margin: 50px auto;
-  position: relative;
-  padding: 20px;
+:deep(.m-spin-content) {
+  width: 100%;
 }
-
-.stage {
-  background-color: white;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 30px;
-  opacity: 0;
-  transform: translateY(50px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.stage h2 {
-  margin-top: 0;
-  color: #2c3e50;
-}
-
-.stage p {
-  color: #7f8c8d;
-}
-
-.stage::before {
-  content: attr(data-stage);
-  position: absolute;
-  left: -30px;
-  top: 20px;
-  background-color: #3498db;
-  color: white;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-weight: bold;
+:deep(.m-timeline-item) {
+  padding-bottom: 88px !important;
 }
 </style>

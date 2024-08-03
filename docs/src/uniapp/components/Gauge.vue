@@ -23,7 +23,7 @@ const props = defineProps({
   },
   height: {
     type: Number,
-    default: 97,
+    default: 120,
   },
   tickCount: {
     type: Number,
@@ -92,7 +92,7 @@ const drawGauge = (highlightedTicks, canvasWidth, canvasHeight) => {
   }
 }
 
-const animateGauge = (canvasWidth = props.width, canvasHeight = props.canvasHeight) => {
+const animateGauge = (canvasWidth = props.width, canvasHeight = props.height) => {
   const { duration, tickCount } = props
   const thresholdIndex = Math.floor(tickCount * props.threshold)
   const startTime = Date.now()

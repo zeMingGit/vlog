@@ -6,11 +6,19 @@
 在最近的 **app** 应用开发过程中，我遇到了许多图表展示的问题。为什么 `ECharts` 不是开发应用的首选？我们不得不使用不支持 `TypeScript` 的 `uCharts` 。uCharts也是依托答辩。尽管uCharts是开源的，但它的可视化配置参数需要收费。尽管如此，我们仍应怀着感恩的心去使用它（我开玩笑的🙃）。
 
 ## 效果展示
+
+:::tip 
+起始角度的0为3点钟位置，结束角度为2即完整一圈
+
+纯手搓，肯定有杂七杂八的bug
+:::
 * 参数配置
 <Space gap="large">
   <InputNumber prefix="百分比：" :min="0" :max="1" precision="1" width="49%" v-model:value="gaugeInfo.threshold" />
   <InputNumber prefix="格子数：" :min="0" :max="100" width="49%" v-model:value="gaugeInfo.tickCount" />
   <InputNumber prefix="动画时间：" :min="0" width="49%" v-model:value="gaugeInfo.duration" />
+  <InputNumber prefix="起始角度：" :min="0" precision="2" width="49%" v-model:value="gaugeInfo.startAngle" />
+  <InputNumber prefix="结束角度：" :min="0" precision="2" width="49%" v-model:value="gaugeInfo.endAngle" />
 </Space>
 
 * 效果如图
@@ -18,6 +26,8 @@
   :threshold="gaugeInfo.threshold"
   :tickCount="gaugeInfo.tickCount"
   :duration="gaugeInfo.duration"
+  :startAngle="gaugeInfo.startAngle"
+  :endAngle="gaugeInfo.endAngle"
 />
 
 <script setup>
@@ -28,6 +38,8 @@ let gaugeInfo = ref({
   threshold: 0.5,
   tickCount: 20,
   duration: 300,
+  startAngle: 0.85,
+  endAngle: 2.15,
 })
 
 // const drawGauge = (highlightedTicks, canvasWidth, canvasHeight) => {

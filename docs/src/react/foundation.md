@@ -100,7 +100,8 @@ setForm({
 })
 
 // 如果需要动态className，那么也需要这么做
-<div className="{`item ${typeId === item.id && 'active'}`}"></div>
+<div className={classNames('item', { active: typeId === item.id })}></div> // npm i classnames
+<div className={`item ${typeId === item.id && 'active'}`}></div>
 ```
 
 ## 二、类组件

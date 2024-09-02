@@ -17,10 +17,25 @@ React 是一个用于构建用户界面的 JavaScript 库。它由 Facebook 开�
 const element = <h1>Hello, world!</h1>
 ```
 
-**2. 标签中混入 JavaScript 表达式要用 `{}`**
+**2. 标签 class 类名不能用 `class`，要用 `className`**
+
+  在 JSX 中，使用 `className` 来定义 CSS 类，而不是 `class`。示例：
+```jsx
+<div className="my-class"></div>
+```
+
+**3. 标签内联样式要用 `{ {} }`**
+
+  在 JSX 中，内联样式需要使用双层大括号，第一层是 JSX 表达式，第二层是样式对象。示例：
+```jsx
+<div style={{ color: "red", fontSize: "20px" }}></div>
+```
+
+**4. 标签中混入 JavaScript 表达式要用 `{}`**
 
   在 JSX 中，可以使用 `{}` 来插入 JavaScript 表达式。示例：
 ```jsx
+/** 列表渲染  */
 const vdom = (
   <ul>
     {data.map((item, index) => {
@@ -28,20 +43,20 @@ const vdom = (
     })}
   </ul>
 )
-```
 
-**3. 标签 class 类名不能用 `class`，要用 `className`**
+/** 条件渲染 */
+<div>
+  { isFlag && <div>状态为真</div> }
+  { !isFlag ? <div>状态为假</div> : <div>状态为真</div> }
+  { /** 复杂条件渲染 */ }
+  { getArticleTem() }
+</div>
 
-  在 JSX 中，使用 `className` 来定义 CSS 类，而不是 `class`。示例：
-```jsx
-<div className="my-class"></div>
-```
-
-**4. 标签内联样式要用 `{ {} }`**
-
-  在 JSX 中，内联样式需要使用双层大括号，第一层是 JSX 表达式，第二层是样式对象。示例：
-```jsx
-<div style={{ color: "red", fontSize: "20px" }}></div>
+/** 事件绑定 */
+<div>
+  { /** 事件对象e和自定义形参传递 */ }
+  <button onClick={ (e)=> handleClick('zeMing', e) }>点击</button>
+</div>
 ```
 
 **5. 只能有一个根标签**

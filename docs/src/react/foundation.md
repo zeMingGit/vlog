@@ -88,6 +88,21 @@ const MyComponent = () => <div></div>
 const element = <MyComponent /> // 被当成自定义组件
 ```
 
+**8. 常见写法**
+```jsx
+// 如果想要修改它，那么必须这么做
+const [form, setForm] = useState({
+  name: 'zeMing',
+})
+setForm({
+  ...form,
+  name: 'hello'
+})
+
+// 如果需要动态className，那么也需要这么做
+<div className="{`item ${typeId === item.id && 'active'}`}"></div>
+```
+
 ## 二、类组件
 
 ### 1. 定义
@@ -574,7 +589,7 @@ Person.defaultProps = {
   const [state, setState] = useState(initialState);
   ```
 
-  示例:
+  **示例:**
 
   ```jsx
   import { useState } from "react";

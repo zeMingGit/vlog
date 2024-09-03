@@ -266,164 +266,156 @@ function B() {
 为了解决函数组件缺失类组件中的 state 、refs 和生命周期这些能力的问题，引入的一些特殊函数。
 
 - **useState()**
+::: tip
+>类似于类组件中的 state 和 setState，用于在函数组件中添加状态。
 
-  类似于类组件中的 state 和 setState，用于在函数组件中添加状态
+参数：接受一个参数，这个参数是状态的初始值。这个初始值可以是任意类型，例如数字、字符串、数组、对象等。
 
-  **参数：**
+返回值：返回一个数组，数组包含两个元素
+:::
 
-  接受一个参数，这个参数是状态的初始值。这个初始值可以是任意类型，例如数字、字符串、数组、对象等。
+```js
+// 1、state：当前状态的值
+// 2、setState：状态更新函数，接受一个新状态值作为参数，或一个返回新状态值的函数
+const [state, setState] = useState(initialState)
+```
 
-  ```js
-  const [state, setState] = useState(initialState); // initialState：状态的初始值
-  ```
+**示例:**
 
-  **返回值:**
+```jsx
+import { useState } from "react"
 
-  返回一个数组，数组包含两个元素：
-
-  ```js
-  // 1、state：当前状态的值
-  // 2、setState：状态更新函数，接受一个新状态值作为参数，或一个返回新状态值的函数
-  const [state, setState] = useState(initialState);
-  ```
-
-  **示例:**
-
-  ```jsx
-  import { useState } from "react";
-
-  function App() {
-    // 初始化一个名为 "count" 的状态变量，初始值为 0
-    const [count, setCount] = useState(0);
-
-    const add = () => {
-      setCount(count + 1);
-    };
-
-    return (
-      <div>
-        <h2>当前和为：{count}</h2>
-        <button onClick={add}>点击加1</button>
-      </div>
-    );
+function App() {
+  // 初始化一个名为 "count" 的状态变量，初始值为 0
+  const [count, setCount] = useState(0)
+  const add = () => {
+    setCount(count + 1)
   }
-  ```
+
+  return (
+    <div>
+      <h2>当前和为：{count}</h2>
+      <button onClick={add}>点击加1</button>
+    </div>
+  )
+}
+```
 
 - **useEffect()**
 
-  类似于类中的生命周期，可以将`useEffect` 视为`componentDidMount`、`componentDidUpdate`和`componentWillUnmount`的组合。
+类似于类中的生命周期，可以将`useEffect` 视为 `componentDidMount`、`componentDidUpdate` 和 `componentWillUnmount` 的组合。
 
-  **参数：**
+**参数：**
 
-    > `useEffect` 接受两个参数：
-    >
-    > 1. **副作用函数**：一个在组件渲染后执行的函数。
-    > 2. **依赖项数组（可选）**：一个数组，包含影响副作用的变量。如果数组中的变量发生变化，副作用函数会重新执行。
+> `useEffect` 接受两个参数：
+>
+> 1. **副作用函数**：一个在组件渲染后执行的函数。
+> 2. **依赖项数组（可选）**：一个数组，包含影响副作用的变量。如果数组中的变量发生变化，副作用函数会重新执行。
 
-    ```js
-    useEffect(() => {
-      // 副作用操作
-    }, [dependencies]);
+```js
+useEffect(() => {
+  // 副作用操作
+}, [dependencies]);
+```
+
+**副作用函数执行的时机：**
+
+1. 不传第二个参数时，无论是组件初次挂载还是更新时，副作用函数都会执行。这个行为类似于类组件中的 `componentDidMount` 和 `componentDidUpdate` 生命周期方法的组合。
+
+    ```jsx
+    import { useState, useEffect } from "react";
+
+    function Counter() {
+      const [count, setCount] = useState(0);
+
+      useEffect(() => {
+        console.log("Effect executed");
+      }); // 没有依赖项数组
+
+      return (
+        <div>
+          <p>You clicked {count} times</p>
+          <button onClick={() => setCount(count + 1)}>Click me</button>
+        </div>
+      );
+    }
     ```
 
-    **副作用函数执行的时机：**
+    > [!NOTE]
+    >
+    > 在这个示例中，每次 Counter 组件渲染时，useEffect 中的副作用函数都会执行一次。也就是说，每当 count 状态更新并导致组件重新渲染时，console.log('Effect executed') 都会被调用。
 
-    1. 不传第二个参数时，无论是组件初次挂载还是更新时，副作用函数都会执行。这个行为类似于类组件中的 `componentDidMount` 和 `componentDidUpdate` 生命周期方法的组合。
+2. 第二个参数为空数组时，只会在组件挂载时执行一次，并且不会在组件更新时重新执行
 
-       ```jsx
-       import { useState, useEffect } from "react";
+    ```jsx
+    import { useState, useEffect } from "react";
 
-       function Counter() {
-         const [count, setCount] = useState(0);
+    function DataFetcher() {
+      const [data, setData] = useState(null);
 
-         useEffect(() => {
-           console.log("Effect executed");
-         }); // 没有依赖项数组
+      useEffect(() => {
+        // 模拟数据获取
+        fetch("https://api.example.com/data")
+          .then((response) => response.json())
+          .then((data) => setData(data))
+          .catch((error) => console.error("Error fetching data:", error));
+      }, []); // 空数组作为依赖项
 
-         return (
-           <div>
-             <p>You clicked {count} times</p>
-             <button onClick={() => setCount(count + 1)}>Click me</button>
-           </div>
-         );
-       }
-       ```
+      return (
+        <div>
+          {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : "Loading..."}
+        </div>
+      );
+    }
+    ```
 
-       > [!NOTE]
-       >
-       > 在这个示例中，每次 Counter 组件渲染时，useEffect 中的副作用函数都会执行一次。也就是说，每当 count 状态更新并导致组件重新渲染时，console.log('Effect executed') 都会被调用。
+    > [!NOTE]
+    >
+    > 在这个示例中，数据获取操作只会在组件首次挂载时执行一次。由于依赖项数组为空，数据获取操作不会在组件更新时重新执行。
 
-    2. 第二个参数为空数组时，只会在组件挂载时执行一次，并且不会在组件更新时重新执行
+3. 传第二个参数且参数不为空数组时，数组中的变量发生变化时执行
 
-       ```jsx
-       import { useState, useEffect } from "react";
+    ```jsx
+    import { useState, useEffect } from "react";
+  
+    function Counter() {
+      const [count, setCount] = useState(0);
+  
+      useEffect(() => {
+        console.log(`Count changed: ${count}`);
+      }, [count]);
+  
+      return (
+        <div>
+          <p>{count}</p>
+          <button onClick={() => setCount(count + 1)}>Increment</button>
+        </div>
+      );
+    }
+    ```
 
-       function DataFetcher() {
-         const [data, setData] = useState(null);
+**副作用函数的返回值：**
 
-         useEffect(() => {
-           // 模拟数据获取
-           fetch("https://api.example.com/data")
-             .then((response) => response.json())
-             .then((data) => setData(data))
-             .catch((error) => console.error("Error fetching data:", error));
-         }, []); // 空数组作为依赖项
+- 如果返回一个匿名函数，则这个函数将会在组件卸载或在下一次副作用函数执行前执行，相当于类组件中的 `componentWillUnmount`生命周期方法
 
-         return (
-           <div>
-             {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : "Loading..."}
-           </div>
-         );
-       }
-       ```
+  ```jsx
+  import { useEffect } from "react";
 
-       > [!NOTE]
-       >
-       > 在这个示例中，数据获取操作只会在组件首次挂载时执行一次。由于依赖项数组为空，数据获取操作不会在组件更新时重新执行。
+  function Timer() {
+    useEffect(() => {
+      const timerId = setInterval(() => {
+        console.log("Tick");
+      }, 1000);
 
-    3. 传第二个参数且参数不为空数组时，数组中的变量发生变化时执行
+      return () => {
+        clearInterval(timerId);
+        console.log("Timer cleared"); // 组件卸载时执行
+      };
+    }, []);
 
-       ```jsx
-       import { useState, useEffect } from "react";
-     
-       function Counter() {
-         const [count, setCount] = useState(0);
-     
-         useEffect(() => {
-           console.log(`Count changed: ${count}`);
-         }, [count]);
-     
-         return (
-           <div>
-             <p>{count}</p>
-             <button onClick={() => setCount(count + 1)}>Increment</button>
-           </div>
-         );
-       }
-       ```
-
-    **副作用函数的返回值：**
-
-    - 如果返回一个匿名函数，则这个函数将会在组件卸载或在下一次副作用函数执行前执行，相当于类组件中的 `componentWillUnmount`生命周期方法
-
-      ```jsx
-      import { useEffect } from "react";
-    
-      function Timer() {
-        useEffect(() => {
-          const timerId = setInterval(() => {
-            console.log("Tick");
-          }, 1000);
-    
-          return () => {
-            clearInterval(timerId);
-            console.log("Timer cleared"); // 组件卸载时执行
-          };
-        }, []);
-    
-        return <div>Check the console for timer updates</div>;
-      }
-      ```
+    return <div>Check the console for timer updates</div>;
+  }
+  ```
 
 - **useRef()**
 

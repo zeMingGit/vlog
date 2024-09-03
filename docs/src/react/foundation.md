@@ -15,6 +15,11 @@ React 是一个用于构建用户界面的 JavaScript 库。它由 Facebook 开�
 
 ```jsx
 const element = <h1>Hello, world!</h1>
+
+// 获取DOM
+<input type="text" ref={ inputRef } />
+const inputRef = useRef<HTMLInputElement>(null)
+console.log(inputRef.current)
 ```
 
 **2. 标签 class 类名不能用 `class`，要用 `className`**
@@ -104,7 +109,367 @@ setForm({
 <div className={`item ${typeId === item.id && 'active'}`}></div>
 ```
 
-## 二、类组件
+## 二、函数式组件
+
+#### 1. 定义
+函数中的 `this` 指向 `undefined` ，因为 babel 编译后开启了严格模式
+```jsx
+function MyComponent() {
+  return <h2>我是一个函数式组件</h2>
+}
+```
+
+#### 2. props
+props可以传递任意的数据：数字、字符串、布尔值、数组、对象、函数、JSX。子组件只能读取props中的数据，不能直接修改，父组件的数据只能由父组件修改。
+
+三大属性中，只有 `props` 可以用于函数组件，因为函数可以接收参数，`state` 和 `refs` 都不能用于函数组件。
+
+::: code-group
+```jsx [父传子]
+// 父组件
+function App() {
+  return (
+    <div>
+      <Person { ...form } />
+      {/* 或 */}
+      <Person name={ name } age={ age } isTrue={ true } />
+
+      {/* 成对标签类似vue的slot，可以在props中的children直接使用它 */}
+      <Person>
+        <div>this is children</div>
+      </Person>
+    </div>
+  )
+}
+
+// 子组件
+function Person(props) {
+  const { name, age, isTrue, children } = props
+  return (
+    <ul>
+      <li>姓名：{ name }</li>
+      <li>年龄：{ age }</li>
+      { children }
+    </ul>
+  )
+}
+
+// 函数组件限制props只能使用此方法
+Person.propTypes = {
+  name: PropTypes.string.isRequired, //限制name必传，且为字符串
+  sex: PropTypes.string, //限制sex为字符串
+  age: PropTypes.number, //限制age为数值
+}
+
+// 指定默认标签属性值
+Person.defaultProps = {
+  sex: "男", //sex默认值为男
+  age: 18, //age默认值为18
+}
+```
+
+```jsx [子传父]
+// 父组件
+function App() {
+  const [msg, setMsg] = useState('')
+  const getMsg = (msgdata) => {
+    setMsg(msgdata)
+  }
+
+  return (
+    <div>
+      { msg }
+      <Son onGetSonMsg={ getMsg } />
+    </div>
+  )
+}
+
+
+// 子组件
+function Son({ onGetSonMsg }) {
+  const msg = '子组件数据'
+  return (
+    <button onClick={() => onGetSonMsg(msg)}>点击传递参数</button>
+  )
+}
+```
+
+```jsx [兄弟组件通信]
+// 父组件
+function App() {
+  const [name, setName] = useState('')
+  const getAName = (namedata: string) => {
+    setName(namedata)
+  }
+  return (
+    <>
+      this is app
+      <A onGetAName={getAName} />
+      <B name={name} />
+    </>
+  )
+}
+
+// 子组件
+function A({ onGetAName }) {
+  const name = 'this is A name'
+  return (
+    <div>
+      this is A 
+      <button onClick={() => onGetAName(name)}>send</button>
+    </div>
+  )
+}
+function B({name}) {
+  return (
+    <div>this is B {name}</div>
+  )
+}
+```
+
+```jsx [Context 跨层级组件通信]
+const MsgContext = createContext()
+// 父组件
+function App() {
+  const msg = 'this is appMsg'
+  return (
+    <>
+      <MsgContext.Provider value={ msg }>
+        this is app
+        <A />
+      </MsgContext.Provider>
+    </>
+  )
+}
+
+// 子组件
+function A() {
+  return (
+    <div>
+      this is A 
+      {/* 使用B组件 */}
+      <B />
+    </div>
+  )
+}
+function B() {
+  const msg = useContext(MsgContext)
+  return (
+    <div>this is B, {msg}</div>
+  )
+}
+```
+:::
+
+#### 3. Hooks
+
+为了解决函数组件缺失类组件中的 state 、refs 和生命周期这些能力的问题，引入的一些特殊函数。
+
+- **useState()**
+
+  类似于类组件中的 state 和 setState，用于在函数组件中添加状态
+
+  **参数：**
+
+  接受一个参数，这个参数是状态的初始值。这个初始值可以是任意类型，例如数字、字符串、数组、对象等。
+
+  ```js
+  const [state, setState] = useState(initialState); // initialState：状态的初始值
+  ```
+
+  **返回值:**
+
+  返回一个数组，数组包含两个元素：
+
+  ```js
+  // 1、state：当前状态的值
+  // 2、setState：状态更新函数，接受一个新状态值作为参数，或一个返回新状态值的函数
+  const [state, setState] = useState(initialState);
+  ```
+
+  **示例:**
+
+  ```jsx
+  import { useState } from "react";
+
+  function App() {
+    // 初始化一个名为 "count" 的状态变量，初始值为 0
+    const [count, setCount] = useState(0);
+
+    const add = () => {
+      setCount(count + 1);
+    };
+
+    return (
+      <div>
+        <h2>当前和为：{count}</h2>
+        <button onClick={add}>点击加1</button>
+      </div>
+    );
+  }
+  ```
+
+- **useEffect()**
+
+  类似于类中的生命周期，可以将`useEffect` 视为`componentDidMount`、`componentDidUpdate`和`componentWillUnmount`的组合。
+
+  **参数：**
+
+    > `useEffect` 接受两个参数：
+    >
+    > 1. **副作用函数**：一个在组件渲染后执行的函数。
+    > 2. **依赖项数组（可选）**：一个数组，包含影响副作用的变量。如果数组中的变量发生变化，副作用函数会重新执行。
+
+    ```js
+    useEffect(() => {
+      // 副作用操作
+    }, [dependencies]);
+    ```
+
+    **副作用函数执行的时机：**
+
+    1. 不传第二个参数时，无论是组件初次挂载还是更新时，副作用函数都会执行。这个行为类似于类组件中的 `componentDidMount` 和 `componentDidUpdate` 生命周期方法的组合。
+
+       ```jsx
+       import { useState, useEffect } from "react";
+
+       function Counter() {
+         const [count, setCount] = useState(0);
+
+         useEffect(() => {
+           console.log("Effect executed");
+         }); // 没有依赖项数组
+
+         return (
+           <div>
+             <p>You clicked {count} times</p>
+             <button onClick={() => setCount(count + 1)}>Click me</button>
+           </div>
+         );
+       }
+       ```
+
+       > [!NOTE]
+       >
+       > 在这个示例中，每次 Counter 组件渲染时，useEffect 中的副作用函数都会执行一次。也就是说，每当 count 状态更新并导致组件重新渲染时，console.log('Effect executed') 都会被调用。
+
+    2. 第二个参数为空数组时，只会在组件挂载时执行一次，并且不会在组件更新时重新执行
+
+       ```jsx
+       import { useState, useEffect } from "react";
+
+       function DataFetcher() {
+         const [data, setData] = useState(null);
+
+         useEffect(() => {
+           // 模拟数据获取
+           fetch("https://api.example.com/data")
+             .then((response) => response.json())
+             .then((data) => setData(data))
+             .catch((error) => console.error("Error fetching data:", error));
+         }, []); // 空数组作为依赖项
+
+         return (
+           <div>
+             {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : "Loading..."}
+           </div>
+         );
+       }
+       ```
+
+       > [!NOTE]
+       >
+       > 在这个示例中，数据获取操作只会在组件首次挂载时执行一次。由于依赖项数组为空，数据获取操作不会在组件更新时重新执行。
+
+    3. 传第二个参数且参数不为空数组时，数组中的变量发生变化时执行
+
+       ```jsx
+       import { useState, useEffect } from "react";
+     
+       function Counter() {
+         const [count, setCount] = useState(0);
+     
+         useEffect(() => {
+           console.log(`Count changed: ${count}`);
+         }, [count]);
+     
+         return (
+           <div>
+             <p>{count}</p>
+             <button onClick={() => setCount(count + 1)}>Increment</button>
+           </div>
+         );
+       }
+       ```
+
+    **副作用函数的返回值：**
+
+    - 如果返回一个匿名函数，则这个函数将会在组件卸载或在下一次副作用函数执行前执行，相当于类组件中的 `componentWillUnmount`生命周期方法
+
+      ```jsx
+      import { useEffect } from "react";
+    
+      function Timer() {
+        useEffect(() => {
+          const timerId = setInterval(() => {
+            console.log("Tick");
+          }, 1000);
+    
+          return () => {
+            clearInterval(timerId);
+            console.log("Timer cleared"); // 组件卸载时执行
+          };
+        }, []);
+    
+        return <div>Check the console for timer updates</div>;
+      }
+      ```
+
+- **useRef()**
+
+  > 类似于 createRef()，创建一个用于包裹 dom 元素的容器，用以操作 dom
+
+  - 参数:
+
+    > 接受一个参数，这个参数是引用的初始值。通常情况下，如果用于访问 DOM 元素，初始值可以是 `null`。
+
+    ```js
+    const refContainer = useRef(null);
+    ```
+
+  - 返回值:
+
+    > 返回一个对象，这个对象有一个名为 `current` 的属性，`current` 属性用于存储引用的值。
+
+    ```js
+    // refContainer.current：引用的当前值
+    const refContainer = useRef(initialValue);
+    ```
+
+  - 示例:
+
+    ```jsx
+    import { useRef } from "react";
+    
+    function App() {
+      const inputEl = useRef(null);
+    
+      const handleClick = () => {
+        inputEl.current.focus();
+      };
+    
+      return (
+        <div>
+          <input ref={inputEl} type="text" />
+          <button onClick={handleClick}>Focus the input</button>
+        </div>
+      );
+    }
+    ```
+
+
+
+## 三、类组件
 
 ### 1. 定义
 
@@ -521,251 +886,3 @@ class Life extends React.component {
 生命周期图
 
 ![](../../public/img/react-lifecycle.png)
-
-## 三、函数式组件
-
-#### 1. 定义
-
-```jsx
-function MyComponent() {
-  return <h2>我是一个函数式组件</h2>;
-}
-```
-
-**函数中的 `this` 指向 `undefined` ，因为 babel 编译后开启了严格模式**
-
-#### 2. props
-
-三大属性中，只有 `props` 可以用于函数组件，因为函数可以接收参数，`state` 和 `refs` 都不能用于函数组件
-
-```jsx
-function Person(props) {
-  const { name, age, sex } = props;
-  return (
-    <ul>
-      <li>姓名：{name}</li>
-      <li>性别：{sex}</li>
-      <li>年龄：{age}</li>
-    </ul>
-  );
-}
-
-// 函数组件限制props只能使用此方法
-Person.propTypes = {
-  name: PropTypes.string.isRequired, //限制name必传，且为字符串
-  sex: PropTypes.string, //限制sex为字符串
-  age: PropTypes.number, //限制age为数值
-};
-
-// 指定默认标签属性值
-Person.defaultProps = {
-  sex: "男", //sex默认值为男
-  age: 18, //age默认值为18
-};
-```
-
-#### 3. Hooks
-
-为了解决函数组件缺失类组件中的 state 、refs 和生命周期这些能力的问题，引入的一些特殊函数。
-
-- **useState()**
-
-  类似于类组件中的 state 和 setState，用于在函数组件中添加状态
-
-  **参数：**
-
-  接受一个参数，这个参数是状态的初始值。这个初始值可以是任意类型，例如数字、字符串、数组、对象等。
-
-  ```js
-  const [state, setState] = useState(initialState); // initialState：状态的初始值
-  ```
-
-  **返回值:**
-
-  返回一个数组，数组包含两个元素：
-
-  ```js
-  // 1、state：当前状态的值
-  // 2、setState：状态更新函数，接受一个新状态值作为参数，或一个返回新状态值的函数
-  const [state, setState] = useState(initialState);
-  ```
-
-  **示例:**
-
-  ```jsx
-  import { useState } from "react";
-
-  function App() {
-    // 初始化一个名为 "count" 的状态变量，初始值为 0
-    const [count, setCount] = useState(0);
-
-    const add = () => {
-      setCount(count + 1);
-    };
-
-    return (
-      <div>
-        <h2>当前和为：{count}</h2>
-        <button onClick={add}>点击加1</button>
-      </div>
-    );
-  }
-  ```
-
-- **useEffect()**
-
-  类似于类中的生命周期，可以将`useEffect` 视为`componentDidMount`、`componentDidUpdate`和`componentWillUnmount`的组合。
-
-  **参数：**
-
-    > `useEffect` 接受两个参数：
-    >
-    > 1. **副作用函数**：一个在组件渲染后执行的函数。
-    > 2. **依赖项数组（可选）**：一个数组，包含影响副作用的变量。如果数组中的变量发生变化，副作用函数会重新执行。
-
-    ```js
-    useEffect(() => {
-      // 副作用操作
-    }, [dependencies]);
-    ```
-
-    **副作用函数执行的时机：**
-
-    1. 不传第二个参数时，无论是组件初次挂载还是更新时，副作用函数都会执行。这个行为类似于类组件中的 `componentDidMount` 和 `componentDidUpdate` 生命周期方法的组合。
-
-       ```jsx
-       import { useState, useEffect } from "react";
-
-       function Counter() {
-         const [count, setCount] = useState(0);
-
-         useEffect(() => {
-           console.log("Effect executed");
-         }); // 没有依赖项数组
-
-         return (
-           <div>
-             <p>You clicked {count} times</p>
-             <button onClick={() => setCount(count + 1)}>Click me</button>
-           </div>
-         );
-       }
-       ```
-
-       > [!NOTE]
-       >
-       > 在这个示例中，每次 Counter 组件渲染时，useEffect 中的副作用函数都会执行一次。也就是说，每当 count 状态更新并导致组件重新渲染时，console.log('Effect executed') 都会被调用。
-
-    2. 第二个参数为空数组时，只会在组件挂载时执行一次，并且不会在组件更新时重新执行
-
-       ```jsx
-       import { useState, useEffect } from "react";
-
-       function DataFetcher() {
-         const [data, setData] = useState(null);
-
-         useEffect(() => {
-           // 模拟数据获取
-           fetch("https://api.example.com/data")
-             .then((response) => response.json())
-             .then((data) => setData(data))
-             .catch((error) => console.error("Error fetching data:", error));
-         }, []); // 空数组作为依赖项
-
-         return (
-           <div>
-             {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : "Loading..."}
-           </div>
-         );
-       }
-       ```
-
-       > [!NOTE]
-       >
-       > 在这个示例中，数据获取操作只会在组件首次挂载时执行一次。由于依赖项数组为空，数据获取操作不会在组件更新时重新执行。
-
-    3. 传第二个参数且参数不为空数组时，数组中的变量发生变化时执行
-
-       ```jsx
-       import { useState, useEffect } from "react";
-     
-       function Counter() {
-         const [count, setCount] = useState(0);
-     
-         useEffect(() => {
-           console.log(`Count changed: ${count}`);
-         }, [count]);
-     
-         return (
-           <div>
-             <p>{count}</p>
-             <button onClick={() => setCount(count + 1)}>Increment</button>
-           </div>
-         );
-       }
-       ```
-
-    **副作用函数的返回值：**
-
-    - 如果返回一个匿名函数，则这个函数将会在组件卸载或在下一次副作用函数执行前执行，相当于类组件中的 `componentWillUnmount`生命周期方法
-
-      ```jsx
-      import { useEffect } from "react";
-    
-      function Timer() {
-        useEffect(() => {
-          const timerId = setInterval(() => {
-            console.log("Tick");
-          }, 1000);
-    
-          return () => {
-            clearInterval(timerId);
-            console.log("Timer cleared"); // 组件卸载时执行
-          };
-        }, []);
-    
-        return <div>Check the console for timer updates</div>;
-      }
-      ```
-
-- **useRef()**
-
-  > 类似于 createRef()，创建一个用于包裹 dom 元素的容器，用以操作 dom
-
-  - 参数:
-
-    > 接受一个参数，这个参数是引用的初始值。通常情况下，如果用于访问 DOM 元素，初始值可以是 `null`。
-
-    ```js
-    const refContainer = useRef(null);
-    ```
-
-  - 返回值:
-
-    > 返回一个对象，这个对象有一个名为 `current` 的属性，`current` 属性用于存储引用的值。
-
-    ```js
-    // refContainer.current：引用的当前值
-    const refContainer = useRef(initialValue);
-    ```
-
-  - 示例:
-
-    ```jsx
-    import { useRef } from "react";
-    
-    function App() {
-      const inputEl = useRef(null);
-    
-      const handleClick = () => {
-        inputEl.current.focus();
-      };
-    
-      return (
-        <div>
-          <input ref={inputEl} type="text" />
-          <button onClick={handleClick}>Focus the input</button>
-        </div>
-      );
-    }
-    ```

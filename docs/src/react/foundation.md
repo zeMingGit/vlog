@@ -305,7 +305,8 @@ function App() {
 
 类似于类中的生命周期，可以将 `useEffect` 视为 `componentDidMount`、`componentDidUpdate` 和 `componentWillUnmount` 的组合。
 
-::: tip
+::: tip [react文档详情](https://zh-hans.react.dev/reference/react/useEffect)
+
 `useEffect` 接受两个参数
 
 **1. 副作用函数**：一个在组件渲染后执行的函数。
@@ -316,7 +317,7 @@ function App() {
 ```js
 useEffect(() => {
   // 副作用操作
-}, [dependencies])
+}, [])
 ```
 
 **副作用函数执行的时机：**
@@ -324,10 +325,18 @@ useEffect(() => {
 1. 不传第二个参数时，无论是组件初次挂载还是更新时，副作用函数都会执行。这个行为类似于类组件中的 `componentDidMount` 和 `componentDidUpdate` 生命周期方法的组合。
 
 ::: info 提示
- 在这个示例中，每次 Counter 组件渲染时，useEffect 中的副作用函数都会执行一次。也就是说，每当 count 状态更新并导致组件重新渲染时，console.log('Effect executed') 都会被调用。
+在这个示例中，每次 Counter 组件渲染时，useEffect 中的副作用函数都会执行一次。也就是说，每当 count 状态更新并导致组件重新渲染时，console.log('Effect executed') 都会被调用
 :::
 
-```jsx
+2. 第二个参数为空数组时，只会在组件挂载时执行一次，并且不会在组件更新时重新执行。
+::: info 提示
+在这个示例中，数据获取操作只会在组件首次挂载时执行一次。由于依赖项数组为空，数据获取操作不会在组件更新时重新执行
+:::
+
+3. 传第二个参数且参数不为空数组时，数组中的变量发生变化时执行。
+
+::: code-group
+```jsx [不传第二个参数]
 import { useState, useEffect } from "react"
 
 function Counter() {
@@ -347,121 +356,112 @@ function Counter() {
 }
 ```
 
-2. 第二个参数为空数组时，只会在组件挂载时执行一次，并且不会在组件更新时重新执行
+```jsx [第二个参数为空数组]
+import { useState, useEffect } from "react"
 
-    ```jsx
-    import { useState, useEffect } from "react";
+function DataFetcher() {
+  const [data, setData] = useState(null)
 
-    function DataFetcher() {
-      const [data, setData] = useState(null);
+  useEffect(() => {
+    // 模拟数据获取
+    fetch("https://api.example.com/data")
+      .then((response) => response.json())
+      .then((data) => setData(data))
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []) // 空数组作为依赖项
 
-      useEffect(() => {
-        // 模拟数据获取
-        fetch("https://api.example.com/data")
-          .then((response) => response.json())
-          .then((data) => setData(data))
-          .catch((error) => console.error("Error fetching data:", error));
-      }, []); // 空数组作为依赖项
+  return (
+    <div>
+      {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : "Loading..."}
+    </div>
+  )
+}
+```
 
-      return (
-        <div>
-          {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : "Loading..."}
-        </div>
-      );
-    }
-    ```
-
-    > [!NOTE]
-    >
-    > 在这个示例中，数据获取操作只会在组件首次挂载时执行一次。由于依赖项数组为空，数据获取操作不会在组件更新时重新执行。
-
-3. 传第二个参数且参数不为空数组时，数组中的变量发生变化时执行
-
-    ```jsx
-    import { useState, useEffect } from "react";
+```jsx [传第二个参数且参数不为空数组]
+import { useState, useEffect } from "react"
   
-    function Counter() {
-      const [count, setCount] = useState(0);
-  
-      useEffect(() => {
-        console.log(`Count changed: ${count}`);
-      }, [count]);
-  
-      return (
-        <div>
-          <p>{count}</p>
-          <button onClick={() => setCount(count + 1)}>Increment</button>
-        </div>
-      );
-    }
-    ```
+function Counter() {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    console.log(`Count changed: ${count}`)
+  }, [count])
+
+  return (
+    <div>
+      <p>{count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  )
+}
+```
+:::
 
 **副作用函数的返回值：**
 
-- 如果返回一个匿名函数，则这个函数将会在组件卸载或在下一次副作用函数执行前执行，相当于类组件中的 `componentWillUnmount`生命周期方法
+如果返回一个匿名函数，则这个函数将会在组件卸载或在下一次副作用函数执行前执行，相当于类组件中的 `componentWillUnmount`生命周期方法
 
   ```jsx
-  import { useEffect } from "react";
+  import { useEffect } from "react"
 
   function Timer() {
     useEffect(() => {
       const timerId = setInterval(() => {
-        console.log("Tick");
-      }, 1000);
+        console.log("Tick")
+      }, 1000)
 
       return () => {
         clearInterval(timerId);
-        console.log("Timer cleared"); // 组件卸载时执行
-      };
-    }, []);
+        console.log("Timer cleared") // 组件卸载时执行
+      }
+    }, [])
 
-    return <div>Check the console for timer updates</div>;
+    return <div>Check the console for timer updates</div>
   }
   ```
 
 - **useRef()**
 
-  > 类似于 createRef()，创建一个用于包裹 dom 元素的容器，用以操作 dom
+类似于 createRef()，创建一个用于包裹 dom 元素的容器，用以操作 dom
 
-  - 参数:
+**参数:**
 
-    > 接受一个参数，这个参数是引用的初始值。通常情况下，如果用于访问 DOM 元素，初始值可以是 `null`。
+接受一个参数，这个参数是引用的初始值。通常情况下，如果用于访问 DOM 元素，初始值可以是 `null`。
 
-    ```js
-    const refContainer = useRef(null);
-    ```
+```js
+const refContainer = useRef(null)
+```
 
-  - 返回值:
+**返回值:**
 
-    > 返回一个对象，这个对象有一个名为 `current` 的属性，`current` 属性用于存储引用的值。
+返回一个对象，这个对象有一个名为 `current` 的属性，`current` 属性用于存储引用的值。
 
-    ```js
-    // refContainer.current：引用的当前值
-    const refContainer = useRef(initialValue);
-    ```
+```js
+// refContainer.current：引用的当前值
+const refContainer = useRef(initialValue)
+```
 
-  - 示例:
+**示例:**
 
-    ```jsx
-    import { useRef } from "react";
-    
-    function App() {
-      const inputEl = useRef(null);
-    
-      const handleClick = () => {
-        inputEl.current.focus();
-      };
-    
-      return (
-        <div>
-          <input ref={inputEl} type="text" />
-          <button onClick={handleClick}>Focus the input</button>
-        </div>
-      );
-    }
-    ```
+```jsx
+import { useRef } from "react"
 
+function App() {
+  const inputEl = useRef(null)
 
+  const handleClick = () => {
+    inputEl.current.focus()
+  }
+
+  return (
+    <div>
+      <input ref={inputEl} type="text" />
+      <button onClick={handleClick}>Focus the input</button>
+    </div>
+  )
+}
+```
 
 ## 三、类组件
 

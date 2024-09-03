@@ -303,47 +303,48 @@ function App() {
 
 - **useEffect()**
 
-类似于类中的生命周期，可以将`useEffect` 视为 `componentDidMount`、`componentDidUpdate` 和 `componentWillUnmount` 的组合。
+类似于类中的生命周期，可以将 `useEffect` 视为 `componentDidMount`、`componentDidUpdate` 和 `componentWillUnmount` 的组合。
 
-**参数：**
+::: tip
+`useEffect` 接受两个参数
 
-> `useEffect` 接受两个参数：
->
-> 1. **副作用函数**：一个在组件渲染后执行的函数。
-> 2. **依赖项数组（可选）**：一个数组，包含影响副作用的变量。如果数组中的变量发生变化，副作用函数会重新执行。
+**1. 副作用函数**：一个在组件渲染后执行的函数。
+
+**2. 依赖项数组（可选）**：一个数组，包含影响副作用的变量。如果数组中的变量发生变化，副作用函数会重新执行。
+:::
 
 ```js
 useEffect(() => {
   // 副作用操作
-}, [dependencies]);
+}, [dependencies])
 ```
 
 **副作用函数执行的时机：**
 
 1. 不传第二个参数时，无论是组件初次挂载还是更新时，副作用函数都会执行。这个行为类似于类组件中的 `componentDidMount` 和 `componentDidUpdate` 生命周期方法的组合。
 
-    ```jsx
-    import { useState, useEffect } from "react";
+```jsx
+import { useState, useEffect } from "react";
 
-    function Counter() {
-      const [count, setCount] = useState(0);
+function Counter() {
+  const [count, setCount] = useState(0);
 
-      useEffect(() => {
-        console.log("Effect executed");
-      }); // 没有依赖项数组
+  useEffect(() => {
+    console.log("Effect executed");
+  }); // 没有依赖项数组
 
-      return (
-        <div>
-          <p>You clicked {count} times</p>
-          <button onClick={() => setCount(count + 1)}>Click me</button>
-        </div>
-      );
-    }
-    ```
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+    </div>
+  );
+}
+```
 
-    > [!NOTE]
-    >
-    > 在这个示例中，每次 Counter 组件渲染时，useEffect 中的副作用函数都会执行一次。也就是说，每当 count 状态更新并导致组件重新渲染时，console.log('Effect executed') 都会被调用。
+> [!NOTE]
+>
+> 在这个示例中，每次 Counter 组件渲染时，useEffect 中的副作用函数都会执行一次。也就是说，每当 count 状态更新并导致组件重新渲染时，console.log('Effect executed') 都会被调用。
 
 2. 第二个参数为空数组时，只会在组件挂载时执行一次，并且不会在组件更新时重新执行
 

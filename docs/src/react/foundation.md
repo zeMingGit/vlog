@@ -228,7 +228,7 @@ function B({name}) {
 ```
 
 ```jsx [Context 跨层级组件通信]
-const MsgContext = createContext()
+const MsgContext = createContext(null)
 // 父组件
 function App() {
   const msg = 'this is appMsg'

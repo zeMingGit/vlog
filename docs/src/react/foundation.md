@@ -1,9 +1,9 @@
-# React基础语法
+# React 基础语法
 
 ## 概要
 `提示：什么是 react？`
 
-React 是一个用于构建用户界面的 JavaScript 库。它由 Facebook 开发和维护，自推出以来，因其高效、灵活和强大的特性迅速获得了广泛的应用。React 通过组件化开发和虚拟DOM技术，使得复杂的用户界面更易于管理和优化。
+[React](https://zh-hans.react.dev/learn) 是一个用于构建用户界面的 JavaScript 库。它由 Facebook 开发和维护，自推出以来，因其高效、灵活和强大的特性迅速获得了广泛的应用。React 通过组件化开发和虚拟DOM技术，使得复杂的用户界面更易于管理和优化。
 
 <!-- ## 技术细节 -->
 

@@ -6,6 +6,7 @@ const React = {
   items: [
     { text: '概述', link: '/' },
     { text: '基础语法', link: '/foundation' },
+    { text: '状态管理', link: '/redux' },
   ]
 }
 

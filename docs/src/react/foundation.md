@@ -111,7 +111,7 @@ setForm({
 
 ## 二、函数式组件
 
-#### 1. 定义
+### 1. 定义
 函数中的 `this` 指向 `undefined` ，因为 babel 编译后开启了严格模式
 ```jsx
 function MyComponent() {
@@ -119,7 +119,7 @@ function MyComponent() {
 }
 ```
 
-#### 2. props
+### 2. props
 props可以传递任意的数据：数字、字符串、布尔值、数组、对象、函数、JSX。子组件只能读取props中的数据，不能直接修改，父组件的数据只能由父组件修改。
 
 三大属性中，只有 `props` 可以用于函数组件，因为函数可以接收参数，`state` 和 `refs` 都不能用于函数组件。
@@ -261,11 +261,11 @@ function B() {
 ```
 :::
 
-#### 3. Hooks
+### 3. Hooks
 
 为了解决函数组件缺失类组件中的 state 、refs 和生命周期这些能力的问题，引入的一些特殊函数。
 
-- **useState()**
+- #### **3.1 useState()**
 ::: tip
 >类似于类组件中的 state 和 setState，用于在函数组件中添加状态。
 
@@ -301,13 +301,14 @@ function App() {
 }
 ```
 
-- **useEffect()**
+- #### **3.2 useEffect()**
+
 
 类似于类中的生命周期，可以将 `useEffect` 视为 `componentDidMount`、`componentDidUpdate` 和 `componentWillUnmount` 的组合。
 
-::: tip [react文档详情](https://zh-hans.react.dev/reference/react/useEffect)
+::: tip useEffect 接受两个参数：[react文档详情](https://zh-hans.react.dev/reference/react/useEffect)
 
-`useEffect` 接受两个参数
+
 
 **1. 副作用函数**：一个在组件渲染后执行的函数。
 
@@ -412,7 +413,7 @@ function Counter() {
       }, 1000)
 
       return () => {
-        clearInterval(timerId);
+        clearInterval(timerId)
         console.log("Timer cleared") // 组件卸载时执行
       }
     }, [])
@@ -421,21 +422,16 @@ function Counter() {
   }
   ```
 
-- **useRef()**
+- #### **3.3 useRef()**
 
-类似于 createRef()，创建一个用于包裹 dom 元素的容器，用以操作 dom
+类似于 createRef()，创建一个用于包裹 dom 元素的容器，用以操作 dom。
 
-**参数:**
+::: tip useRef()
 
-接受一个参数，这个参数是引用的初始值。通常情况下，如果用于访问 DOM 元素，初始值可以是 `null`。
+**参数：**  接受一个参数，这个参数是引用的初始值。通常情况下，如果用于访问 DOM 元素，初始值可以是 `null`
 
-```js
-const refContainer = useRef(null)
-```
-
-**返回值:**
-
-返回一个对象，这个对象有一个名为 `current` 的属性，`current` 属性用于存储引用的值。
+**返回值：** 返回一个对象，这个对象有一个名为 `current` 的属性，`current` 属性用于存储引用的值
+:::
 
 ```js
 // refContainer.current：引用的当前值
@@ -483,7 +479,7 @@ class MyComponent extends React.Component {
 
 ### 2. 实例的三大属性
 
-- #### **2.1 state**
+- **state**
 
 组件的状态，类似于 vue 中的响应式数据。
 
@@ -534,7 +530,7 @@ class MyComponent extends React.Component {
 }
 ```
 
-- #### **2.2 props**
+- **props**
 
 通过标签属性从组件外向组件内传递变化的数据
 
@@ -636,7 +632,7 @@ class Person extends React.Component {
 ```
 :::
 
-- #### **2.3 refs**
+- **refs**
 
 组件内的标签可以定义`ref`属性来标识自己（类似于 id）
 

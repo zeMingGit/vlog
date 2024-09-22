@@ -3,8 +3,52 @@
 ## 概要
 `提示：提供一些常见布局`
 
+目前，`Flexbox` 是一种非常常见的 CSS 布局方式，但很多人在学习和使用时并未真正掌握它的核心思想。在编写 CSS 时，为什么要固定元素的宽高呢？这是一个误区，因为你无法预料某个元素的内容未来会有多高。此外，固定宽高会导致内容在不同设备上出现不适配的问题，尤其是在屏幕大小变化时，内容容易被挤压、换行。例如，设计稿在 1080 像素的屏幕上一行显示的内容，到了 750 像素的设备上就可能换行。
+
+通过深入学习，我发现 `flex-basis` 是一个非常实用的属性。如果你想实现特定的布局效果，使用 `Flexbox` 可以非常轻松地完成。
 ## 技术细节
-#### 1. 三宫格布局-中间居中
+#### 1. 二宫格布局
+```scss
+.gridWrap {
+  display: flex;
+  flex-wrap: wrap;
+
+  .gridItem {
+    flex: 1;
+    flex-basis: 50%;
+    box-sizing: border-box;
+
+    &:nth-child(2n) {
+      padding-left: 24rpx; // 希望两个之间有间隙的做法
+    }
+  }
+}
+```
+
+实现这个左右效果不需要固定宽
+![](../../public/img/css_flex.jpg)
+
+<div style="display: flex;align-items: center;color: #fff;">
+  <div style="flex:1;background: #01cfab;padding: 16px;">左侧</div>
+  <div style="flex:2;background: #81eccf;padding: 16px;">右侧</div>
+</div>
+
+```scss
+.infoItem {
+  display: flex;
+  align-items: center;
+
+  .infoKey {
+    flex: 1;
+  }
+
+  .infoValue {
+    flex: 2;
+  }
+}
+```
+
+#### 2. 三宫格布局-中间居中
 ```scss
 .wrap {
   display: flex;
@@ -32,7 +76,7 @@
 }
 ```
 
-#### 2. 四宫格布局-中间居中
+#### 3. 四宫格布局-中间居中
 ```scss
 // 使用flex、gap属性来设置间隙
 .imgWrap {
@@ -69,14 +113,14 @@
 }
 ```
 
-#### 3. 各种机型底部的安全区域
+#### 4. 各种机型底部的安全区域
 ```css
 .item {
   padding-bottom: calc(env(safe-area-inset-bottom) + 20rpx);
 }
 ```
 
-#### 4. 常用css
+#### 5. 常用css
 ```scss
 .item {
   word-break: break-all; // 纯数字换行
@@ -94,7 +138,7 @@
 }
 ```
 
-#### 5. css好网站
+#### 6. css好网站
 这里是一些优秀的网站资源，可以用于 CSS 相关的开发和设计：
 - [毛玻璃](http://tool.mkblog.cn/glassmorphism/) - 一个生成毛玻璃效果的在线工具。
 - [毛玻璃](https://glassgenerator.netlify.app/) - 另一个生成毛玻璃效果的在线工具。

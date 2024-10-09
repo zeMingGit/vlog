@@ -9,7 +9,8 @@
 ::: details 推荐的插件
 **人工智能**
 
-GitHub Copilot Chat、GitHub Copilot
+GitHub Copilot Chat、GitHub Copilot、Codeium: AI Coding Autocomplete and Chat for Python, Javascript, Typescript, Java, Go, and more
+
 
 **必装插件**
 
@@ -708,4 +709,36 @@ dist
 *.njsproj
 *.sln
 *.sw?
+```
+
+#### 6. 代码片段配置
+vue3快捷模板生成：
+```json
+// vue3快捷模板生成
+"vue1": {
+  "prefix": "vue3",
+  "body": [
+   "<template>",
+   "\t<view class=\"xx\">\n",
+   "\t</view>",
+   "</template>\n",
+   "<script setup lang=\"ts\">",
+   "import { ref, unref } from 'vue'",
+   "</script>\n",
+   "<style lang=\"scss\" scoped>\n",
+   "</style>\n",
+  ],
+  "description": "vue3 template"
+},
+```
+
+uniapp的view标签快捷生成：
+```json
+"view": {
+  "prefix": "view",
+  "body": [
+   "<view class=\"xx\"></view>",
+  ],
+  "description": "view"
+},
 ```

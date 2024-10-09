@@ -8,6 +8,7 @@
 [工作浏览器书签](https://cdn.chinachdu.com/webStatic/xin_docs/workJob_bookmarks0118.html)
 [密码](workJob_pass.csv)
 
+* [代理](https://w1.v2free.top/user) xiaoxiao888
 
 ### 2. 宝藏库
 * [animejs](https://animejs.com/)

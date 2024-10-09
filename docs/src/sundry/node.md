@@ -24,13 +24,23 @@ registry.npm.taobao.org ==》 registry.npmmirror.com
 npm.taobao.org ==》npmmirror.com
 ```
 
+常用的node版本
+```shell
+v18.15.0
+v18.9.1
+v16.18.0
+v14.19.0
+v14.18.1
+v12.14.0
+v10.24.1
+```
 
 ### 2. nvm(windows)
 ```shell
 # 指导地址
 https://beltxman.com/3789.html
 ```
-* nvm下载地址
+* nvm下载地址 **（版本 `v1.1.10`）**
 ```shell
 # nvm下载地址
 https://nvm.uihtm.com/

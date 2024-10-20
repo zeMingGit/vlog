@@ -11,8 +11,8 @@ node_modules
 package-lock.json
 dist
 dist-ssr
-docs/.vitepress/cache
-docs/.vitepress/dist
+.vitepress/cache
+.vitepress/dist
 .DS_Store
 dist
 *.local

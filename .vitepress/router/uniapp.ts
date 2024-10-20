@@ -2,7 +2,7 @@
 const uniapp = {
   text: 'uniapp',
   collapsed: false,
-  base: '/src/uniapp',
+  base: '/uniapp',
   items: [
     { text: '概述', link: '/' },
     { text: 'uniapp项目初始化', link: '/cli' },

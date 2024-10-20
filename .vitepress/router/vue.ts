@@ -1,7 +1,7 @@
 const vue = {
   text: 'vue',
   collapsed: false,
-  base: '/src/vue3',
+  base: '/vue3',
   items: [
     { text: 'vue3概述', link: '/' },
     // { text: 'vue2概述', link: '/index_v2' },

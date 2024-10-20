@@ -39,7 +39,7 @@ C 语言编译器用于将 C 语言源代码翻译成机器语言（机器代码
 
    - 在插件市场安装 C/C++ 插件
 
-      ![](../../public/img/cpp-extension.png)
+      ![](/img/cpp-extension.png)
 
 ### 3. 编写第一个 C 程序
 

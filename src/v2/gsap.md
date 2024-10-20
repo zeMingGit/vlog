@@ -18,7 +18,7 @@ lastUpdated: false
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { Timeline, Spin } from 'vue-amazing-ui'
-import { fetchReleaseTagArray } from '../.vitepress/script/fetchReleaseTag.ts'
+import { fetchReleaseTagArray } from '../../.vitepress/script/fetchReleaseTag.ts'
 // import gsap  from 'gsap'
 // import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 

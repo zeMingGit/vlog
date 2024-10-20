@@ -139,7 +139,7 @@ export default axiosAdapter
 
 #### 2.3 **eslint**
 
-ESLint 最新版本是 9.7.0，由于尚未熟悉 9 大版本的新文件格式，建议仍使用 8 版本进行配置。下载以下依赖后，将 [vue3 eslint](/src/sundry/settings.md) 复制到项目中。
+ESLint 最新版本是 9.7.0，由于尚未熟悉 9 大版本的新文件格式，建议仍使用 8 版本进行配置。下载以下依赖后，将 [vue3 eslint](../sundry/settings) 复制到项目中。
 
 ::: code-group
 ```sh [npm]
@@ -155,7 +155,7 @@ $ pnpm i eslint@8.39.0 -D
 
 #### 2.4 **stylelint**
 
-下载以下依赖，将[vue3 stylelint](/src/sundry/settings.md) 复制到项目中。
+下载以下依赖，将[vue3 stylelint](../sundry/settings) 复制到项目中。
 
 ::: code-group
 ```sh [npm]

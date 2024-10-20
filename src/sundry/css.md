@@ -26,7 +26,7 @@
 ```
 
 实现这个左右效果不需要固定宽
-![](../../public/img/css_flex.jpg)
+![](/img/css_flex.jpg)
 
 <div style="display: flex;align-items: center;color: #fff;">
   <div style="flex:1;background: #01cfab;padding: 16px;">左侧</div>

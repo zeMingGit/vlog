@@ -1,5 +1,5 @@
 const nav = [
-  { text: '开始', link: '/src/introduction/' },
+  { text: '开始', link: '/introduction/' },
   {
     text: '作者',
     link: '/v2/',
@@ -7,8 +7,8 @@ const nav = [
   {
     text: "关于",
     items: [
-      { text: '团队', link: '/src/nav/team' },
-      { text: '关于我们', link: '/src/nav/about' },
+      { text: '团队', link: '/nav/team' },
+      { text: '关于我们', link: '/nav/about' },
     ],
   },
   {

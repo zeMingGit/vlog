@@ -875,4 +875,4 @@ class Life extends React.component {
 
 生命周期图
 
-![](../../public/img/react-lifecycle.png)
+![](/img/react-lifecycle.png)

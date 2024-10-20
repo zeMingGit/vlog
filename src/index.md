@@ -12,7 +12,7 @@ hero:
   actions:
     - theme: brand
       text: 快速开始
-      link: /src/introduction/
+      link: /introduction/
  
 features:
   - icon: ⚡️
@@ -28,7 +28,7 @@ features:
 
 <script setup>
 import { onMounted } from 'vue'
-import { fetchReleaseTag } from './.vitepress/script/fetchReleaseTag.ts'
+import { fetchReleaseTag } from '../.vitepress/script/fetchReleaseTag.ts'
 
 onMounted(() => {
   fetchReleaseTag()

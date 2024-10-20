@@ -6,7 +6,7 @@ import c from '../router/c'
 const introduction = {
   text: '开始',
   collapsed: false,
-  base: '/src/introduction',
+  base: '/introduction',
   items: [
     { text: '简介', link: '/' },
     { text: '快速上手', link: '/quick-start' },
@@ -16,7 +16,7 @@ const introduction = {
 const sundry = {
   text: '杂项',
   collapsed: false,
-  base: '/src/sundry',
+  base: '/sundry',
   items: [
     { text: '概述', link: '/' },
     { text: 'css布局', link: '/css' },
@@ -29,7 +29,7 @@ const sundry = {
 }
 
 const sidebar = {
-  '/src/': [ introduction, uniapp, vue, react, c, sundry ],
+  '/': [ introduction, uniapp, vue, react, c, sundry ],
 }
 
 export default sidebar

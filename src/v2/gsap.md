@@ -1,4 +1,5 @@
 ---
+layout: home
 editLink: false
 lastUpdated: false
 ---

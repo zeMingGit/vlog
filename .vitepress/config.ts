@@ -15,6 +15,7 @@ export default defineConfig({
   title: 'zeMing',
   description: 'vlog - 小棱镜 快速入门指南',
   srcDir: 'src',
+  // assetsDir: 'static',
   cleanUrls: true, //是否启用干净的URL，例如/about代替/about.html
   locales: {
     root: { label: '简体中文' },

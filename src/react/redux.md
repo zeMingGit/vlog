@@ -16,8 +16,86 @@ npm install @reduxjs/toolkit react-redux
 .
 └─ store
    ├─ modules
-   │  ├─ xxx.ts
+   │  ├─ countStore.ts
    │  └─ xxx.ts
    └─ index.ts
 ```
 :::
+
+## 二、定义与使用
+在store中这样去定义它：
+::: code-group
+``` jsx [store/index.ts]
+import { configureStore } from '@reduxjs/toolkit'
+import counterReducer from './modules/countStore'
+
+const store = configureStore({
+  reducer: {
+    counter: counterReducer
+  }
+})
+
+export default store
+```
+``` jsx [store/modules/countStore]
+import { createSlice } from '@reduxjs/toolkit'
+
+const countStore = createSlice({
+  name: 'count',
+  // 初始化state
+  initialState: {
+    count: 0,
+  },
+  // 修改状态的方法，同步方法 支持直接修改
+  reducers: {
+    inscrement (state) {
+      state.count++
+    },
+    decrement (state) {
+      state.count--
+    },
+  }
+})
+
+const { inscrement, decrement } = countStore.actions
+const reducer = countStore.reducer
+
+export { inscrement, decrement }
+export default reducer
+```
+:::
+
+在main.tsx中挂载react-redux
+``` jsx
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './App.tsx'
+import store from './store/index.ts'
+import { Provider } from 'react-redux'
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </StrictMode>,
+)
+```
+
+在页面中使用：
+```jsx
+import { useSelector, useDispatch } from 'react-redux'
+import { inscrement, decrement } from './store/modules/countStore'
+function App() {
+  const { count } = useSelector(state => state.counter)
+  const dispatch = useDispatch()
+  return (
+    <div>
+      this is app { count }
+
+      <button onClick={() => dispatch(inscrement())}>加count</button>
+      <button onClick={() => dispatch(decrement())}>减count</button>
+    </div>
+  )
+}
+```

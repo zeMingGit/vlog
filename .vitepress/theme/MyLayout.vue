@@ -36,3 +36,10 @@ watch(isDark, (old) => {
 
 const markImg = 'https://cdn.chinachdu.com/webStatic/wechat-applets/nyt-static/xin_vlogLogoSun.svg'
 </script>
+
+<style>
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe, #41d1ff);
+}
+</style>

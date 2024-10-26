@@ -36,13 +36,8 @@ onMounted(() => {
 </script>
 
 <style>
-  :root {
-    --vp-home-hero-name-color: transparent;
-    --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe, #41d1ff);
-  }
-
-  .VPImage.image-src {
-    padding: 24px;
-    border-radius: 50%;
-  }
+.VPImage.image-src {
+  padding: 24px;
+  border-radius: 50%;
+}
 </style>

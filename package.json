@@ -13,7 +13,7 @@
   "dependencies": {
     "gsap": "^3.12.5",
     "nanoid": "^5.0.7",
-    "vue-amazing-ui": "^0.1.38"
+    "vue-amazing-ui": "^1.8.10"
   },
   "devDependencies": {
     "sass": "^1.78.0",

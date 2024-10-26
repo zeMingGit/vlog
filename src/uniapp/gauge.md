@@ -7,12 +7,12 @@
 
 ## 效果展示
 
-:::tip 
+:::tip 纯手搓，肯定有杂七杂八的bug
 起始角度的0为3点钟位置，结束角度为2即完整一圈
 
-纯手搓，肯定有杂七杂八的bug
+致文档维护者：下面有效果展示代码，因为打包问题勿开放勿删！
 :::
-* 参数配置
+<!-- * 参数配置
 <Space gap="large">
   <InputNumber prefix="百分比：" :min="0" :max="1" precision="1" width="49%" v-model:value="gaugeInfo.threshold" />
   <InputNumber prefix="格子数：" :min="0" :max="100" width="49%" v-model:value="gaugeInfo.tickCount" />
@@ -42,88 +42,12 @@ let gaugeInfo = ref({
   endAngle: 2.15,
 })
 
-// const drawGauge = (highlightedTicks, canvasWidth, canvasHeight) => {
-//   const ctx = canvas.value.getContext('2d')
-//   const { tickCount, startAngle, endAngle, threshold, color } = unref(props)
-//   const radius = canvasWidth / 2
-//   const tickLength = 10
-//   const angleRange = (endAngle - startAngle) * Math.PI
-//   const angleStep = angleRange / tickCount
-//   const thresholdIndex = Math.floor(tickCount * threshold)
-
-//   ctx.clearRect(0, 0, canvasWidth, canvasHeight)
-//   ctx.lineWidth = 2
-
-//   for (let i = 0; i <= tickCount; i++) {
-//     const angle = startAngle * Math.PI + i * angleStep
-//     const startX = radius + Math.cos(angle) * (radius - tickLength)
-//     const startY = radius + Math.sin(angle) * (radius - tickLength)
-//     const endX = radius + Math.cos(angle) * radius
-//     const endY = radius + Math.sin(angle) * radius
-
-//     // 设置不同的刻度颜色
-//     if (thresholdIndex > 0 && i <= highlightedTicks && i <= thresholdIndex) {
-//       ctx.strokeStyle = color // 自定义颜色
-//     } else {
-//       ctx.strokeStyle = '#CFCFCF' // 默认颜色
-//     }
-
-//     ctx.beginPath()
-//     ctx.moveTo(startX, startY)
-//     ctx.lineTo(endX, endY)
-//     ctx.stroke()
-//   }
-// }
-
-// const animateGauge = (canvasWidth, canvasHeight) => {
-//   const { duration, tickCount, threshold } = unref(props)
-//   const thresholdIndex = Math.floor(tickCount * threshold)
-//   const startTime = Date.now()
-
-//   const animate = () => {
-//     const currentTime = Date.now()
-//     const elapsed = currentTime - startTime
-//     const progress = Math.min(elapsed / duration, 1)
-//     const highlightedTicks = Math.floor(thresholdIndex * progress)
-
-//     drawGauge(highlightedTicks, canvasWidth, canvasHeight)
-
-//     if (progress < 1) {
-//       animationFrameId = requestAnimationFrame(animate)
-//     }
-//   }
-
-//   animationFrameId = requestAnimationFrame(animate)
-// }
-
-// const onChange = (s) => {
-//   nextTick(() => {
-//     animateGauge(240 / 2, 195 / 2)
-//   })
-// }
-
-// onMounted(() => {
-//   const canvasElement = canvas.value
-//   const canvasWidth = 240 / 2 || canvasElement.clientWidth
-//   const canvasHeight = 195 / 2 || canvasElement.clientHeight
-
-//   canvasElement.width = canvasWidth
-//   canvasElement.height = canvasHeight
-
-//   animateGauge(canvasWidth, canvasHeight)
-// })
-
-// onBeforeUnmount(() => {
-//   if (animationFrameId) {
-//     cancelAnimationFrame(animationFrameId)
-//   }
-// })
 </script>
 <style scoped lang="scss">
 :deep(.u-input-prefix) {
   white-space: nowrap !important;
 }
-</style>
+</style> -->
 
 
 ## 技术细节

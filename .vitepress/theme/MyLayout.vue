@@ -22,7 +22,6 @@ import { ref, watch } from 'vue'
 import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { Watermark } from 'vue-amazing-ui'
-import 'vue-amazing-ui/css'
 // import HeroImage from './components/HeroImage.vue'
 // const { Layout } = DefaultTheme
 

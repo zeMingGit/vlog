@@ -54,13 +54,16 @@ const countStore = createSlice({
     decrement (state) {
       state.count--
     },
+    addToNum(state, action) {
+      state.count += action.payload
+    },
   }
 })
 
-const { inscrement, decrement } = countStore.actions
+const { inscrement, decrement, addToNum } = countStore.actions
 const reducer = countStore.reducer
 
-export { inscrement, decrement }
+export { inscrement, decrement, addToNum }
 export default reducer
 ```
 :::
@@ -85,7 +88,7 @@ createRoot(document.getElementById('root')!).render(
 在页面中使用：
 ```jsx
 import { useSelector, useDispatch } from 'react-redux'
-import { inscrement, decrement } from './store/modules/countStore'
+import { inscrement, decrement, addToNum } from './store/modules/countStore'
 function App() {
   const { count } = useSelector(state => state.counter)
   const dispatch = useDispatch()
@@ -95,6 +98,10 @@ function App() {
 
       <button onClick={() => dispatch(inscrement())}>加count</button>
       <button onClick={() => dispatch(decrement())}>减count</button>
+
+      {/* 传参 */}
+      <button onClick={() => dispatch(addToNum(10))}>加count + 10</button>
+      <button onClick={() => dispatch(addToNum(20))}>加count + 20</button>
     </div>
   )
 }

@@ -21,7 +21,7 @@ npm install react-router-dom
    └─ index.tsx
 ```
 :::
-## 二、使用
+## 二、定义
 在这可以学习到具体信息：[视频教程地址](https://www.bilibili.com/list/watchlater?oid=577161016&bvid=BV1ZB4y1Z7o8&spm_id_from=333.1007.top_right_bar_window_view_later.content.click&p=53)
 
 ### 1. 在router中这样去定义它
@@ -69,6 +69,123 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>
 )
 ```
+
+## 三、使用
+
+### 1. 路由导航跳转
+**声明式导航：** 在模板中通过 `<Link/>` 组件描述出要跳转到哪里去，to属性指定要跳转到路由path。
+
+**编程式导航：** 通过 `useNavigate` 钩子得到导航方法，通过调用方法以命令式的形式进行路由跳转。
+::: code-group
+``` tsx [编程式导航]
+import { useNavigate } from 'react-router-dom'
+
+const Login: React.FC = () => {
+  const navigate = useNavigate()
+  return (
+    <div className="">
+      <div className="">我是登录页面</div>
+
+      <button onClick={() => navigate('/article')}>跳转article</button>
+    </div>
+  )
+}
+
+export default Login
+```
+``` tsx [声明式导航]
+import { Link } from 'react-router-dom'
+
+const Login: React.FC = () => {
+  const navigate = useNavigate()
+  return (
+    <div className="">
+      <div className="">我是登录页面</div>
+
+      <Link to={'/article'}>跳转article</Link>
+    </div>
+  )
+}
+
+export default Login
+```
+:::
+
+### 2. 路由导航跳转传参
+::: code-group
+``` tsx [searchParams传参]
+// 传递
+import { useNavigate } from 'react-router-dom'
+const Login: React.FC = () => {
+  const navigate = useNavigate()
+  return (
+    <div className="">
+      <div className="">我是登录页面</div>
+
+      <button onClick={() => navigate('/article?id=123&name=xiaoxiao')}>
+        searchParams传参
+      </button>
+    </div>
+  )
+}
+export default Login
+
+// 接收
+import { useSearchParams } from 'react-router-dom'
+const Article: React.FC = () => {
+  const [params] = useSearchParams()
+  return (
+    <div className="">
+      我是文章 { params.get('id') } { params.get('name') }
+    </div>
+  )
+}
+```
+
+``` tsx [params传参]
+// 传递
+import { useNavigate } from 'react-router-dom'
+const Login: React.FC = () => {
+  const navigate = useNavigate()
+  return (
+    <div className="">
+      <div className="">我是登录页面</div>
+
+      <button onClick={() => navigate('/article/132/xiaoxiao')}>
+        params传参
+      </button>
+    </div>
+  )
+}
+export default Login
+
+// 路由配置
+const router = createBrowserRouter([
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/article/:id/:name', // 定义占位符
+    element: <Article />,
+  }
+])
+
+
+// 接收
+import { useParams } from 'react-router-dom'
+const Article: React.FC = () => {
+  const { id, name } = useParams()
+  return (
+    <div className="">
+      我是文章 { id } { name }
+    </div>
+  )
+}
+```
+:::
+
+### 3. 嵌套路由
 
 ## 最后
 待补充...

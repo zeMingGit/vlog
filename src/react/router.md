@@ -186,6 +186,146 @@ const Article: React.FC = () => {
 :::
 
 ### 3. 嵌套路由
+::: code-group
+``` tsx [路由配置]
+import { createBrowserRouter } from 'react-router-dom'
+import Layout from '../page/Layout'
+import Board from '../page/Board'
+import About from '../page/About'
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: '/board',
+        element: <Board />
+      },
+      {
+        path: '/about',
+        element: <About />
+      }
+    ]
+  },
+])
+```
+
+``` tsx [Layout页]
+import { Link, Outlet } from 'react-router-dom'
+
+const Layout:React.FC = () => {
+  return (
+    <div>
+      <div className="">我是layput</div>
+      <Link to="/board">面板</Link>
+      <Link to="/about">关于</Link>
+
+      {/* 二级路由出口 */}
+      <Outlet />
+    </div>
+  )
+}
+
+export default Layout
+```
+
+``` tsx [Board页]
+const Board: React.FC = () => {
+  return (
+    <div className="">我是看板页面</div>
+  )
+}
+
+export default Board
+```
+``` tsx [About页]
+const About: React.FC = () => {
+  return (
+    <div className="">我是关于页面</div>
+  )
+}
+
+export default About
+```
+:::
+
+### 4. 默认二级路由配置
+场景和配置方式：访问的是一级路由时，默认的二级路由组件可以得到渲染，只需要在二级路由的位置 `去掉path，设置index属性为true`。但是还有最后一步，应该把`layout中它的路径替换为 / `。
+
+::: code-group
+``` tsx [路由配置 - 默认二级路由配置]
+import { createBrowserRouter } from 'react-router-dom'
+import Layout from '../page/Layout'
+import Board from '../page/Board'
+import About from '../page/About'
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        // path: '/board',
+        index: true, // 默认二级路由配置
+        element: <Board />
+      },
+      {
+        path: '/about',
+        element: <About />
+      }
+    ]
+  },
+])
+```
+
+``` tsx [Layout页]
+import { Link, Outlet } from 'react-router-dom'
+
+const Layout:React.FC = () => {
+  return (
+    <div>
+      <div className="">我是layput</div>
+      {/* 默认二级路由配置 */}
+      <Link to="/">面板</Link>
+      <Link to="/about">关于</Link>
+
+      {/* 二级路由出口 */}
+      <Outlet />
+    </div>
+  )
+}
+
+export default Layout
+```
+:::
+
+### 5. 404路由配置
+在路由表数组的末尾，以 * 号作为路由path配置路由
+``` tsx
+import { createBrowserRouter } from 'react-router-dom'
+import NotFound from '../page/NotFound'
+
+const router = createBrowserRouter([
+  ...
+  // 404路由配置
+  {
+    path: '*',
+    element: <NotFound />
+  }
+])
+
+export default router
+```
+
+### 6. 路由模式
+常见的路由模式有两种，history模式和hash模式，ReactRouter分别由createBrowserRouter 和 createHashRouter函数负责创建
+
+
+| 路由模式 | url表现     | 底层原理           |         是否需要后端支持  |
+| :-------: | :---------: | :--------------:  | :----------: |
+| history | url/login   | history对象 + pushState事件 | 需要|
+| hash    | url/#/login | 监听 hashChange事件 | 不需要 |
 
 ## 最后
 待补充...

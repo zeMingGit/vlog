@@ -318,7 +318,33 @@ const router = createBrowserRouter([
 export default router
 ```
 
-### 6. 路由模式
+### 6. 路由懒加载
+``` tsx
+import { createBrowserRouter } from 'react-router-dom'
+
+const Layout = lazy(() => import('@/page/Layout'))
+const Board = lazy(() => import('@/page/Board'))
+const About = lazy(() => import('@/page/About'))
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: '/board',
+        element: <Suspense fallback={'加载中'}> <Board /> </Suspense>
+      },
+      {
+        path: '/about',
+        element: <Suspense fallback={'加载中'}> <About /> </Suspense>
+      }
+    ]
+  },
+])
+```
+
+### 7. 路由模式
 常见的路由模式有两种，history模式和hash模式，ReactRouter分别由createBrowserRouter 和 createHashRouter函数负责创建
 
 

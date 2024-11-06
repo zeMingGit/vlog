@@ -459,6 +459,91 @@ function App() {
 }
 ```
 
+- #### **3.4 useReducer()**
+[useReducer](https://zh-hans.react.dev/reference/react/useReducer) 是一个 React Hook，它允许你向组件里面添加一个 reducer。可以在[这里](https://www.bilibili.com/list/watchlater?oid=577161016&bvid=BV1ZB4y1Z7o8&spm_id_from=333.1007.top_right_bar_window_view_later.content.click&p=133)学习到 useReducer。 
+::: details 使用方法
+```tsx
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'INC':
+      return state + 1
+    case 'DEC':
+      return state - 1
+    case 'SET':
+      return action.payload
+    default:
+      return state
+  }
+}
+function App() {
+  const [state, dispatch] = useReducer(reducer, 0)
+  return (
+    <div>
+      this is app
+
+      <button onClick={() => dispatch({type: 'DEC'})}>-</button>
+      {state}
+      <button onClick={() => dispatch({type: 'INC'})}>+</button>
+      <button onClick={() => dispatch({type: 'SET', payload: 10})}>update</button>
+    </div>
+  )
+}
+
+export default App
+```
+:::
+
+- #### **3.5 useMemo()**
+[useMemo](https://zh-hans.react.dev/reference/react/useMemo) 是一个 React Hook，它在组件每次 重新渲染 的时候能够缓存计算的结果。
+
+[React.memo](https://www.bilibili.com/list/watchlater?oid=577161016&bvid=BV1ZB4y1Z7o8&spm_id_from=333.1007.top_right_bar_window_view_later.content.click&p=135) 作用：允许组件在Props没有改变的情况下跳过渲染。
+
+React组件默认的渲染机制：只要父组件重新渲染子组件就会重新渲染。
+
+::: details React.memo使用方法
+::: code-group
+```tsx [使用]
+// memo 进行缓存，只有props发生变化的时候才会重新渲染
+const MemoSon = memo(function Son() {
+  return <div>this is Son</div>
+})
+
+function App() {
+  const [count, setCount] = useState(0)
+  return (
+    <div>
+      this is app
+      <button onClick={() => setCount(count + 1)}>+{count}</button>
+      <MemoSon />
+    </div>
+  )
+}
+export default App
+```
+
+```tsx [props比较机制说明]
+// 机制：在使用memo缓存组件之后，React会对每一个prop使用Object.is比较新值和老值，返回true，表示没有变化
+
+// 如果prop是简单类型
+// Object.is(3,3) true 没有变化
+
+// 如果prop是引用类型（对象/数组）
+// Object.is([],[]) false 有变化，React只关心引用是否变化
+
+
+// 如果想实现被缓存效果，可以使用useMemo
+const list = useMemo(() => {
+  return [1, 2, 3]
+}, [])
+
+```
+:::
+
+- #### **3.6 useCallback()**
+[useCallback](https://zh-hans.react.dev/reference/react/useCallback) 是一个允许你在多次渲染中缓存函数的 React Hook。
+
+
+
 ## 三、类组件
 
 ### 1. 定义

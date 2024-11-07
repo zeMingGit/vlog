@@ -1,10 +1,12 @@
 ## 小棱镜 - 前端技术简明概述
 
-##### 项目使用vitepress方式创建
+### Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=zeMingGit/vlog&type=Timeline)](https://star-history.com/#zeMingGit/vlog&Timeline)
 
 ### 安装依赖
 ```
-npm install 
+npm install
 ```
 
 ### 本地运行
@@ -12,12 +14,3 @@ npm install
 npm run dev
 ```
 
-### 打包上线
-```
-npm run build
-```
-
-### 技术栈
-```
-vitepress
-```

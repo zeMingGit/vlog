@@ -540,9 +540,32 @@ const list = useMemo(() => {
 :::
 
 - #### **3.6 useCallback()**
-[useCallback](https://zh-hans.react.dev/reference/react/useCallback) 是一个允许你在多次渲染中缓存函数的 React Hook。
+[useCallback](https://zh-hans.react.dev/reference/react/useCallback) 是一个允许你在多次渲染中缓存函数的 React Hook。可以在[这里](https://www.bilibili.com/video/BV1ZB4y1Z7o8?spm_id_from=333.788.player.switch&vd_source=636e79898d369bbe2acb20cb13cd6463&p=137)学习到 useCallback。
 
+- #### **3.7 forwardRef()**
+[forwardRef](https://zh-hans.react.dev/reference/react/forwardRef) 允许组件使用 ref 将 DOM 节点暴露给父组件。
 
+::: details forwardRef使用方法
+``` tsx
+// 子组件
+const MyInput = forwardRef((props, ref) => {
+  return <input type="text" ref={ref} />
+})
+
+// 父组件
+const App() {
+  const inputRef = useRef(null)
+  return (
+    <>
+      <MyInput ref={inputRef} />
+    </>
+  )
+}
+```
+:::
+
+- #### **3.8 forwardRef()**
+[useImperativeHandle](https://zh-hans.react.dev/reference/react/useImperativeHandle) 是 React 中的一个 Hook，它能让你自定义由 ref 暴露出来的句柄。
 
 ## 三、类组件
 

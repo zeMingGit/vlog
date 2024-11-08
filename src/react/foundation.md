@@ -564,7 +564,7 @@ const App() {
 ```
 :::
 
-- #### **3.8 forwardRef()**
+- #### **3.8 useImperativeHandle()**
 [useImperativeHandle](https://zh-hans.react.dev/reference/react/useImperativeHandle) 是 React 中的一个 Hook，它能让你自定义由 ref 暴露出来的句柄。
 
 ## 三、类组件

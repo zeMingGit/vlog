@@ -75,6 +75,13 @@ export default defineConfig({
     darkModeSwitchLabel: '切换外观',
     lightModeSwitchTitle: '切换到浅色模式',
     darkModeSwitchTitle: '切换到深色模式',
+    notFound: {
+      title: '',
+      quote: '曾经有个页面摆在你面前你没有珍惜，直到它404了...',
+      linkLabel: 'go to home',
+      linkText: 'Take me home',
+      code: '404',
+    }
   },
   vite: {
     plugins: [Inspect()],

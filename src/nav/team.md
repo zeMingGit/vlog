@@ -22,15 +22,7 @@ const members = [
     name: 'PanMin',
     title: '贡献者',
     links: [
-      { icon: 'github', link: 'https://github.com/pm0915' },
-    ]
-  },
-  {
-    avatar: 'https://foruda.gitee.com/avatar/1702023507003711393/10948272_zhangchufan_1702023506.png!avatar200',
-    name: 'ChufanOvO',
-    title: '参与者',
-    links: [
-      { icon: 'github', link: 'https://gitee.com/zhangchufan' },
+      { icon: 'github', link: 'https://github.com/pm981206' },
     ]
   },
 ]

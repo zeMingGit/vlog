@@ -35,10 +35,8 @@
 
 # 开发环境
 VITE_DEV_BASE_URL = 'http://172.16.124.28:48080'
-
 # 正式环境
 VITE_BASE_URL = 'http://172.16.124.28:48080'
-
 # 接口前缀
 VITE_API_PATH = '/app-api'
 ```
@@ -52,6 +50,20 @@ export const baseURL = process.env.NODE_ENV === 'development'
 // 接口路径
 export const apiPath = import.meta.env.VITE_API_PATH
 ```
+如果你刚好使用的是 `TypeScript` ，那么你就可以为 [import.meta.env](https://cn.vitejs.dev/guide/env-and-mode#intellisense) 提供类型定义。
+
+要想做到这一点，你可以在 src 目录下创建一个 vite-env.d.ts 文件，接着按下面这样增加 ImportMetaEnv 的定义：
+``` typeScript
+// / <reference types="vite/client" />
+
+// eslint-disable-next-line no-unused-vars
+interface ImportMetaEnv {
+  readonly VITE_DEV_PORT: string
+  readonly VITE_DEV_BASE_URL: string
+}
+
+```
+
 
 ## 最后
 Vite 是一个超快速的前端构建工具，推动着下一代网络应用的发展。

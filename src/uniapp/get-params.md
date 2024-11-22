@@ -2,7 +2,7 @@
 ## 概要
 
 :::tip
-使用vite创建的项目请见 [vue / Vite栏](../vue3/vite.md)
+使用vite创建的项目请见 [vue / Vite栏](../cli/vite.md)
 :::
 ` 提示：uniapp 用cli工程创建，npm命令启动编译不同的文件`
 

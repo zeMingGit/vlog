@@ -6,6 +6,7 @@ const vue = {
     { text: 'vue3概述', link: '/' },
     { text: 'SHA 256', link: '/sha256' },
     { text: 'Number精度问题', link: '/precision' },
+    { text: 'OpenSSL问题', link: '/script' },
   ]
 }
 

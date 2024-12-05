@@ -8,6 +8,7 @@ const cli = {
     { text: 'node生态环境', link: '/node' },
     { text: 'vsCode/eslint配置', link: '/settings' },
     { text: '格式化工具Prettier', link: '/prettier' },
+    { text: 'vue 图片引入指南', link: '/imageIngestion' },
   ],
 }
 

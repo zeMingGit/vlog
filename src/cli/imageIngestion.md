@@ -234,163 +234,162 @@ const imageNames = [
 
 ## 四、批量动态导入图片
 
-#### import.meta.glob
+### 1. import.meta.glob
 
-在上面的示例中，我们使用`mport.meta.glob`动态加载了一张图片
+在上面的示例中，我们使用 `mport.meta.glob` 动态加载了一张图片。
+::: tip
+`import.meta.glob` 是 Vite 提供的一个API，用于批量导入文件，特别适合动态加载资源。它可以自动解析文件路径并生成一个文件映射对象。
+:::
+``` vue
+<template>
+  <img :src="imagePath" />
+</template>
 
-  *   *   *   *   *   *   *   *   *   *   *   *   * 
+<script setup>
+import { ref } from 'vue'
 
-[code]
+const images = import.meta.glob('@/assets/*.jpg', { eager: true })
+const name = "c.jpg"
+const imagePath = images[`/src/assets/${name}`]?.default
+</script>
+```
+**基础语法：**
+``` javascript
+const files = import.meta.glob(pattern, options)
+```
+* `pattern`：匹配文件路径的通配符模式，例如 `./assets/*.jpg`。
+* `options`：
 
-    <template>  <img :src="imagePath" /></template>  
-    <script setup>import { ref } from 'vue'  
-    const images = import.meta.glob('@/assets/*.jpg', { eager: true });const name = "c.jpg";const imagePath = images[`/src/assets/${name}`]?.default;  
-      
-    </script>
-[/code]
-
-> ❝
->
-> `import.meta.glob` 是 Vite 提供的一个
-> API，用于批量导入文件，特别适合动态加载资源。它可以自动解析文件路径并生成一个文件映射对象。
->
-> ❞
-
-**「基础语法」**
-
-[code]
-
-    const files = import.meta.glob(pattern, options);  
-    
-[/code]
-
-  * `pattern`：匹配文件路径的通配符模式，例如 `./assets/*.jpg`。
-  * `options`：
-
-> ❝
->
-> `eager`: 是否立即加载文件（`true` 表示立即加载）。`as`: 指定导出的内容格式，例如 `raw`（导出文件内容为字符串）。
->
-> ❞
+:::tip
+`eager` : 是否立即加载文件（`true` 表示立即加载）。`as` : 指定导出的内容格式，例如 `raw`（导出文件内容为字符串）。
+:::
 
 返回值是一个对象，键为文件路径，值为导入函数或导入的内容（取决于 `eager` 配置）。
 
 当我们需要加载一个目录下的所有图片时，就可以使用import.meta.glob来批量加载 `src/assets`
 目录下的所有图片文件，然后通过路径访问它们。
 
-## 加载整个目录中的图片
+### 2. 加载整个目录中的图片
 
-假设 `src/assets/`下存有多个图片：
+假设 `src/assets/`下存有多个图片，通过以下代码实现批量导入：
 
-![图片](data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg
-width='1px' height='1px' viewBox='0 0 1 1' version='1.1'
-xmlns='http://www.w3.org/2000/svg'
-xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg
-stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-
-opacity='0'%3E%3Cg transform='translate\(-249.000000, -126.000000\)'
-fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1'
-height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E)
+``` vue
+<template>
+  <img :src="path" />
+</template>
 
-通过以下代码实现批量导入：
+<script setup>
+import { ref } from 'vue'
 
-  *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   * 
+const imageNames = ref({})
+const images = import.meta.glob('@/assets/*.jpg', { eager: true })
 
-[code]
-
-    <template>  <img :src="path" /></template>  
-    <script setup>import { ref } from 'vue'  
-    const imageNames = ref({});const images = import.meta.glob('@/assets/*.jpg', { eager: true });  
-    for (const [key, value] of Object.entries(images)) {  const fileName = key.split('/').pop(); // 提取文件名  imageNames.value[fileName] = value.default; // 设置键值对}  
-    </script>
-[/code]
-
+for (const [key, value] of Object.entries(images)) {
+  const fileName = key.split('/').pop() // 提取文件名
+  imageNames.value[fileName] = value.default // 设置键值对
+}
+</script>
+```
 代码就不解读了，大家直接使用即可。再提供一些其他写法
 
-  *   *   *   *   *   *   * 
 
-[code]
+::: code-group
+``` javascript [方法一]
+// 使用动态导入加载所有图片路径
+const imageNames = ref(
+  Object.fromEntries(
+    Object.entries(import.meta.glob('@/assets/*.jpg', { eager: true }))
+    .map(([key, value]) => [key.split('/').pop(), value.default])
+  )
+)
+```
 
-    // 使用动态导入加载所有图片路径const imageNames = ref(  Object.fromEntries(    Object.entries(import.meta.glob('@/assets/*.jpg', { eager: true }))    .map(([key, value]) => [key.split('/').pop(), value.default])  ));
-[/code]
+``` javascript [方法二]
+const imageNames = ref(
+  Object.entries(import.meta.glob('@/assets/*.jpg', { eager: true })).reduce(
+    (acc, [key, value]) => {
+      const fileName = key.split('/').pop() // 提取文件名
+      acc[fileName] = value.default // 设置键值对
+      return acc
+    },
+    {} // 初始化为空对象
+  )
+)
+```
 
-或
+:::
 
-  *   *   *   *   *   *   *   *   *   * 
-
-[code]
-
-    const imageNames = ref(  Object.entries(import.meta.glob('@/assets/*.jpg', { eager: true })).reduce(    (acc, [key, value]) => {      const fileName = key.split('/').pop(); // 提取文件名      acc[fileName] = value.default; // 设置键值对      return acc;    },    {} // 初始化为空对象  ));
-[/code]
-
-![图片](data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg
-width='1px' height='1px' viewBox='0 0 1 1' version='1.1'
-xmlns='http://www.w3.org/2000/svg'
-xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg
-stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-
-opacity='0'%3E%3Cg transform='translate\(-249.000000, -126.000000\)'
-fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1'
-height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E)
-
-### **「按条件批量加载」**
+### 3. 按条件批量加载
 
 通过正则我们可以筛选特定文件，比如加载以 `gcshi_` 开头的图片：
+``` javascript
+const imageFiles = import.meta.glob('@/assets/images/gcshi_*.jpg')
+```
 
-  * 
+## 五、延迟加载图片
 
-[code]
+为了提升首屏性能，我们可以借助 vanilla-lazyload 插件实现延迟加载或懒加载图片：
+``` vue
+<template>
+  <div v-for="(src, name) in images" :key="name" class="image-container">
+  <img :data-src="src" :alt="name" class="lazy" />
+  </div>
+</template>
 
-    const imageFiles = import.meta.glob('@/assets/images/gcshi_*.jpg');
-[/code]
+<script setup>
+import LazyLoad from 'vanilla-lazyload' // 轻量懒加载库
 
-# 延迟加载图片
+const imageFiles = import.meta.glob('@/assets/images/*.jpg')
+const images = {}
 
-为了提升首屏性能，我们可以借助vanilla-lazyload插件实现延迟加载或懒加载图片：
+// 动态加载图片 URL
+for (const [key, value] of Object.entries(imageFiles)) {
+  images[key.split('/').pop()] = await value()
+}
 
-  *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   * 
+// 初始化懒加载
+onMounted(() => {
+  new LazyLoad({ elements_selector: '.lazy' })
+})
+</script>
+```
 
-[code]
+## 六、常见问题与解决方法
 
-    <template>  <div v-for="(src, name) in images" :key="name" class="image-container">  <img :data-src="src" :alt="name" class="lazy" />  </div>  </template>  
-      <script setup>  import LazyLoad from 'vanilla-lazyload'; // 轻量懒加载库  
-    const imageFiles = import.meta.glob('@/assets/images/*.jpg');const images = {};  
-    // 动态加载图片 URLfor (const [key, value] of Object.entries(imageFiles)) {  images[key.split('/').pop()] = await value();}  
-    // 初始化懒加载onMounted(() => {  new LazyLoad({ elements_selector: '.lazy' });});</script>
-[/code]
+### 1. 路径别名不起作用
 
-# 常见问题与解决方法
+**原因** ：`vite.config.js` 中未正确配置别名。 **解决方法** ：
+``` javascript
+import { defineConfig } from "vite"
+import vue from "@vitejs/plugin-vue"
+import { resolve } from 'path'
 
-## 路径别名不起作用
+export default defineConfig({
+  plugins: [vue()],
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "src"), // 设置@指向src目录
+    },
+  },
+})
+```
 
-**「原因」** ：`vite.config.js` 中未正确配置别名。
+### 2. CSS 文件中的路径错误
 
-**「解决方法」** ：
+**原因** ：构建后 CSS 文件的路径不正确。 **解决方法** ：
 
-  *   *   *   *   *   *   *   *   *   *   *   * 
+* 使用绝对路径引用 `public` 中的资源。
+* 使用 Vite 的别名或相对路径引用 `src/assets` 中的资源。
 
-[code]
-
-    import { defineConfig } from "vite";import vue from "@vitejs/plugin-vue";import { resolve } from 'path';  
-    export default defineConfig({  plugins: [vue()],  resolve: {    alias: {      "@": resolve(__dirname, "src"), // 设置@指向src目录    },  },});
-[/code]
-
-## CSS 文件中的路径错误
-
-**「原因」** ：构建后 CSS 文件的路径不正确。
-
-**「解决方法」** ：
-
-  * 使用绝对路径引用 `public` 中的资源。
-  * 使用 Vite 的别名或相对路径引用 `src/assets` 中的资源。
-
-# 总结
+## 总结
 
 通过本文的解析，相信大家已经掌握了 Vue3 + Vite 项目中从静态到动态、从单个到批量导入图片的所有方法和优化技巧：
 
 场景| 推荐方法  
----|---  
-**「静态图片」**|  相对路径或 `import`引入  
-**「动态生成路径的图片」**| `new URL`动态拼接路径  
-**「批量动态导入目录中的图片」**|  使用 `import.meta.glob`  
-**「延迟加载图片」**|  配合懒加载库  
+|---|:---:|
+|**「静态图片」**|  相对路径或 `import`引入  |
+|**「动态生成路径的图片」**| `new URL`动态拼接路径  |
+|**「批量动态导入目录中的图片」**|  使用 `import.meta.glob`  |
+|**「延迟加载图片」**|  配合懒加载库  |
   
 通过灵活应用这些方法，可以让我们的 Vue3 + Vite 项目图片管理更加高效、灵活！

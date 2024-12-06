@@ -136,6 +136,26 @@
     scroll-snap-stop: always; // 吸附是否停止
   }
 }
+
+// 设置宽高比例
+.box {
+  width: 90%;
+  aspect-ratio: 16/9;
+}
+
+// 逻辑属性
+.box {
+  margin-block: 5px 10px;    /* 上边距 5px，下边距 10px */
+  margin-inline: 20px 30px;  /* 左边距 20px，右边距 30px */
+
+  padding-block: 10px 20px;  /* 上下内边距 */
+  padding-inline: 15px 25px; /* 左右内边距 */
+}
+
+// 平滑滚动
+html {
+  scroll-behavior: smooth;
+}
 ```
 
 #### 6. css好网站

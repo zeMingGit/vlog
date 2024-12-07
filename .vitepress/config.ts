@@ -79,9 +79,9 @@ export default defineConfig({
       title: '',
       quote: '曾经有个页面摆在你面前你没有珍惜，直到它404了...',
       linkLabel: 'go to home',
-      linkText: 'Take me home',
+      linkText: '回到首页',
       code: '404',
-    }
+    },
   },
   vite: {
     plugins: [Inspect()],
@@ -89,7 +89,7 @@ export default defineConfig({
       // tip：默认端口号在win系统上有些许问题，自测mac正常。暂时不打开。-zeMing
       // port: 8888,
       host: true,
-      // open: '/', // 不做修改，不打开！！！
+      open: '/', // 不做修改，不打开！！！
     },
   }
 })

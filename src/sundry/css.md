@@ -125,6 +125,7 @@
 .item {
   word-break: break-all; // 纯数字换行
   shape-outside: circle(50% at 50% 50%); // 不规则的文字环绕
+  white-space: pre; // 文字两端对齐
 }
 
 // 滑动吸附效果--常见于swiper

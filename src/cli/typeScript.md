@@ -33,3 +33,38 @@ function fn(参数: 类型, 参数: 类型): 类型 {
 | array  |   [1,2,3]   |   任意的JS数组 |
 | tuple  |   [4,5]   |   元素，TS新增类型，固定长度数组 |
 | enum  |   enum *{A,B}*   |   枚举，TS中新增类型 |
+
+::: details 举例
+``` ts
+/** 如果a的类型为unknown */
+let a: unknown
+a = 99
+a = '123'
+
+let b: string
+// 方法一
+if (typeof a === 'string'){
+  b = a
+}
+// 方法二 断言
+b = a as string // 或 b = <string>a
+
+
+/** 如果a的类型为object */
+let a: {
+  name: string
+  [key: string]: any  // 索引签名
+}
+a = {
+  name: 'sd',
+  age: 88,
+}
+```
+:::
+
+## 二、接口
+
+<!-- ## 三、接口 -->
+
+## 小结
+ts定义类型油电男。

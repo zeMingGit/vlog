@@ -8,17 +8,6 @@
 ## 一、基本类型
 类型声明：通过类型声明可以指定TS中变量（参数、形参）的类型。指定类型后，当为变量赋值时，TS编辑器会自动检查值是否符合类型声明，否则报错。简而言之，变量只能存储声明时候定义的类型值。
 
-
-**语法：**
-``` ts
-let 变量: 类型
-let 变量: 类型 = 值
-function fn(参数: 类型, 参数: 类型): 类型 {
-  ...
-}
-
-```
-**类型：**
 | 类型     |  例子  |  描述  |
 | -------- | :-------: | :-------: |
 | number  |   1,-33,2.5   |   任意数字 |
@@ -34,8 +23,17 @@ function fn(参数: 类型, 参数: 类型): 类型 {
 | tuple  |   [4,5]   |   元素，TS新增类型，固定长度数组 |
 | enum  |   enum *{A,B}*   |   枚举，TS中新增类型 |
 
-::: details 举例
-``` ts
+::: details 语法和举例
+::: code-group
+``` ts [语法]
+let 变量: 类型
+let 变量: 类型 = 值
+function fn(参数: 类型, 参数: 类型): 类型 {
+  ...
+}
+
+```
+``` ts [举例]
 /** 如果a的类型为unknown */
 let a: unknown
 a = 99
@@ -62,6 +60,74 @@ a = {
 ```
 :::
 
+::: details  enum 枚举和type使用
+::: code-group
+``` ts [enum 枚举]
+/** 1.数字枚举 */
+enum Direction {
+  Up,
+  Down,
+  ...
+}
+console.log(Direction.Up)
+
+const walk = (data: Direction) => {
+  data // 0
+  if (data === Direction.Up) {}
+}
+walk(Direction.Up)
+
+/** 2.字符串枚举 */
+enum Direction {
+  Up = 'up',
+  Down = 'down',
+  ...
+}
+let dir: Direction = Direction.Up
+
+/** 3.常量枚举 */
+const enum Direction {
+  Up,
+  Down,
+  ...
+}
+console.log(Direction.Up)
+```
+``` ts [type]
+/** 联合类型 */
+type Status = number | string
+type Gender = '男' | '女'
+
+const printStatus = (data: Status) => {
+
+}
+printStatus(404) // printStatus('404')
+
+/** 交叉类型 */
+type Area = {
+  width: number;
+  height: number;
+}
+
+type Address = {
+  room: string
+  cell: number
+}
+
+type House = Area & Address
+```
+``` ts [特殊情况]
+// https://www.typescriptlang.org/docs/handbook/2/functions.html#assignability-of-functions
+// 总结：使用类型声明限制函数返回值为void时，TypeScript 并不会严格要求函数返回空
+type LogFunc = () => void // 换undefined
+
+const f1 = () => 200 // 允许返回非空值
+
+let x =f1()
+if (x) {} // 会报错
+
+```
+:::
 ## 二、接口
 
 <!-- ## 三、接口 -->
